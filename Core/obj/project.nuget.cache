@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KUizKms9eTVyOcs6si8cuitY2Na3sKZj/BTnMA13dXajjfNtpOx5B+QS5xoAaOa0SfWtCnPpZ+Umi6VRLqw6CA==",
+  "dgSpecHash": "4Bcw75E/kFbkGrsq5Mb0w+Z8mMd9y4hOY1OXSmgv7LnYBe1BXKtqdhkS1598iiZGZLm6IkbF1moksnFNf19idA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Mert\\Desktop\\ECommerce\\Core\\Core.csproj",
+  "projectFilePath": "C:\\Users\\Mert\\Desktop\\Commerce\\Core\\Core.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
