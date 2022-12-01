@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kTerA1Ao3rAquN9r1jERmiF5nB+64GN020MVfN4u6r4hTg6AfL6UIftyg2N3WZWqFj2I6S6/ydHlkT0k60BHIA==",
+  "dgSpecHash": "2/aSuTIgydgHENFW8BcbE7JlUOqFtCGQXQ/CFwlQbDP3TwhkObJXMWWU9v4nGi3SNLXY/Qv9ZdzU1kCUUgUSeQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Mert\\Desktop\\ECommerce\\API\\API.csproj",
+  "projectFilePath": "C:\\Users\\Mert\\Desktop\\Commerce\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mert\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

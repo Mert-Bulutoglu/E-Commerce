@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9a/YzGHXv2o2JuOW7mgFlaNOMHXYGNCtDwiC09F1xtooVrppjCeI3XhLZ2eABubjFtsdaoASb9awH/Ui+/RHHA==",
+  "dgSpecHash": "fGFM/7XyRqTd1PbhFwkXXMIbfGF4aIUHcsOyuEnlFgbVtK4YrnJd8ZIX6aUZRby6CFgeIliJZtkmYnt9jcUF1g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Mert\\Desktop\\ECommerce\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\Mert\\Desktop\\Commerce\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
