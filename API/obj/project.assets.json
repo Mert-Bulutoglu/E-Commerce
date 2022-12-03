@@ -870,6 +870,10 @@
       "Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.4",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.4"
+        },
         "compile": {
           "bin/placeholder/Core.dll": {}
         },
@@ -882,6 +886,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Core": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "6.0.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.4"
         },
         "compile": {
@@ -2251,6 +2256,7 @@
       "Infrastructure >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 6.0.4",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.4",
+      "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.4",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.4",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
@@ -2314,6 +2320,10 @@
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
+            "target": "Package",
+            "version": "[6.0.4, )"
+          },
+          "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
             "version": "[6.0.4, )"
           },
