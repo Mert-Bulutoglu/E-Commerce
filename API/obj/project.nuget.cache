@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "meEzfIGebEKPovWc1IGpHj5Mb1TKxWQXv6XhhLxabelcp2JRZe8BK2agIZF5LYxHI3VPk0BcwO0hRcyGzE9qRA==",
+  "dgSpecHash": "M8blKqQsgKW7CIcNeSeh4ElF87F2bklsQQJOrBASpE6jSA/1C6A955wQ3Shnc+ubcRAkgTBsO0D3ziNqKCZ9AA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Mert\\Desktop\\Commerce\\API\\API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Mert\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
+    "C:\\Users\\Mert\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\Mert\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.4\\microsoft.entityframeworkcore.6.0.4.nupkg.sha512",
