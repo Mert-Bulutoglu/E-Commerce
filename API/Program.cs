@@ -1,13 +1,10 @@
 
-using API.Errors;
 using API.Extensions;
 using API.Helpers;
 using API.Middleware;
-using Core.Interfaces;
 using Infrastructure.Data;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<StoreContext>(options => 
 {options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+builder.Services.AddSingleton<IConnectionMultiplexer>(c => {
+    var configuration = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"),true);
+    return ConnectionMultiplexer.Connect(configuration);
 });
 
 builder.Services.AddApplicationServices();

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5mrzdR/rcAZWQEbBE8trI0dw4U/AqUafL2Yx01sTfrfu33ecdbIb9beCJFlxoFNFExu6ECAZgLf/y3TRmncYsQ==",
+  "dgSpecHash": "q6QZINcG6N2W+RQui3FiYNrs1TRl5h+EEQBqKWk99Q9hxatbqOQT7d4ksiClqUUKv5dc4IkwlfcJ/EXobB2tqA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Mert\\Desktop\\Commerce\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -32,11 +32,14 @@
     "C:\\Users\\Mert\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\Mert\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.2\\pipelines.sockets.unofficial.2.2.2.nupkg.sha512",
+    "C:\\Users\\Mert\\.nuget\\packages\\stackexchange.redis\\2.6.86\\stackexchange.redis.2.6.86.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\system.configuration.configurationmanager\\4.7.0\\system.configuration.configurationmanager.4.7.0.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\system.identitymodel.tokens.jwt\\6.8.0\\system.identitymodel.tokens.jwt.6.8.0.nupkg.sha512",
+    "C:\\Users\\Mert\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\system.runtime.caching\\4.7.0\\system.runtime.caching.4.7.0.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",

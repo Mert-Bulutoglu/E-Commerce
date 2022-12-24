@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "M8blKqQsgKW7CIcNeSeh4ElF87F2bklsQQJOrBASpE6jSA/1C6A955wQ3Shnc+ubcRAkgTBsO0D3ziNqKCZ9AA==",
+  "dgSpecHash": "D9PMmyo1IO3acNw2tHkrw/LgJKcYW417wjLp6K+bLEsc2J0LVwGHEIPcB8j5bi6RvK5CBz3QlzsRcalN/zhtYA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Mert\\Desktop\\Commerce\\API\\API.csproj",
   "expectedPackageFiles": [
@@ -37,6 +37,8 @@
     "C:\\Users\\Mert\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\Mert\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.2\\pipelines.sockets.unofficial.2.2.2.nupkg.sha512",
+    "C:\\Users\\Mert\\.nuget\\packages\\stackexchange.redis\\2.6.86\\stackexchange.redis.2.6.86.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
@@ -46,6 +48,7 @@
     "C:\\Users\\Mert\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\system.identitymodel.tokens.jwt\\6.8.0\\system.identitymodel.tokens.jwt.6.8.0.nupkg.sha512",
+    "C:\\Users\\Mert\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\system.runtime.caching\\4.7.0\\system.runtime.caching.4.7.0.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\Mert\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
