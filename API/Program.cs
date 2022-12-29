@@ -4,13 +4,25 @@ using API.Helpers;
 using API.Middleware;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("Serilog.json", true).Build();
+Log.Logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(configuration)
+                .Enrich.FromLogContext()
+                .Enrich.WithProperty("ApplicationName", typeof(Program).Assembly.GetName().Name)
+                .CreateLogger();
 // Add services to the container.
-
 builder.Services.AddControllers();
+
+builder.Host.UseSerilog();
+
+
+
+builder.Services.AddLogging();
 builder.Services.AddDbContext<StoreContext>(options => 
 {options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
@@ -46,6 +58,7 @@ if (app.Environment.IsDevelopment())
    app.UseSwaggerDocumantation();
 }
 
+
 app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
 app.UseHttpsRedirection();
@@ -77,3 +90,5 @@ catch (Exception ex)
 }
 
 await app.RunAsync();
+
+Log.Information("wwowowoowowo");

@@ -18,16 +18,20 @@ namespace API.Controllers
         private readonly IGenericRepository<ProductBrand> _productBrandRepo;
         private readonly IGenericRepository<ProductType> _productTypeRepo;
         private readonly IMapper _mapper;
+        private readonly ILogger _logger;
 
         public ProductsController(IGenericRepository<Product> productRepo,
         IGenericRepository<ProductBrand> productBrandRepo,
         IGenericRepository<ProductType> productTypeRepo,
-        IMapper mapper)
+        IMapper mapper,
+        ILogger<ProductsController> logger
+        )
         {
             this._productRepo = productRepo;
             this._productBrandRepo = productBrandRepo;
             this._productTypeRepo = productTypeRepo;
             this._mapper = mapper;
+            this._logger = logger;
         }
 
         [HttpGet]
@@ -43,6 +47,8 @@ namespace API.Controllers
             var products = await _productRepo.ListAsync(spec);
 
             var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
+
+            _logger.LogInformation("Başariyla getirildi.");
 
             return Ok(new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
         }
