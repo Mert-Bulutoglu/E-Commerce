@@ -4,8 +4,6 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
 import { ServerErrorComponent } from './core/server-error/server-error.component';
 import { TestErrorComponent } from './core/test-error/test-error.component';
 import { HomeComponent } from './home/home.component';
-import { ProductDetailsComponent } from './shop/product-details/product-details.component';
-import { ShopComponent } from './shop/shop.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -13,6 +11,8 @@ const routes: Routes = [
   {path: 'server-error', component: ServerErrorComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule)},
+  {path: 'basket', loadChildren: () => import('./basket/basket.module').then(mod => mod.BasketModule)},
+  {path: 'checkout', loadChildren: () => import('./checkout/checkout.module').then(mod => mod.CheckoutModule)},
   {path: '**', redirectTo: '', pathMatch:'full'}
 ];
 
