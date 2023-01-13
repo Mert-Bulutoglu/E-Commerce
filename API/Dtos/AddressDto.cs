@@ -19,6 +19,6 @@ namespace API.Dtos
         [Required]
         public string State { get; set; } 
         [Required]
-        public int ZipCode { get; set; } 
+        public string ZipCode { get; set; } 
     }
 }

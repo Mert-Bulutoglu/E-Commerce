@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20230112125645_OrderEntity")]
+    [Migration("20230113143945_OrderEntity")]
     partial class OrderEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -204,8 +204,8 @@ namespace Infrastructure.Migrations
                             b1.Property<string>("Street")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.Property<int>("ZipCode")
-                                .HasColumnType("int");
+                            b1.Property<string>("ZipCode")
+                                .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("OrderId");
 
