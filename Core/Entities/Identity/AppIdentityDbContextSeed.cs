@@ -24,7 +24,7 @@ namespace Core.Entities.Identity
                         Street = "Esatpaşa",
                         City = "Istanbul",
                         State = "Ataşehir",
-                        ZipCode = 34000
+                        ZipCode = "34000"
                     }
                 };
 

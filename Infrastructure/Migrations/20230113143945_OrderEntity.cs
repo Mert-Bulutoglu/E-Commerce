@@ -64,7 +64,7 @@ namespace Infrastructure.Migrations
                     ShipToAddress_Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ShipToAddress_City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ShipToAddress_State = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ShipToAddress_ZipCode = table.Column<int>(type: "int", nullable: false),
+                    ShipToAddress_ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeliveryMethodId = table.Column<int>(type: "int", nullable: true),
                     Subtotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),

@@ -202,8 +202,8 @@ namespace Infrastructure.Migrations
                             b1.Property<string>("Street")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.Property<int>("ZipCode")
-                                .HasColumnType("int");
+                            b1.Property<string>("ZipCode")
+                                .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("OrderId");
 
