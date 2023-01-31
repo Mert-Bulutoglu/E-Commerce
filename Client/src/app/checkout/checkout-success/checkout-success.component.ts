@@ -7,20 +7,12 @@ import { Order } from 'src/app/shared/models/order';
   templateUrl: './checkout-success.component.html',
   styleUrls: ['./checkout-success.component.scss']
 })
-export class CheckoutSuccessComponent implements OnInit {
-  order: Order;
-
-  constructor(private router: Router) 
-  {
+export class CheckoutSuccessComponent  {
+  order?: Order;
+  
+  constructor(private router: Router) {
     const navigation = this.router.getCurrentNavigation();
-    const state = navigation && navigation.extras && navigation.extras.state;
-    if(state) {
-      this.order = state as Order;
-
-    }
-   }
-
-  ngOnInit(): void {
+    this.order = navigation?.extras?.state as Order
   }
 
 }
