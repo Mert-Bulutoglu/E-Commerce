@@ -9,6 +9,7 @@ using API.Extensions;
 using AutoMapper;
 using Core.Entities.Identity;
 using Core.Interfaces;
+using Google.Apis.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -126,6 +127,53 @@ namespace API.Controllers
                 Email = user.Email
             };
 
+        }
+
+        [HttpPost("google-login")]
+        public async Task<ActionResult<UserDto>> GoogleLogin(GoogleDto googleDto)
+        {
+            var settings = new GoogleJsonWebSignature.ValidationSettings()
+            {
+                Audience = new List<string> {"530880028410-j4tfeh1qe8s7qtcu3hgsq55qetllur3i.apps.googleusercontent.com"}
+            };
+
+            var payload = await GoogleJsonWebSignature.ValidateAsync(googleDto.IdToken, settings);
+
+            var info = new UserLoginInfo(googleDto.Provider, payload.Subject,googleDto.Provider);
+
+            AppUser user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+
+            bool result = user != null; 
+
+            if(user == null)
+            {
+                user = await _userManager.FindByEmailAsync(payload.Email);
+                if (user == null)
+                {
+                    user = new()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Email = payload.Email,
+                        UserName = payload.Email,
+                        DisplayName = payload.Name,
+                    };
+                    var identityResult = await _userManager.CreateAsync(user);
+                    result = identityResult.Succeeded;
+                }                
+            }
+
+            if (result)
+                await _userManager.AddLoginAsync(user, info);
+            else
+                throw new Exception("Invalid external authentication.");
+            
+
+            return new UserDto
+            {
+                DisplayName = user.DisplayName,
+                Token = _tokenService.CreateToken(user),
+                Email = user.Email
+            };            
         }
 
     }

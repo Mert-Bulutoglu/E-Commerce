@@ -1,6 +1,9 @@
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { AccountService } from '../account.service';
 
 @Component({
@@ -12,7 +15,16 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   returnUrl: string;
 
-  constructor(private accountService: AccountService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private accountService: AccountService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private socialAuthService: SocialAuthService
+  ) {
+    this.socialAuthService.authState.subscribe((user: SocialUser) => {
+      console.log(user);
+      this.handleGoogle(user);
+    });
+  }
 
   ngOnInit() {
     this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/shop';
@@ -27,12 +39,20 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  handleGoogle(user: SocialUser) {
+    this.accountService.googleLogin(user).subscribe(() => {
+      this.router.navigateByUrl(this.returnUrl);
+    }, error => {
+      console.log(error)
+    });
+  }
+
   onSubmit() {
     this.accountService.login(this.loginForm.value).subscribe(() => {
       this.router.navigateByUrl(this.returnUrl);
     }, error => {
       console.log(error);
-    })
+    });
   }
 
 }

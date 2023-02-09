@@ -1,3 +1,4 @@
+import { GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -14,7 +15,7 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<IUser>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private authService: SocialAuthService) { }
 
   loadCurrentUser(token: string) {
     if (token === null) {
@@ -45,6 +46,17 @@ export class AccountService {
     )
   }
 
+  googleLogin(values: SocialUser) {
+    return this.http.post(this.baseUrl + 'account/google-login', values).pipe(
+      map((user: IUser) => {
+        if(user) {
+          localStorage.setItem('token', user.token);
+          this.currentUserSource.next(user);
+        }
+      })
+    )
+  }
+
   register(values: any) {
     return this.http.post(this.baseUrl + 'account/register', values).pipe(
       map((user: IUser) => {
@@ -60,6 +72,7 @@ export class AccountService {
     localStorage.removeItem('token');
     this.currentUserSource.next(null);
     this.router.navigateByUrl('/');
+    this.authService.signOut(true);
   }
 
   checkEmailExists(email: string) {
