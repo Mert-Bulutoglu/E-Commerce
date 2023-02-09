@@ -4,18 +4,20 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AccountRoutingModule } from './account-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { SocialLoginModule } from '@abacritt/angularx-social-login';
 
 
 
 @NgModule({
   declarations: [
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     CommonModule,
     AccountRoutingModule,
-    SharedModule
+    SharedModule,
+    SocialLoginModule 
   ]
 })
 export class AccountModule { }
