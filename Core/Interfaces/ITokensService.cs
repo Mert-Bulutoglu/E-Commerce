@@ -8,6 +8,6 @@ namespace Core.Interfaces
 {
     public interface ITokensService
     {
-        string CreateToken(AppUser user);
+        Task<string> CreateToken(AppUser user);
     }
 }

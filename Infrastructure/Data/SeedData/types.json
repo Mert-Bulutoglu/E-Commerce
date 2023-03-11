@@ -1,14 +1,17 @@
 [
   {
-    "Name": "Boards"
+    "Name": "Protein"
   },
   {
-    "Name": "Hats"
+    "Name": "Performans"
   },
   {
-    "Name": "Boots"
+    "Name": "Zayıflama"
   },
   {
-    "Name": "Gloves"
+    "Name": "Sağlık"
+  },
+  {
+    "Name": "Vitaminler"
   }
 ]
