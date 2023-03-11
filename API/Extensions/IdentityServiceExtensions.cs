@@ -18,6 +18,8 @@ namespace API.Extensions
         {
             var builder = services.AddIdentityCore<AppUser>();
             builder = new IdentityBuilder(builder.UserType, builder.Services);
+            builder.AddRoles<AppRole>();
+            builder.AddRoleManager<RoleManager<AppRole>>();
             builder.AddEntityFrameworkStores<AppIdentityDbContext>();
             builder.AddSignInManager<SignInManager<AppUser>>();
 
@@ -32,6 +34,12 @@ namespace API.Extensions
                         ValidateAudience = false
                     };          
                 });
+
+            services.AddAuthorization(opt => 
+            {
+                
+                opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+            }); 
             
             return services;
         }

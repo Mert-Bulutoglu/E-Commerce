@@ -6,6 +6,7 @@ using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,20 +21,25 @@ namespace API.Controllers
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
 
+        private readonly IMailService _mailService;
+
         public ProductsController(IGenericRepository<Product> productRepo,
         IGenericRepository<ProductBrand> productBrandRepo,
         IGenericRepository<ProductType> productTypeRepo,
         IMapper mapper,
         ILogger<ProductsController> logger
-        )
+,
+        IMailService mailService)
         {
             this._productRepo = productRepo;
             this._productBrandRepo = productBrandRepo;
             this._productTypeRepo = productTypeRepo;
             this._mapper = mapper;
             this._logger = logger;
+            _mailService = mailService;
         }
 
+        //[Authorize(Policy = "RequireAdminRole")]
         [HttpGet]
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts(
             [FromQuery] ProductSpecParams productParams)
@@ -78,6 +84,13 @@ namespace API.Controllers
         {
             return Ok(await _productTypeRepo.ListAllAsync());
 
+        }
+
+        [HttpGet("exampleEmail")]
+        public async Task<IActionResult> ExampleMailTest()
+        {
+             await  _mailService.SendMessageAsync("mertbulutoglu95@gmail.com","Örnek mail", "<strong> SİÜÜÜÜÜÜ </strong>");
+             return Ok();
         }
     }
 }

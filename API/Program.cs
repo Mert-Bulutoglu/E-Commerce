@@ -22,8 +22,7 @@ Log.Logger = new LoggerConfiguration()
 builder.Services.AddControllers();
 
 builder.Host.UseSerilog();
-
-
+builder.Services.AddHttpClient();
 
 builder.Services.AddLogging();
 builder.Services.AddDbContext<StoreContext>(options => 
@@ -64,7 +63,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-   app.UseSwaggerDocumantation();
+   app.UseSwaggerDocumentation();
 }
 
 
@@ -93,9 +92,10 @@ try
     await StoreContextSeed.SeedAsync(context, loggerFactory);
 
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
     var identityContext = services.GetRequiredService<AppIdentityDbContext>();
     await identityContext.Database.MigrateAsync();
-    await AppIdentityDbContextSeed.SeedUserAsync(userManager);
+    await AppIdentityDbContextSeed.SeedUserAsync(userManager, roleManager);
 
 }
 catch (Exception ex)

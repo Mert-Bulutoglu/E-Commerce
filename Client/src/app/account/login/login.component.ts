@@ -1,4 +1,4 @@
-import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -22,7 +22,14 @@ export class LoginComponent implements OnInit {
   ) {
     this.socialAuthService.authState.subscribe((user: SocialUser) => {
       console.log(user);
-      this.handleGoogle(user);
+      switch (user.provider) {
+        case "GOOGLE":
+          this.handleGoogleService(user);
+          break;
+        case "FACEBOOK":
+          this.handleFacebookService(user);
+          break;
+      }
     });
   }
 
@@ -39,7 +46,23 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  handleGoogle(user: SocialUser) {
+  handleFacebook() {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+
+  handleGoogle() {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  handleFacebookService(user: SocialUser) {
+    this.accountService.facebookLogin(user).subscribe(() => {
+      this.router.navigateByUrl(this.returnUrl);
+    }, error => {
+      console.log(error)
+    });
+  }
+
+  handleGoogleService(user: SocialUser) {
     this.accountService.googleLogin(user).subscribe(() => {
       this.router.navigateByUrl(this.returnUrl);
     }, error => {
