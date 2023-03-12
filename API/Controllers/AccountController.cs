@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using API.Dtos;
@@ -14,6 +15,7 @@ using Google.Apis.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace API.Controllers
 {
@@ -24,19 +26,22 @@ namespace API.Controllers
         private readonly ITokensService _tokenService;
         private readonly IMapper _mapper;
         private readonly HttpClient _httpClient;
+        private readonly IMailService _mailService;
 
         public AccountController(UserManager<AppUser> userManager,
          SignInManager<AppUser> signInManager,
           ITokensService tokenService,
           IMapper mapper,
           IHttpClientFactory httpClientFactory
-          )
+,
+          IMailService mailService)
         {
             _tokenService = tokenService;
             _mapper = mapper;
             _signInManager = signInManager;
             _userManager = userManager;
             _httpClient = httpClientFactory.CreateClient();
+            _mailService = mailService;
         }
 
         [Authorize]
@@ -139,6 +144,8 @@ namespace API.Controllers
             };
 
         }
+
+
 
         [HttpPost("google-login")]
         public async Task<ActionResult<UserDto>> GoogleLogin(GoogleDto googleDto)
@@ -243,6 +250,25 @@ namespace API.Controllers
                 };
             }
             throw new Exception("Invalid external authentication.");
+
+        }
+
+        
+        [HttpPost("password-reset")]
+        public async Task<ActionResult<UserDto>> PasswordReset([FromBody] PasswordResetDto passwordResetDto)
+        {
+            
+             AppUser user = await _userManager.FindByEmailAsync(passwordResetDto.Email);
+             if(user != null)
+             {
+                string resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+                byte[] tokenBytes = Encoding.UTF8.GetBytes(resetToken);
+                resetToken = WebEncoders.Base64UrlEncode(tokenBytes);
+
+                await _mailService.SendPasswordResetMailAsync(passwordResetDto.Email, user.Id.ToString(), resetToken);
+             }
+
+             return Ok();
 
         }
 

@@ -83,6 +83,13 @@ export class AccountService {
     )
   }
 
+  passwordReset(email: string) {
+    return this.http.post(this.baseUrl + 'account/password-reset', email);
+  }
+  
+
+  
+
   logout() {
     localStorage.removeItem('token');
     this.currentUserSource.next(null);

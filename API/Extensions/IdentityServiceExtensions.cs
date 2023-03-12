@@ -20,7 +20,7 @@ namespace API.Extensions
             builder = new IdentityBuilder(builder.UserType, builder.Services);
             builder.AddRoles<AppRole>();
             builder.AddRoleManager<RoleManager<AppRole>>();
-            builder.AddEntityFrameworkStores<AppIdentityDbContext>();
+            builder.AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
             builder.AddSignInManager<SignInManager<AppUser>>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
