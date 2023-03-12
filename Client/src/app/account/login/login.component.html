@@ -14,7 +14,7 @@
               </label>
             </div> -->
       <button [disabled]="loginForm.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-
+      <a class="btn btn-lg btn-success btn-block" routerLink="/account/password-reset" type="submit">Forgot Password</a>
       
       <asl-google-signin-button class="btn-block"></asl-google-signin-button>
       <img src="../../../assets/images/facebooklow3.png" (click)="handleFacebook()" style="float: left">

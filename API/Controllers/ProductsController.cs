@@ -89,7 +89,7 @@ namespace API.Controllers
         [HttpGet("exampleEmail")]
         public async Task<IActionResult> ExampleMailTest()
         {
-             await  _mailService.SendMessageAsync("mertbulutoglu95@gmail.com","Örnek mail", "<strong> SİÜÜÜÜÜÜ </strong>");
+             await  _mailService.SendMailAsync("mertbulutoglu95@gmail.com","Örnek mail", "<strong> SİÜÜÜÜÜÜ </strong>");
              return Ok();
         }
     }
