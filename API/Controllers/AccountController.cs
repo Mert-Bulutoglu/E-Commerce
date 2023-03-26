@@ -253,23 +253,74 @@ namespace API.Controllers
 
         }
 
-        
+
         [HttpPost("password-reset")]
         public async Task<ActionResult<UserDto>> PasswordReset([FromBody] PasswordResetDto passwordResetDto)
         {
-            
-             AppUser user = await _userManager.FindByEmailAsync(passwordResetDto.Email);
-             if(user != null)
-             {
+
+            AppUser user = await _userManager.FindByEmailAsync(passwordResetDto.Email);
+            if (user != null)
+            {
                 string resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
                 byte[] tokenBytes = Encoding.UTF8.GetBytes(resetToken);
                 resetToken = WebEncoders.Base64UrlEncode(tokenBytes);
 
                 await _mailService.SendPasswordResetMailAsync(passwordResetDto.Email, user.Id.ToString(), resetToken);
-             }
+            }
 
-             return Ok();
+            return Ok();
 
+        }
+
+        [HttpPost("verify-reset-token")]
+        public async Task<ActionResult<VerifyResetTokenResponseDto>> VerifyResetToken(VerifyResetTokenDto verify)
+        {
+
+            AppUser user = await _userManager.FindByIdAsync(verify.UserId);
+            if (user != null)
+            {
+                byte[] tokenBytes = WebEncoders.Base64UrlDecode(verify.ResetToken);
+                verify.ResetToken = Encoding.UTF8.GetString(tokenBytes);
+
+                var state = await _userManager.VerifyUserTokenAsync(user, _userManager.Options.Tokens.PasswordResetTokenProvider, "ResetPassword", verify.ResetToken);
+
+                return new VerifyResetTokenResponseDto()
+                {
+                    State = state
+                };
+
+            }
+
+            return BadRequest();
+
+        }
+
+
+        [HttpPost("update-password")]
+        public async Task<bool> UpdatePassword([FromBody] UpdatePasswordCommandDto updatePassword)
+        {
+            if(!updatePassword.Password.Equals(updatePassword.PasswordConfirm))
+                throw new Exception("Please approve your password");
+            
+            AppUser user = await _userManager.FindByIdAsync(updatePassword.UserId);
+            if (user != null)
+            {
+                
+                byte[] tokenBytes = WebEncoders.Base64UrlDecode(updatePassword.ResetToken);
+                updatePassword.ResetToken = Encoding.UTF8.GetString(tokenBytes);
+
+                IdentityResult result = await _userManager.ResetPasswordAsync(user, updatePassword.ResetToken, updatePassword.Password);
+
+                if(result.Succeeded)
+                {
+                    await  _userManager.UpdateSecurityStampAsync(user);
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            return false;
         }
 
     }

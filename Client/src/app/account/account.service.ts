@@ -87,6 +87,15 @@ export class AccountService {
     return this.http.post(this.baseUrl + 'account/password-reset', email);
   }
   
+  verifyResetToken(resetToken: string, userId: string){
+    const data = { resetToken, userId };
+    return this.http.post(this.baseUrl + 'account/verify-reset-token', data);
+  }
+
+  updatePassword(userId: string, resetToken: string, password: string, passwordConfirm: string){
+    const data = { userId, resetToken, password, passwordConfirm };
+    return this.http.post(this.baseUrl + 'account/update-password', data);
+  }
 
   
 
@@ -109,4 +118,6 @@ export class AccountService {
   updateUserAddress(address: IAddress) {
     return this.http.put<IAddress>(this.baseUrl + 'account/address', address)
   }
+
+  
 }

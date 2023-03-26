@@ -19,7 +19,7 @@ export class PasswordResetComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/login';
+    this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/account/login';
     this.createPasswordResetForm();
   }
 
