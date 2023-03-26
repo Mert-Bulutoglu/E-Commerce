@@ -48,12 +48,10 @@ namespace Infrastructure.Services
         public async Task SendPasswordResetMailAsync(string to, string userId, string resetToken)
         {
             StringBuilder mail = new();
-            mail.AppendLine("Merhaba<br>Eğer yeni şifre talebinde bulunduysanız aşağıdaki linkten şifrenizi yenileyebilirsiniz.<br><strong><a target=\"_blank\" href=\"");
-            string str = _config["AngularClientUrl"] + "/account/update-password/" + userId + "/" + resetToken;
-            mail.AppendLine(str);
-            mail.AppendLine("\"Yeni şifre talebi için tıklayınız... </a></strong><br><br><span style=\"font-size:12px;\">Not: Eğer ki bu talep tarafınızca gerçekleştirilmemişse lütfen bu maili ciddiye almayınız.</span><br><br><br> Eat Your Protein");
-            
-            await SendMailAsync(to, "Şifre Yenileme Talebi", mail.ToString());
+            mail.AppendLine("Hello<br>If you have requested a new password, you can renew your password from the link below.</br><br>");
+            mail.AppendLine(_config["AngularClientUrl"] + userId + "/" + resetToken);
+            mail.AppendLine("<br><br><span style=\"font-size:12px;\">NOTE: If this request has not been fulfilled by you, please do not take this e-mail seriously.</span><br/><br/><br>Kind Regards...<br><br><br>Eat Your Protein<br/><br/><br/><br/>");
+            await SendMailAsync(to, "Password Renewal Request", mail.ToString());
             
         }
 
