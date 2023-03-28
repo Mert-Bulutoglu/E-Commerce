@@ -1,30 +1,30 @@
 [
   {
     "Id": 1,
-    "ShortName": "UPS1",
+    "ShortName": "DHL",
     "Description": "Fastest delivery time",
-    "DeliveryTime": "1-2 Days",
-    "Price": 10
+    "DeliveryTime": "1 Day",
+    "Price": 69
   },
   {
     "Id": 2,
-    "ShortName": "UPS2",
+    "ShortName": "Yurtiçi Kargo",
     "Description": "Get it within 5 days",
-    "DeliveryTime": "2-5 Days",
-    "Price": 5
+    "DeliveryTime": "2-3 Days",
+    "Price": 29
   },
   {
     "Id": 3,
-    "ShortName": "UPS3",
+    "ShortName": "Sürat Kargo",
     "Description": "Slower but cheap",
-    "DeliveryTime": "5-10 Days",
-    "Price": 2
+    "DeliveryTime": "3-4 Days",
+    "Price": 14
   },
   {
     "Id": 4,
-    "ShortName": "FREE",
+    "ShortName": "PTT Kargo",
     "Description": "Free! You get what you pay for",
-    "DeliveryTime": "1-2 Weeks",
+    "DeliveryTime": "1 Week",
     "Price": 0
   }
 ]

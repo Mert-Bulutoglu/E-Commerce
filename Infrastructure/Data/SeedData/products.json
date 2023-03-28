@@ -1,146 +1,219 @@
 [
   {
-    "Name": "Angular Speedster Board 2000",
-    "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-    "Price": 200,
-    "PictureUrl": "images/products/sb-ang1.png",
+    "Name": "Protein Ocean Whey Protein™ Vanilla 400Gr",
+    "Description": "Whey proteini vücutta hızlıca sindirilebilir. Bu yüzden antrenman sonrası ve sabah uyandığında, su veya süt ile karıştırarak tüketilmesini öneririz. 1 ölçek (yaklaşık 25g) ürünü 250ml su veya süt ile karıştırınız. ",
+    "Price": 199,
+    "PictureUrl": "images/products/protein/ProteinOceanWhey.png",
     "ProductTypeId": 1,
     "ProductBrandId": 1
   },
   {
-    "Name": "Green Angular Board 3000",
-    "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
-    "Price": 150,
-    "PictureUrl": "images/products/sb-ang2.png",
-    "ProductTypeId": 1,
-    "ProductBrandId": 1
-  },
-  {
-    "Name": "Core Board Speed Rush 3",
-    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
-    "Price": 180,
-    "PictureUrl": "images/products/sb-core1.png",
+    "Name": "Supplementler Whey Protein 2000 Gr",
+    "Description": "1 servis (3/4 ölçek, 30 Gr) ürünü 150 mL su veya az yağlı süt ile karıştırarak antrenmandan hemen sonra tüketiniz.",
+    "Price": 999,
+    "PictureUrl": "images/products/protein/SupplementlerWhey.jpeg",
     "ProductTypeId": 1,
     "ProductBrandId": 2
   },
   {
-    "Name": "Net Core Super Board",
-    "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
-    "Price": 300,
-    "PictureUrl": "images/products/sb-core2.png",
+    "Name": "HIQ Pure Isolate 510 Gr",
+    "Description": "HIQ Pure Isolate düşük karbonhidrat ve yağ oranına sahip CFM (crossmicrofilter) teknolojisi ile üretilmiş İzole Whey proteinidir. Isolate whey’i diğer wheylerden ayıran en önemli özelliği düşük karbonhidrat ve yağ oranına sahip olmasının yanı sıra çok hızlı emilime sahip olmasıdır. Diyet zamanı atletlerin tercih ettiği HIQ Pure Isolate yüksek bcaa oranına ile yağsız kas kütlesini arttırmaya destek olacaktır. Aspartam içermez, Yüksek kalite CFM (crossmicrofilter) teknolojisi hammadde ile üretilmiştir. Almanyada formüle edilip Türkiye de üretilmiştir.",
+    "Price": 679,
+    "PictureUrl": "images/products/protein/HIQWhey.png",
     "ProductTypeId": 1,
-    "ProductBrandId": 2
+    "ProductBrandId": 3
   },
   {
-    "Name": "React Board Super Whizzy Fast",
-    "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-    "Price": 250,
-    "PictureUrl": "images/products/sb-react1.png",
+    "Name": "Bahs Öğün Tozu 600 Gr",
+    "Description": "1 servis (60gr) ürünü 500ml su ile karıştırarak antreman öncesi veya sonrası tüketebilirsiniz. Günük doz 5'er saat ara ile tüketilen 3 öğünden oluşur.",
+    "Price": 299,
+    "PictureUrl": "images/products/protein/BahsWhey.png",
     "ProductTypeId": 1,
     "ProductBrandId": 4
   },
   {
-    "Name": "Typescript Entry Board",
-    "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
-    "Price": 120,
-    "PictureUrl": "images/products/sb-ts1.png",
+    "Name": "Hardline Whey 3 Matrix 2300 Gr",
+    "Description": "1 servisi (1 ölçek; 75 cc = 30 gr) 150 mL su veya az yağlı sütle karıştırarak antrenmandan hemen sonra alınız.",
+    "Price": 1279,
+    "PictureUrl": "images/products/protein/HardlineWhey.jpeg",
     "ProductTypeId": 1,
     "ProductBrandId": 5
   },
   {
-    "Name": "Core Blue Hat",
-    "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-    "Price": 10,
-    "PictureUrl": "images/products/hat-core1.png",
+    "Name": "Optimum Gold Standard Whey Protein Tozu 2273 Gr",
+    "Description": "Antrenmanlardan hemen sonra 1 ölçeği 300 mL su ile karıştırarak tüketiniz.",
+    "Price": 1279,
+    "PictureUrl": "images/products/protein/OptimumNutritionWhey.png",
+    "ProductTypeId": 1,
+    "ProductBrandId": 6
+  }, 
+  {
+    "Name": "Protein Ocean Bcaa+ 120Gr",
+    "Description": "1 ölçek (yaklaşık 10g) ürünü 200ml su ile tüketebilirsin. Damak tadına göre koyacağın sıvı miktarını ayarlayabilirsin.",
+    "Price": 139,
+    "PictureUrl": "images/products/performans/PerformansProteinOcean.png",
+    "ProductTypeId": 2,
+    "ProductBrandId": 1
+  },
+  {
+    "Name": "Supplementler.com Creatine (Creapure®) 500 Gr",
+    "Description": "Spor sonrası 1 porsiyon (2/3 ölçek, 5 g) 400 ml su ile karıştırılarak tüketilir. ",
+    "Price": 899,
+    "PictureUrl": "images/products/performans/PerformansSupplementler.png",
     "ProductTypeId": 2,
     "ProductBrandId": 2
   },
   {
-    "Name": "Green React Woolen Hat",
-    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
-    "Price": 8,
-    "PictureUrl": "images/products/hat-react1.png",
+    "Name": "HIQ Creatine 300 Gr",
+    "Description": "Creatine monohydrate kas içi su tutumunu arttırdığı için daha uzun süreli antrenman yapılmasına destek sağlar.",
+    "Price": 629,
+    "PictureUrl": "images/products/performans/PerformansHIQ.png",
+    "ProductTypeId": 2,
+    "ProductBrandId": 3
+  },
+  {
+    "Name": "Bahs Protein Bar 45 Gr 1 Adet",
+    "Description": "Antreman öncesi veya sonrası tüketilebilir. Aynı zamanda kahvaltı için de idealdir.",
+    "Price": 19,
+    "PictureUrl": "images/products/performans/PerformansBahs.png",
     "ProductTypeId": 2,
     "ProductBrandId": 4
   },
   {
-    "Name": "Purple React Woolen Hat",
-    "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-    "Price": 15,
-    "PictureUrl": "images/products/hat-react2.png",
+    "Name": "Hardline Magnesium Liquid 250 Mg 30mL 1 Adet",
+    "Description": "1 servisi (30mL) spor sonrası veya gece yatmadan önce günde 1 defa alınız.",
+    "Price": 25,
+    "PictureUrl": "images/products/performans/PerformansHardline.png",
     "ProductTypeId": 2,
-    "ProductBrandId": 4
+    "ProductBrandId": 5
   },
   {
-    "Name": "Blue Code Gloves",
-    "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
-    "Price": 18,
-    "PictureUrl": "images/products/glove-code1.png",
-    "ProductTypeId": 4,
+    "Name": "Optimum Bcaa 5000 Powder 345 Gr",
+    "Description": "Spordan 30dk önce 1 ölçeği 250 mL su ya da meyve suyu ile karıştırarak alınız. ",
+    "Price": 299,
+    "PictureUrl": "images/products/performans/PerformansOptimum.png",
+    "ProductTypeId": 2,
+    "ProductBrandId": 6
+  },
+  {
+    "Name": "Protein Ocean L-Carnitine 150Gr",
+    "Description": "1 ölçek (yaklaşık 3g) L-CARNITINE'i 100ml su ile karıştırarak tüketebilirsiniz. Antrenman öncesi ve sabah aç karna kullanılabilir.",
+    "Price": 299,
+    "PictureUrl": "images/products/zayıflama/ZayıflamaProteinOcean.png",
+    "ProductTypeId": 3,
+    "ProductBrandId": 1
+  },
+  {
+    "Name": "Supplementler Glutamine 300 Gr",
+    "Description": "1 servis ürünü (1 ölçek: 5 g) 250 mL su ile karıştırarak tercihen antrenmandan sonra tüketiniz.",
+    "Price": 239,
+    "PictureUrl": "images/products/zayıflama/ZayıflamaSupplementler.png",
+    "ProductTypeId": 3,
+    "ProductBrandId": 2
+  },
+  {
+    "Name": "HIQ Vitargo 1000 Gr",
+    "Description": "1 ölçek (50g) ürünü 200ml suda veya hafif bir meyve suyunda çözün ve tüketin. Porsiyon tercihen antrenmandan önce ve/veya sonra tüketilmelidir. Günde 1-2 porsiyon tüketmeniz önerilir.",
+    "Price": 529,
+    "PictureUrl": "images/products/zayıflama/ZayıflamaHIQ.png",
+    "ProductTypeId": 3,
     "ProductBrandId": 3
   },
   {
-    "Name": "Green Code Gloves",
-    "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
-    "Price": 15,
-    "PictureUrl": "images/products/glove-code2.png",
-    "ProductTypeId": 4,
-    "ProductBrandId": 3
+    "Name": "Hardline Burner 120 Tablet",
+    "Description": "1 servisi (2 kapsül) kahvaltıdan sonra ve 1 servisi akşam yemeğinden 1 saat önce alınız.",
+    "Price": 250,
+    "PictureUrl": "images/products/zayıflama/ZayıflamaHardline.png",
+    "ProductTypeId": 3,
+    "ProductBrandId": 5
   },
   {
-    "Name": "Purple React Gloves",
-    "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa.",
-    "Price": 16,
-    "PictureUrl": "images/products/glove-react1.png",
-    "ProductTypeId": 4,
-    "ProductBrandId": 4
-  },
-  {
-    "Name": "Green React Gloves",
-    "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
-    "Price": 14,
-    "PictureUrl": "images/products/glove-react2.png",
-    "ProductTypeId": 4,
-    "ProductBrandId": 4
-  },
-  {
-    "Name": "Redis Red Boots",
+    "Name": "Optimum Gold Standard BCAA 266 Gr",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 250,
-    "PictureUrl": "images/products/boot-redis1.png",
+    "PictureUrl": "images/products/zayıflama/ZayıflamaOptimum.png",
     "ProductTypeId": 3,
     "ProductBrandId": 6
   },
   {
-    "Name": "Core Red Boots",
-    "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-    "Price": 189.99,
-    "PictureUrl": "images/products/boot-core2.png",
-    "ProductTypeId": 3,
-    "ProductBrandId": 2
-  },
-  {
-    "Name": "Core Purple Boots",
-    "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
-    "Price": 199.99,
-    "PictureUrl": "images/products/boot-core1.png",
-    "ProductTypeId": 3,
-    "ProductBrandId": 2
-  },
-  {
-    "Name": "Angular Purple Boots",
-    "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
-    "Price": 150,
-    "PictureUrl": "images/products/boot-ang2.png",
-    "ProductTypeId": 3,
+    "Name": "Protein Ocean Collogen 250Gr",
+    "Description": "Yetişkinler için; 1 ölçek (yaklaşık 10g) ürünü 200ml su ile karıştırarak tüketebilirsiniz.",
+    "Price": 349,
+    "PictureUrl": "images/products/sağlık/SağlıkProteinOcean.png",
+    "ProductTypeId": 4,
     "ProductBrandId": 1
   },
   {
-    "Name": "Angular Blue Boots",
-    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "Name": "Supplementler Casein Protein 1000 Gr",
+    "Description": "Gece yatmadan önce veya antenmandan sonra 1 servisi (3/4 ölçek, 30 g) 300 mL su ile hızlıca karıştırdıktan sonra tüketiniz.",
+    "Price": 699,
+    "PictureUrl": "images/products/sağlık/SağlıkSupplementler.png",
+    "ProductTypeId": 4,
+    "ProductBrandId": 2
+  },
+  {
+    "Name": "HIQ Maltodextrin 1500 Gr",
+    "Description": "Bir ölçek (100g), 400ml suda veya hafif bir meyve suyunda çözün ve tüketin. Porsiyon tercihen antrenmandan önce ve/veya sonra tüketilmelidir. Günde 1-2 porsiyon tüketmeniz önerilir.",
+    "Price": 299,
+    "PictureUrl": "images/products/sağlık/SağlıkHIQ.png",
+    "ProductTypeId": 4,
+    "ProductBrandId": 3
+  },
+  {
+    "Name": "Hardline Aol 120 Kapsül",
+    "Description": "1 servisi (3 kapsül) 200 mL su ile antrenmandan 30dk önce ve akşam yatmadan önce alınız.",
+    "Price": 225,
+    "PictureUrl": "images/products/sağlık/SağlıkHardline.png",
+    "ProductTypeId": 4,
+    "ProductBrandId": 5
+  },
+  {
+    "Name": "Optimum Nutrition ZMA Complex 100 Tablet",
+    "Description": "Yetişkinler için günde 1 tablet tercihen gece yatmadan önce tüketmeniz tavsiye edilir.",
+    "Price": 239,
+    "PictureUrl": "images/products/sağlık/SağlıkOptimum.png",
+    "ProductTypeId": 4,
+    "ProductBrandId": 6
+  },
+  {
+    "Name": "Protein Ocean Multivitamin 60 Tablet",
+    "Description": "Yetişkinler için; günde 2 kapsül kullanılması tavsiye edilmektedir. Bol su ile birlikte tüketilmesi önerilmektedir.",
+    "Price": 129,
+    "PictureUrl": "images/products/vitaminler/VitaminProteinOcean.png",
+    "ProductTypeId": 5,
+    "ProductBrandId": 1
+  },
+  {
+    "Name": "Supplementler L-Carnitine Shot 3000 Mg 1 Ampul",
+    "Description": "Antrenmandan 30 dk önce 1 porsiyonu (60 mL) 100 mL su ile karıştırarak tüketmeniz önerilir.",
+    "Price": 25,
+    "PictureUrl": "images/products/vitaminler/VitaminSupplementler.png",
+    "ProductTypeId": 5,
+    "ProductBrandId": 2
+  },
+  {
+    "Name": "HIQ Omega 3 D3+K2 Premium Complex 30 Tablet",
+    "Description": "Her Servisinde 500mg EPA ve 250mg DHA ile zengin içeriği",
+    "Price": 379,
+    "PictureUrl": "images/products/vitaminler/VitaminHIQ.png",
+    "ProductTypeId": 5,
+    "ProductBrandId": 3
+  },
+  {
+    "Name": "Hardline Vitamin Mineral 120 Tablet",
+    "Description": "Tercihen sabah kalktıktan sonra 1 servis (2 tablet) alınız.",
+    "Price": 259,
+    "PictureUrl": "images/products/vitaminler/VitaminlerOptimum.png",
+    "ProductTypeId": 5,
+    "ProductBrandId": 5
+  }
+  ,
+  {
+    "Name": "Optimum Nutrition Thermo Carnitine 1000 mL",
+    "Description": "1 servis ürünü (1 kapak, 25 mL) antrenmandan 30 dk önce tüketiniz.",
     "Price": 180,
-    "PictureUrl": "images/products/boot-ang1.png",
-    "ProductTypeId": 3,
-    "ProductBrandId": 1
+    "PictureUrl": "images/products/vitaminler/VitaminOptimum.png",
+    "ProductTypeId": 5,
+    "ProductBrandId": 6
   }
 ]
