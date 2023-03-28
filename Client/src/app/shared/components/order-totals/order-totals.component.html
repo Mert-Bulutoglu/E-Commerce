@@ -11,7 +11,7 @@
                 Order subtotal
             </strong>
             <strong class="text-muted">
-                {{(basketTotal$ | async).subtotal | currency}}
+                ₺{{(basketTotal$ | async).subtotal}}
             </strong>
         </li>
         <li class="d-flex justify-content-between py-3 border-bottom">
@@ -19,7 +19,7 @@
                 Shipping and handLing
             </strong>
             <strong class="text-muted">
-                {{(basketTotal$ | async).shipping | currency}}
+                ₺{{(basketTotal$ | async).shipping}}
             </strong>
         </li>
         <li class="d-flex justify-content-between py-3 border-bottom">
@@ -27,7 +27,7 @@
                 Total
             </strong>
             <strong class="text-muted">
-                {{(basketTotal$ | async).total | currency}}
+                ₺{{(basketTotal$ | async).total}}
             </strong>
         </li>
     </ul>
