@@ -22,6 +22,9 @@ namespace API.Extensions
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IMailService, MailService>();
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
+            services.AddScoped<IBrandRepository, BrandRepository>();
+            services.AddScoped<ITypeRepository, TypeRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.Configure<ApiBehaviorOptions>(options =>
              {

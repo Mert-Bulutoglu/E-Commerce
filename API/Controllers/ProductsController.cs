@@ -1,4 +1,5 @@
 using API.Dtos;
+using API.Dtos.EntityDtos;
 using API.Errors;
 using API.Helpers;
 using AutoMapper;
@@ -9,27 +10,31 @@ using Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
+using static StackExchange.Redis.Role;
 
 namespace API.Controllers
 {
 
     public class ProductsController : BaseApiController
     {
-        private readonly IGenericRepository<Product> _productRepo;
+        private readonly IProductRepository _productRepo;
         private readonly IGenericRepository<ProductBrand> _productBrandRepo;
         private readonly IGenericRepository<ProductType> _productTypeRepo;
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
         private readonly IMailService _mailService;
 
-        public ProductsController(IGenericRepository<Product> productRepo,
+        public ProductsController(IProductRepository productRepo,
         IGenericRepository<ProductBrand> productBrandRepo,
         IGenericRepository<ProductType> productTypeRepo,
         IMapper mapper,
         ILogger<ProductsController> logger
 ,
-        IMailService mailService)
+        IMailService mailService,
+        IUnitOfWork unitOfWork)
         {
             this._productRepo = productRepo;
             this._productBrandRepo = productBrandRepo;
@@ -37,6 +42,7 @@ namespace API.Controllers
             this._mapper = mapper;
             this._logger = logger;
             _mailService = mailService;
+            _unitOfWork = unitOfWork;
         }
 
         //[Authorize(Policy = "RequireAdminRole")]
@@ -52,7 +58,7 @@ namespace API.Controllers
 
             var products = await _productRepo.ListAsync(spec);
 
-            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
+            var data = _mapper.Map<IReadOnlyList<Core.Entities.Product>, IReadOnlyList<ProductToReturnDto>>(products);
 
             _logger.LogInformation("Başariyla getirildi.");
 
@@ -69,7 +75,7 @@ namespace API.Controllers
 
             if (product == null) return NotFound(new ApiResponse(404));
 
-            return _mapper.Map<Product, ProductToReturnDto>(product);
+            return _mapper.Map<Core.Entities.Product, ProductToReturnDto>(product);
         }
 
         [HttpGet("brands")]
@@ -86,11 +92,44 @@ namespace API.Controllers
 
         }
 
-        [HttpGet("exampleEmail")]
-        public async Task<IActionResult> ExampleMailTest()
+        [HttpPost]
+        public async Task<ActionResult> Save(ProductDto productDto)
         {
-             await  _mailService.SendMailAsync("mertbulutoglu95@gmail.com","Örnek mail", "<strong> SİÜÜÜÜÜÜ </strong>");
-             return Ok();
+            var mapped = _mapper.Map<Core.Entities.Product>(productDto);
+            _productRepo.Add(mapped);
+            await _unitOfWork.Complete();
+            return Ok(productDto);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Update(ProductDto productDto)
+        {
+            var databaseProduct = await _productRepo.GetProductByIdAsync(productDto.Id);
+            if (databaseProduct == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(productDto, databaseProduct);
+
+            _productRepo.Update(databaseProduct);
+            await _unitOfWork.Complete();
+
+            return Ok(_mapper.Map<ProductDto>(databaseProduct));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var databaseProduct = await _productRepo.GetProductByIdAsync(id);
+            if (databaseProduct == null)
+            {
+                return NotFound();
+            }
+
+            _productRepo.Delete(databaseProduct);
+            await _unitOfWork.Complete();
+
+            return Ok();
         }
     }
 }

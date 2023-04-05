@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Core.Entities.Identity;
-using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Infrastructure.Data;
 
 namespace API.Extensions
 {
@@ -20,7 +20,7 @@ namespace API.Extensions
             builder = new IdentityBuilder(builder.UserType, builder.Services);
             builder.AddRoles<AppRole>();
             builder.AddRoleManager<RoleManager<AppRole>>();
-            builder.AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
+            builder.AddEntityFrameworkStores<StoreContext>().AddDefaultTokenProviders();
             builder.AddSignInManager<SignInManager<AppUser>>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -36,8 +36,7 @@ namespace API.Extensions
                 });
 
             services.AddAuthorization(opt => 
-            {
-                
+            {             
                 opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
             }); 
             
