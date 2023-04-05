@@ -34,6 +34,7 @@ export class ShopComponent implements OnInit {
    this.getBrands();
    this.getTypes();
   }
+  
   getProducts(){
     this.shopService.getProducts(this.shopParams).subscribe(response => {
       this.products = response.data;

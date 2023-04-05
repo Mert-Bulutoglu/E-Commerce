@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly StoreContext _context;
+        protected readonly StoreContext _context;
 
         public GenericRepository(StoreContext context)
         {

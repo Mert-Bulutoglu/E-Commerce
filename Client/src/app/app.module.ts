@@ -13,11 +13,19 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptors';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { OrderDetailedComponent } from './order-detailed/order-detailed.component';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from "@abacritt/angularx-social-login";
+import { ProductComponent } from './product/product.component';
+import { UserComponent } from './user/user.component';
+import { ProductDetailsComponent } from './product/product-details/product-details.component';
+import { UserDetailsComponent } from './user/user-details/user-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    OrderDetailedComponent
+    OrderDetailedComponent,
+    ProductComponent,
+    UserComponent,
+    ProductDetailsComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,

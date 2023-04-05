@@ -4,12 +4,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : GenericRepository<Product>, IProductRepository
     {
-        private readonly StoreContext _context;
-        public ProductRepository(StoreContext context)
+        public ProductRepository(StoreContext context) : base(context)
         {
-            _context = context;
+        }
+
+        public void Create(Product product)
+        {
+            _context.Add(product);
+        }
+
+        public void Edit(Product product)
+        {
+            _context.Update(product);
         }
 
         public async Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync()

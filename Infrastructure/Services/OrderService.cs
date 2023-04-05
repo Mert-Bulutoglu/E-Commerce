@@ -6,17 +6,18 @@ using Core.Entities;
 using Core.Entities.OrderAggregate;
 using Core.Interfaces;
 using Core.Specifications;
+using Infrastructure.Data;
 
 namespace Infrastructure.Services
 {
-    public class OrderService : IOrderService
+    public class OrderService : GenericRepository<Order>, IOrderService
     {
         private readonly IBasketRepository _basketRepo;
         private readonly IUnitOfWork _unitOfWork;
 
-        public OrderService(IUnitOfWork unitOfWork, IBasketRepository basketRepo)
+        public OrderService(StoreContext context, IUnitOfWork unitOfWork, IBasketRepository basketRepo) : base(context)
         {
-            _unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork; 
             _basketRepo = basketRepo;
         }
 
