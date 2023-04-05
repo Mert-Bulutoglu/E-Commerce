@@ -8,11 +8,12 @@ import { ServerErrorComponent } from './server-error/server-error.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { SharedModule } from '../shared/shared.module';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 
 
 @NgModule({
-  declarations: [NavBarComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent],
+  declarations: [NavBarComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent, ConfirmationDialogComponent],
   imports: [
     CommonModule,
     RouterModule,

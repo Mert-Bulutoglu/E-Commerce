@@ -1,0 +1,37 @@
+<form class="type-form" [formGroup]="form" (ngSubmit)="saveType(form)">
+  <mat-form-field class="form-field" appearance="outline">
+    <mat-label>Type name</mat-label>
+    <input type="text" class="input" matInput [formControl]="name" placeholder="Type name">
+    <mat-error *ngIf="name.hasError('required')">
+      Type name is required
+    </mat-error>
+    <mat-error *ngIf="name.hasError('minlength') || name.hasError('required')">
+      Type name must be at least 3 characters long.
+    </mat-error>
+  </mat-form-field>
+  <button mat-raised-button class="btn large inline" type="submit">Add Type</button>
+</form>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="typeName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Type Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+      <td mat-cell *matCellDef="let row">
+        <div class="action-buttons">
+          <button class="btn" mat-raised-button (click)="openDeleteConfirmation(row.id)" color="warn"> Delete </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 15, 50]" aria-label="Select page of types"></mat-paginator>
+</div>

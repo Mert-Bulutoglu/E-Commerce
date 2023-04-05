@@ -14,6 +14,7 @@ export class OrdersService {
   getOrdersForUser() {
     return this.http.get<Order[]>(this.Url + 'orders');
   }
+  
   getOrderDetailed(id: number) {
     return this.http.get<Order>(this.Url + 'orders/' + id);
   }

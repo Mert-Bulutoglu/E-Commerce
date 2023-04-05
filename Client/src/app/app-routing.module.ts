@@ -9,6 +9,8 @@ import { ProductComponent } from './product/product.component';
 import { UserComponent } from './user/user.component';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
+import { TypeComponent } from './type/type.component';
+import { BrandComponent } from './brand/brand.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -26,6 +28,8 @@ const routes: Routes = [
   {path: 'user', component: UserComponent /*canActivate:[AuthGuard] */},
   {path: 'user/:id', component: UserDetailsComponent /*canActivate:[AuthGuard] */},
   {path: 'create-user', component: UserDetailsComponent /*canActivate:[AuthGuard] */},
+  {path: 'type', component: TypeComponent /*canActivate:[AuthGuard] */ },
+  {path: 'brand', component: BrandComponent /*canActivate:[AuthGuard] */ },
   {path: '**', redirectTo: '', pathMatch:'full'}
 ];
 
