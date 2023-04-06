@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Stripe;
 using static StackExchange.Redis.Role;
+using Product = Core.Entities.Product;
 
 namespace API.Controllers
 {
@@ -31,8 +32,7 @@ namespace API.Controllers
         IGenericRepository<ProductBrand> productBrandRepo,
         IGenericRepository<ProductType> productTypeRepo,
         IMapper mapper,
-        ILogger<ProductsController> logger
-,
+        ILogger<ProductsController> logger,
         IMailService mailService,
         IUnitOfWork unitOfWork)
         {
@@ -95,10 +95,38 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult> Save(ProductDto productDto)
         {
-            var mapped = _mapper.Map<Core.Entities.Product>(productDto);
-            _productRepo.Add(mapped);
+            var productType = await _productRepo.GetProductTypeByNameAsync(productDto.ProductType);
+            var productBrand = await _productRepo.GetProductBrandByNameAsync(productDto.ProductBrand);
+
+            if (productType == null)
+                return BadRequest($"Product type {productDto.ProductType} not found");
+            if (productBrand == null)
+                return BadRequest($"Product brand {productDto.ProductBrand} not found");
+
+            var existingProduct = await _productRepo.GetProductByNameAsync(productDto.Name);
+            if (existingProduct != null)
+            {
+                return BadRequest($"Product with name '{productDto.Name}' already exists");
+            }
+
+            var newProduct = new Product
+            {
+                Name = productDto.Name,
+                Description = productDto.Description,
+                Price = productDto.Price,
+                PictureUrl = productDto.PictureUrl,
+                ProductTypeId = productType.Id,
+                ProductType = productType,
+                ProductBrandId = productBrand.Id,
+                ProductBrand = productBrand
+            };
+
+            _productRepo.Add(newProduct);
             await _unitOfWork.Complete();
-            return Ok(productDto);
+
+            var newProductDto = _mapper.Map<ProductDto>(newProduct);
+
+            return Ok(newProductDto);
         }
 
         [HttpPut("{id}")]
@@ -109,7 +137,17 @@ namespace API.Controllers
             {
                 return NotFound();
             }
+            var productType = await _productRepo.GetProductTypeByNameAsync(productDto.ProductType);
+            var productBrand = await _productRepo.GetProductBrandByNameAsync(productDto.ProductBrand);
+
+            if (productType == null)
+                return BadRequest($"Product type {productDto.ProductType} not found");
+            if (productBrand == null)
+                return BadRequest($"Product brand {productDto.ProductBrand} not found");
+
             _mapper.Map(productDto, databaseProduct);
+            databaseProduct.ProductBrand= productBrand;
+            databaseProduct.ProductType = productType;
 
             _productRepo.Update(databaseProduct);
             await _unitOfWork.Complete();

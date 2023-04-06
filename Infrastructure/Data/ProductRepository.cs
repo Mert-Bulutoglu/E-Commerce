@@ -46,5 +46,18 @@ namespace Infrastructure.Data
             return await _context.ProductTypes
             .ToListAsync();
         }
+        public async Task<ProductType> GetProductTypeByNameAsync(string productTypeName)
+        {
+            return await _context.ProductTypes.FirstOrDefaultAsync(pt => pt.Name == productTypeName);
+        }
+        public async Task<ProductBrand> GetProductBrandByNameAsync(string productBrandName)
+        {
+            return await _context.ProductBrands.FirstOrDefaultAsync(pt => pt.Name == productBrandName);
+        }
+
+        public async Task<Product> GetProductByNameAsync(string productName)
+        {
+            return await _context.Products.FirstOrDefaultAsync(pt => pt.Name == productName);
+        }
     }
 }
