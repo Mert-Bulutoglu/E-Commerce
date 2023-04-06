@@ -28,6 +28,7 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { MatInputModule } from '@angular/material/input';
     FormsModule,
     MatDialogModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    MatGridListModule 
   ],
   exports:[
     NgxSpinnerModule
