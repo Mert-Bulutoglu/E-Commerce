@@ -16,9 +16,13 @@ namespace API.Helpers
                 .ForMember(d => d.ProductBrand, o => o.MapFrom(s => s.ProductBrand.Name))
                 .ForMember(d => d.ProductType, o => o.MapFrom(s => s.ProductType.Name))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
-            CreateMap<Product, ProductDto>().ReverseMap()
-                 .ForMember(dest => dest.ProductBrandId, opt => opt.MapFrom(src => src.ProductBrandId))
-                 .ForMember(dest => dest.ProductTypeId, opt => opt.MapFrom(src => src.ProductTypeId));
+            CreateMap<Product, ProductDto>()
+               .ForMember(d => d.ProductBrand, o => o.MapFrom(s => s.ProductBrand.Name))
+               .ForMember(d => d.ProductType, o => o.MapFrom(s => s.ProductType.Name));
+            CreateMap<ProductDto, Product>()
+                .ForMember(dest => dest.ProductBrand, opt => opt.MapFrom(src => new ProductBrand { Name = src.ProductBrand }))
+                .ForMember(dest => dest.ProductType, opt => opt.MapFrom(src => new ProductType { Name = src.ProductType }));
+
             CreateMap<ProductType, TypeDto>().ReverseMap();
             CreateMap<ProductBrand, BrandDto>().ReverseMap();
             CreateMap<Core.Entities.Identity.Address, AddressDto>().ReverseMap();
