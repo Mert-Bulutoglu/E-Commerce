@@ -1,1 +1,51 @@
-<p>product works!</p>
+
+<button class="btn large" mat-raised-button routerLink="/create-product">
+    Add Product
+  </button>
+  
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. productBrand" #input>
+  </mat-form-field>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+        <td mat-cell *matCellDef="let row"> {{row.price}}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="productType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Type </th>
+        <td mat-cell *matCellDef="let row"> {{row.productType}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="productBrand">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Brand </th>
+        <td mat-cell *matCellDef="let row"> {{row.productBrand}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let row">
+          <div class="action-buttons">
+            <button class="btn" mat-raised-button (click)="showProductDetails(row.id)">Show Details</button>
+            <button class="btn" mat-raised-button (click)="openDeleteConfirmation(row.id)" color="warn">Delete </button>
+          </div>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of products"></mat-paginator>
+  </div>

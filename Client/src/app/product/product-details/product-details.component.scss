@@ -1,0 +1,51 @@
+.container {
+    min-width: 0px;
+
+    .product-form {
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+
+        .mat-form-field {
+            width: 100%;
+        }
+
+        .checkbox-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .btn-container {
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .limited-height textarea {
+            max-height: 80px;
+            /* set a maximum height, in pixels */
+        }
+
+        .right-align {
+            text-align: right;
+        }
+
+        input.right-align {
+            appearance: textfield;
+        }
+    }
+}
+
+.form-grid {
+    width: 100%;
+}

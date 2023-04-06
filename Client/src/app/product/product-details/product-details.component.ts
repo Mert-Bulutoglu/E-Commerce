@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IBrand } from 'src/app/shared/models/brand';
+import { IProduct } from 'src/app/shared/models/product';
+import { IType } from 'src/app/shared/models/productType';
+import { ProductService } from '../product.service';
+import { BrandService } from 'src/app/brand/brand.service';
+import { TypeService } from 'src/app/type/type.service';
 
 @Component({
   selector: 'app-product-details',
@@ -6,10 +14,194 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
+  form: FormGroup;
+  typesList: IType[] = [];
+  brandsList: IBrand[] = [];
+  product: IProduct;
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private productService: ProductService,
+    private brandService: BrandService,
+    private typeService: TypeService,
+  ) { }
 
-  constructor() { }
+  ngOnInit() {
+    const productId: string = this.route.snapshot.paramMap.get('id');
+    this.getAllBrands();
+    this.getAllTypes();
 
-  ngOnInit(): void {
+    if (productId) {
+      this.getProduct(productId);
+      this.form = this.fb.group({
+        name: ['', [Validators.required]],
+        description: [''],
+        features: [''],
+        nutrientContent: [''],
+        price: ['', [Validators.required]],
+        pictureUrl: ['', [Validators.required]],
+        productType: ['', [Validators.required]],
+        productBrand: ['', [Validators.required]],
+      });
+    }
+    else {
+      this.form = this.fb.group({
+        name: ['', [Validators.required]],
+        description: [''],
+        features: [''],
+        nutrientContent: [''],
+        price: ['', [Validators.required]],
+        pictureUrl: ['', [Validators.required]],
+        productType: ['', [Validators.required]],
+        productBrand: ['', [Validators.required]],
+      });
+    }
   }
 
+  getProduct(productId: string) {
+    this.productService.getProduct(productId)
+    .subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.product = data;
+        this.prefillForm();
+      },
+      error: (err: any) =>{
+        console.log(err);
+      },
+      complete: () => {
+        console.log('get by id completed');
+      } 
+    });
+  }
+  
+  updateProduct(id: number, form: FormGroup){
+    if(form.valid){
+      const product: IProduct = form.value;
+      product.id = id;
+      console.log(product);
+      this.productService.updateProduct(id, product)
+      .subscribe({
+        next: (data: any) => {
+          console.log(data);
+        },
+        error: (err: any) =>{
+          console.log(err);
+        },
+        complete: () => {
+          console.log('product update completed');
+        } 
+      })
+    } 
+  }
+
+  saveProduct(form: FormGroup){
+    if(form.valid){
+      let product: IProduct = form.value;
+      this.productService.createProduct(product)
+      .subscribe({
+        next: (data: any) => {
+          console.log(data);
+          this.router.navigate(['/product']);
+        },
+        error: (err: any) =>{
+          console.log(err);
+        },
+        complete: () =>{
+          console.log('product add completed');
+        } 
+      })
+    } 
+  }
+
+  getAllBrands() {
+    this.brandService.getAllBrands()
+      .subscribe({
+        next: (data: any) => {
+          console.log(data);
+          this.brandsList = data;
+          if (this.product) {
+            this.prefillForm();
+          }
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+        complete: () => {
+          console.log('get brand completed');
+        }
+      });
+  }
+
+  getAllTypes() {
+    this.typeService.getAllTypes()
+      .subscribe({
+        next: (data: any) => {
+          console.log(data);
+          this.typesList = data;
+          if (this.product) {
+            this.prefillForm();
+          }
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+        complete: () => {
+          console.log('get brand completed');
+        }
+      });
+  }
+
+  handleSaveButton(form: FormGroup) {
+    console.log(form.value);
+    if (this.product) {
+      this.updateProduct(this.product.id, form);
+    } else {
+      this.saveProduct(form);
+    }
+  }
+
+  prefillForm(): void {
+    this.name.setValue(this.product.name);
+    this.description.setValue(this.product.description);
+    this.nutrientContent.setValue(this.product.nutrientContent);
+    this.features.setValue(this.product.features);
+    this.price.setValue(this.product.price);
+    this.pictureUrl.setValue(this.product.pictureUrl);
+    this.productType.setValue(this.product.productType);
+    this.productBrand.setValue(this.product.productBrand);
+  }
+
+  get name(): any {
+    return this.form.get('name');
+  }
+  get description(): any {
+    return this.form.get('description');
+  }
+
+  get nutrientContent(): any {
+    return this.form.get('nutrientContent');
+  } 
+
+  get features(): any {
+    return this.form.get('features');
+  }
+  
+  get price(): any {
+    return this.form.get('price');
+  }
+
+  get pictureUrl(): any {
+    return this.form.get('pictureUrl');
+  }
+
+  get productType(): any {
+    return this.form.get('productType');
+  }
+  
+  get productBrand(): any {
+    return this.form.get('productBrand');
+  }
 }
+

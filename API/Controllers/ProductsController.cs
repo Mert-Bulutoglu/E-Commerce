@@ -25,7 +25,6 @@ namespace API.Controllers
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
-
         private readonly IMailService _mailService;
 
         public ProductsController(IProductRepository productRepo,
@@ -63,6 +62,27 @@ namespace API.Controllers
             _logger.LogInformation("Başariyla getirildi.");
 
             return Ok(new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
+        }
+
+        [HttpGet("[action]")]
+        public async Task<ActionResult> GetProductOnly()
+        {
+            var products = await _productRepo.GetProductsAsync();
+
+            var productDtos = products.Select(p => new ProductDto
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                NutrientContent = p.NutrientContent,
+                Features = p.Features,
+                Price = p.Price,
+                PictureUrl = p.PictureUrl,
+                ProductType = p.ProductType != null ? p.ProductType.Name : null,
+                ProductBrand = p.ProductBrand != null ? p.ProductBrand.Name : null
+            }).ToList();
+
+            return Ok(productDtos);
         }
 
         [HttpGet("{id}")]
