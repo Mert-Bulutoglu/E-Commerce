@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IBrand } from 'src/app/shared/models/brand';
@@ -7,6 +7,8 @@ import { IType } from 'src/app/shared/models/productType';
 import { ProductService } from '../product.service';
 import { BrandService } from 'src/app/brand/brand.service';
 import { TypeService } from 'src/app/type/type.service';
+import { HttpClient } from '@angular/common/http';
+import { FileUploadOptions } from 'src/app/core/file-upload/file-upload.component';
 
 @Component({
   selector: 'app-product-details',
@@ -15,6 +17,7 @@ import { TypeService } from 'src/app/type/type.service';
 })
 export class ProductDetailsComponent implements OnInit {
   form: FormGroup;
+  selectedFile: File = null;
   typesList: IType[] = [];
   brandsList: IBrand[] = [];
   product: IProduct;
@@ -25,6 +28,7 @@ export class ProductDetailsComponent implements OnInit {
     private productService: ProductService,
     private brandService: BrandService,
     private typeService: TypeService,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
@@ -40,6 +44,7 @@ export class ProductDetailsComponent implements OnInit {
         features: [''],
         nutrientContent: [''],
         price: ['', [Validators.required]],
+        stock: ['', [Validators.required]],
         pictureUrl: ['', [Validators.required]],
         productType: ['', [Validators.required]],
         productBrand: ['', [Validators.required]],
@@ -52,6 +57,7 @@ export class ProductDetailsComponent implements OnInit {
         features: [''],
         nutrientContent: [''],
         price: ['', [Validators.required]],
+        stock: ['', [Validators.required]],
         pictureUrl: ['', [Validators.required]],
         productType: ['', [Validators.required]],
         productBrand: ['', [Validators.required]],
@@ -162,6 +168,13 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
+  @Output() fileUploadOptions: Partial<FileUploadOptions> = {
+    action: "upload",
+    controller: "products",
+    explanation: "Pass files or select files..",
+    accept: ".png, .jpg, .jpeg"
+  }
+
   prefillForm(): void {
     this.name.setValue(this.product.name);
     this.description.setValue(this.product.description);
@@ -171,6 +184,7 @@ export class ProductDetailsComponent implements OnInit {
     this.pictureUrl.setValue(this.product.pictureUrl);
     this.productType.setValue(this.product.productType);
     this.productBrand.setValue(this.product.productBrand);
+    this.stock.setValue(this.product.stock);
   }
 
   get name(): any {
@@ -190,6 +204,10 @@ export class ProductDetailsComponent implements OnInit {
   
   get price(): any {
     return this.form.get('price');
+  }
+
+  get stock(): any {
+    return this.form.get('stock');
   }
 
   get pictureUrl(): any {

@@ -6,7 +6,7 @@
     "PictureUrl": "images/products/protein/ProteinOceanWhey.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 1,
     "ProductBrandId": 1
   },
@@ -17,7 +17,7 @@
     "PictureUrl": "images/products/protein/SupplementlerWhey.jpeg",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 1,
     "ProductBrandId": 2
   },
@@ -28,7 +28,7 @@
     "PictureUrl": "images/products/protein/HIQWhey.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 1,
     "ProductBrandId": 3
   },
@@ -39,7 +39,7 @@
     "PictureUrl": "images/products/protein/BahsWhey.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 1,
     "ProductBrandId": 4
   },
@@ -50,7 +50,7 @@
     "PictureUrl": "images/products/protein/HardlineWhey.jpeg",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 1,
     "ProductBrandId": 5
   },
@@ -61,7 +61,7 @@
     "PictureUrl": "images/products/protein/OptimumNutritionWhey.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 1,
     "ProductBrandId": 6
   },
@@ -72,7 +72,7 @@
     "PictureUrl": "images/products/performans/PerformansProteinOcean.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 2,
     "ProductBrandId": 1
   },
@@ -83,7 +83,7 @@
     "PictureUrl": "images/products/performans/PerformansSupplementler.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 2,
     "ProductBrandId": 2
   },
@@ -94,7 +94,7 @@
     "PictureUrl": "images/products/performans/PerformansHIQ.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 2,
     "ProductBrandId": 3
   },
@@ -105,7 +105,7 @@
     "PictureUrl": "images/products/performans/PerformansBahs.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 2,
     "ProductBrandId": 4
   },
@@ -116,7 +116,7 @@
     "PictureUrl": "images/products/performans/PerformansHardline.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 2,
     "ProductBrandId": 5
   },
@@ -127,7 +127,7 @@
     "PictureUrl": "images/products/performans/PerformansOptimum.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 2,
     "ProductBrandId": 6
   },
@@ -138,7 +138,7 @@
     "PictureUrl": "images/products/zayıflama/ZayıflamaProteinOcean.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 3,
     "ProductBrandId": 1
   },
@@ -149,7 +149,7 @@
     "PictureUrl": "images/products/zayıflama/ZayıflamaSupplementler.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 3,
     "ProductBrandId": 2
   },
@@ -160,7 +160,7 @@
     "PictureUrl": "images/products/zayıflama/ZayıflamaHIQ.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 3,
     "ProductBrandId": 3
   },
@@ -171,7 +171,7 @@
     "PictureUrl": "images/products/zayıflama/ZayıflamaHardline.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 3,
     "ProductBrandId": 5
   },
@@ -182,7 +182,7 @@
     "PictureUrl": "images/products/zayıflama/ZayıflamaOptimum.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 3,
     "ProductBrandId": 6
   },
@@ -193,7 +193,7 @@
     "PictureUrl": "images/products/sağlık/SağlıkProteinOcean.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 4,
     "ProductBrandId": 1
   },
@@ -204,7 +204,7 @@
     "PictureUrl": "images/products/sağlık/SağlıkSupplementler.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 4,
     "ProductBrandId": 2
   },
@@ -215,7 +215,7 @@
     "PictureUrl": "images/products/sağlık/SağlıkHIQ.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 4,
     "ProductBrandId": 3
   },
@@ -226,7 +226,7 @@
     "PictureUrl": "images/products/sağlık/SağlıkHardline.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 4,
     "ProductBrandId": 5
   },
@@ -237,7 +237,7 @@
     "PictureUrl": "images/products/sağlık/SağlıkOptimum.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 4,
     "ProductBrandId": 6
   },
@@ -248,7 +248,7 @@
     "PictureUrl": "images/products/vitaminler/VitaminProteinOcean.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 5,
     "ProductBrandId": 1
   },
@@ -259,7 +259,7 @@
     "PictureUrl": "images/products/vitaminler/VitaminSupplementler.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 5,
     "ProductBrandId": 2
   },
@@ -270,7 +270,7 @@
     "PictureUrl": "images/products/vitaminler/VitaminHIQ.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 5,
     "ProductBrandId": 3
   },
@@ -281,7 +281,7 @@
     "PictureUrl": "images/products/vitaminler/VitaminlerOptimum.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 5,
     "ProductBrandId": 5
   }
@@ -293,7 +293,7 @@
     "PictureUrl": "images/products/vitaminler/VitaminOptimum.png",
     "NutrientContent": null,
     "Features": null,
-    "ViewCount": null,
+                 
     "ProductTypeId": 5,
     "ProductBrandId": 6
   }

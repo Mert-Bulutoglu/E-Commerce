@@ -264,8 +264,9 @@ namespace Infrastructure.Migrations
                     NutrientContent = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Features = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Stock = table.Column<int>(type: "int", nullable: false),
                     PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ViewCount = table.Column<int>(type: "int", nullable: true),
+                    ViewCount = table.Column<int>(type: "int", nullable: false),
                     ProductTypeId = table.Column<int>(type: "int", nullable: true),
                     ProductBrandId = table.Column<int>(type: "int", nullable: true)
                 },

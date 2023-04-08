@@ -1,6 +1,6 @@
 <div class="container">
     <form class="product-form" [formGroup]="form" (ngSubmit)="handleSaveButton(form)">
-        <mat-grid-list class="form-grid" cols="3" rowHeight="150px" gutterSize="56px">
+        <mat-grid-list class="form-grid" cols="2" rowHeight="150px" gutterSize="56px">
             <mat-grid-tile>
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Name</mat-label>
@@ -20,7 +20,7 @@
             </mat-grid-tile>
             <mat-grid-tile>
                 <mat-form-field class="limited-height" appearance="outline">
-                    <mat-label>NutrientContent</mat-label>
+                    <mat-label>Nutrient Content</mat-label>
                     <textarea type="text" class="input" matInput [formControl]="nutrientContent" placeholder="Nutrient Content"></textarea>
                 </mat-form-field>
             </mat-grid-tile>
@@ -41,11 +41,21 @@
             </mat-grid-tile>
             <mat-grid-tile>
                 <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Stock</mat-label>
+                    <input type="number" class="input" matInput [formControl]="stock" placeholder="Stock" min="0">
+                    <mat-error *ngIf="price.hasError('required')">
+                        Stock is required
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Picture</mat-label>
                     <input type="text" class="input" matInput [formControl]="pictureUrl" placeholder="Picture">
                     <mat-error *ngIf="pictureUrl.hasError('required')">
                         Picture is required
                     </mat-error>
+                    
                 </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile>
@@ -71,6 +81,7 @@
                 </mat-form-field>
             </mat-grid-tile>     
         </mat-grid-list>
+        <app-file-upload [options]="fileUploadOptions"></app-file-upload>
 
         <div class="btn-container">
             <button mat-raised-button class="btn large" routerLink="/product">Back To List</button>

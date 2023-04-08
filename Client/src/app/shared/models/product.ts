@@ -5,6 +5,7 @@ export interface IProduct {
     nutrientContent: string;
     features: string;
     price: number;
+    stock: number;
     viewCount: number;
     pictureUrl: string;
     productType: string;

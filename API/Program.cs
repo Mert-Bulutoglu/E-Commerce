@@ -4,6 +4,7 @@ using API.Helpers;
 using API.Middleware;
 using Core.Entities.Identity;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -32,6 +33,10 @@ builder.Services.AddDbContext<StoreContext>(options =>
 builder.Services.AddSingleton<IConnectionMultiplexer>(c => {
     var configuration = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"),true);
     return ConnectionMultiplexer.Connect(configuration);
+});
+
+builder.Services.Configure<FormOptions>(options => {
+    options.MultipartBodyLengthLimit = 1073741824;
 });
 
 builder.Services.AddApplicationServices();
@@ -64,6 +69,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 app.UseCors("CorsPolicy");

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20230406003732_NewMigration")]
+    [Migration("20230407111622_NewMigration")]
     partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -297,7 +297,10 @@ namespace Infrastructure.Migrations
                     b.Property<int?>("ProductTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ViewCount")
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ViewCount")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
