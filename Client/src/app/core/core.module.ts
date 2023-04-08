@@ -9,21 +9,27 @@ import { ToastrModule } from 'ngx-toastr';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { SharedModule } from '../shared/shared.module';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
 
 
 
 @NgModule({
-  declarations: [NavBarComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent, ConfirmationDialogComponent],
+  declarations: [NavBarComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent, ConfirmationDialogComponent, FileUploadComponent],
   imports: [
     CommonModule,
     RouterModule,
     BreadcrumbModule,
+    NgxFileDropModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true
     }),
     SharedModule
   ],
-  exports: [NavBarComponent]
+  exports: [
+    NavBarComponent,
+    FileUploadComponent
+  ]
 })
 export class CoreModule { }

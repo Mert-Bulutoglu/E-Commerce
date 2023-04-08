@@ -11,9 +11,10 @@ namespace Core.Entities
        public string Description { get; set; }
        public string NutrientContent { get; set; }
        public string Features { get; set; }
-       public decimal Price { get; set; }   
+       public decimal Price { get; set; }
+       public int Stock { get; set; }
        public string PictureUrl { get; set; }
-       public int? ViewCount { get; set; }
+       public int ViewCount { get; set; }
        
         //Related Entities  
        public ProductType ProductType { get; set; } 

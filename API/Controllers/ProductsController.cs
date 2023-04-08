@@ -26,6 +26,7 @@ namespace API.Controllers
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMailService _mailService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
         public ProductsController(IProductRepository productRepo,
         IGenericRepository<ProductBrand> productBrandRepo,
@@ -33,7 +34,8 @@ namespace API.Controllers
         IMapper mapper,
         ILogger<ProductsController> logger,
         IMailService mailService,
-        IUnitOfWork unitOfWork)
+        IUnitOfWork unitOfWork,
+        IWebHostEnvironment webHostEnvironment)
         {
             this._productRepo = productRepo;
             this._productBrandRepo = productBrandRepo;
@@ -42,6 +44,7 @@ namespace API.Controllers
             this._logger = logger;
             _mailService = mailService;
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         //[Authorize(Policy = "RequireAdminRole")]
@@ -77,6 +80,7 @@ namespace API.Controllers
                 NutrientContent = p.NutrientContent,
                 Features = p.Features,
                 Price = p.Price,
+                Stock = p.Stock,
                 PictureUrl = p.PictureUrl,
                 ProductType = p.ProductType != null ? p.ProductType.Name : null,
                 ProductBrand = p.ProductBrand != null ? p.ProductBrand.Name : null
@@ -133,7 +137,10 @@ namespace API.Controllers
             {
                 Name = productDto.Name,
                 Description = productDto.Description,
+                NutrientContent = productDto.NutrientContent,
+                Features = productDto.Features,
                 Price = productDto.Price,
+                Stock = productDto.Stock,
                 PictureUrl = productDto.PictureUrl,
                 ProductTypeId = productType.Id,
                 ProductType = productType,
@@ -186,6 +193,29 @@ namespace API.Controllers
 
             _productRepo.Delete(databaseProduct);
             await _unitOfWork.Complete();
+
+            return Ok();
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Upload()
+        {
+            string uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "images1/product");
+
+            if (!Directory.Exists(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
+            Random r = new();
+
+            foreach(var file in Request.Form.Files)
+            {
+                string fullPath = Path.Combine(uploadPath, $"{r.Next()}{Path.GetExtension(file.FileName)}");
+
+                using FileStream fileStream = new(fullPath, FileMode.Create, FileAccess.Write, FileShare.None, 1024 * 1024, useAsync: false);
+                await file.CopyToAsync(fileStream);
+                await fileStream.FlushAsync();
+            }
 
             return Ok();
         }

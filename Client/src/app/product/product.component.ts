@@ -19,7 +19,7 @@ export class ProductComponent implements AfterViewInit {
 
   products: IProduct[] = []
   dataSource: MatTableDataSource<IProduct>;
-  displayedColumns: string[] = ['name', 'price', 'productType', 'productBrand','action'];
+  displayedColumns: string[] = ['name', 'price','stock', 'productType', 'productBrand','action'];
   columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
   expandedProduct: IProduct | null
   showProductModal: boolean = false;

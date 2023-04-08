@@ -295,7 +295,10 @@ namespace Infrastructure.Migrations
                     b.Property<int?>("ProductTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ViewCount")
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ViewCount")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
