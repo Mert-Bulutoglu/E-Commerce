@@ -11,11 +11,12 @@ import { SharedModule } from '../shared/shared.module';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
+import { SelectProductImageDialogComponent } from './select-product-image-dialog/select-product-image-dialog.component';
 
 
 
 @NgModule({
-  declarations: [NavBarComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent, ConfirmationDialogComponent, FileUploadComponent],
+  declarations: [NavBarComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent, ConfirmationDialogComponent, FileUploadComponent, SelectProductImageDialogComponent],
   imports: [
     CommonModule,
     RouterModule,

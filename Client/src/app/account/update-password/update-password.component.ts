@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AccountService } from '../account.service';
@@ -11,7 +11,7 @@ import { AccountService } from '../account.service';
 })
 export class UpdatePasswordComponent implements OnInit {
   returnUrl: string;
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   
   constructor(spinner: NgxSpinnerService, private accountService: AccountService,
     private router: Router,
@@ -58,11 +58,11 @@ export class UpdatePasswordComponent implements OnInit {
   }
 
   createPasswordResetForm() {
-    this.loginForm = new FormGroup({
-         email: new FormControl('', [Validators.required, Validators
+    this.loginForm = new UntypedFormGroup({
+         email: new UntypedFormControl('', [Validators.required, Validators
         .pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
-        password: new FormControl('', Validators.required),
-        passwordConfirm: new FormControl('', Validators.required)
+        password: new UntypedFormControl('', Validators.required),
+        passwordConfirm: new UntypedFormControl('', Validators.required)
     });
   }
 

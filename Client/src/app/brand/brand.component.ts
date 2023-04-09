@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { BrandService } from './brand.service';
 import { ConfirmationDialog } from '../shared/models/confirmation-dialog';
 import { ConfirmationDialogComponent } from '../core/confirmation-dialog/confirmation-dialog.component';
@@ -27,7 +27,7 @@ export class BrandComponent implements AfterViewInit {
   constructor(
     public dialogRef: MatDialog,
     private router: Router,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private brandService: BrandService,
   ) {
     this.dataSource = new MatTableDataSource(this.brands);
@@ -101,7 +101,7 @@ export class BrandComponent implements AfterViewInit {
       });
   }
 
-  saveBrand(form: FormGroup){
+  saveBrand(form: UntypedFormGroup){
     if(form.valid){
       let brand: IBrand = form.value;
       console.log(brand);

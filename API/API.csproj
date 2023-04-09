@@ -36,4 +36,9 @@
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\photos\" />
+    <Folder Include="wwwroot\photos\product\" />
+  </ItemGroup>
+
 </Project>
