@@ -24,7 +24,7 @@ export class ProductService {
   
   getProduct(id: string) {
     const data: string = JSON.stringify(id);
-    return this.http.get<any>(this.Url + '/' + id,
+    return this.http.get<any>(this.Url + '/' +'details' + '/' + id,
         {
           params: new HttpParams()
             .set('data', data)

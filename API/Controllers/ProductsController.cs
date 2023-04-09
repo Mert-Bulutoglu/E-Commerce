@@ -102,6 +102,18 @@ namespace API.Controllers
             return _mapper.Map<Core.Entities.Product, ProductToReturnDto>(product);
         }
 
+
+        [HttpGet("details/{id}")]
+        public async Task<ActionResult<ProductDto>> GetProductById(int id)
+        {
+            var spec = new ProductsWithTypesAndBrandsSpecification(id);
+            var product = await _productRepo.GetEntityWithSpec(spec);
+
+            if (product == null) return NotFound(new ApiResponse(404));
+
+            return _mapper.Map<Core.Entities.Product, ProductDto>(product);
+        }
+
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
         {
@@ -200,7 +212,7 @@ namespace API.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Upload()
         {
-            string uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "images1/product");
+            string uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "photos/product");
 
             if (!Directory.Exists(uploadPath))
             {
@@ -208,16 +220,21 @@ namespace API.Controllers
             }
             Random r = new();
 
-            foreach(var file in Request.Form.Files)
+            foreach (var file in Request.Form.Files)
             {
-                string fullPath = Path.Combine(uploadPath, $"{r.Next()}{Path.GetExtension(file.FileName)}");
+                string fileName = $"{r.Next()}{Path.GetExtension(file.FileName)}";
+                string fullPath = Path.Combine(uploadPath, fileName);
 
                 using FileStream fileStream = new(fullPath, FileMode.Create, FileAccess.Write, FileShare.None, 1024 * 1024, useAsync: false);
                 await file.CopyToAsync(fileStream);
                 await fileStream.FlushAsync();
+
+                string url = "photos/product/" + fileName;
+
+                return Ok(new { url });
             }
 
-            return Ok();
+            return BadRequest();
         }
     }
 }

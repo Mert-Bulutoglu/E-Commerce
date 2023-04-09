@@ -1,0 +1,6 @@
+<div mat-dialog-content class="dialog-content">
+    <app-file-upload [options]="options" (fileUrl)="onFileUploadSuccess($event)"></app-file-upload>
+</div>
+<div mat-dialog-actions class="dialog-actions">
+    <button mat-raised-button class="btn" (click)="closeModal()">Close</button>
+</div>

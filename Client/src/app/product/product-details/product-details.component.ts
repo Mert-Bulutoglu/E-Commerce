@@ -1,5 +1,5 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IBrand } from 'src/app/shared/models/brand';
 import { IProduct } from 'src/app/shared/models/product';
@@ -9,6 +9,9 @@ import { BrandService } from 'src/app/brand/brand.service';
 import { TypeService } from 'src/app/type/type.service';
 import { HttpClient } from '@angular/common/http';
 import { FileUploadOptions } from 'src/app/core/file-upload/file-upload.component';
+import { MatDialog } from '@angular/material/dialog';
+import { SelectProductImageDialogComponent } from 'src/app/core/select-product-image-dialog/select-product-image-dialog.component';
+import { ConfirmationDialog } from 'src/app/shared/models/confirmation-dialog';
 
 @Component({
   selector: 'app-product-details',
@@ -16,20 +19,28 @@ import { FileUploadOptions } from 'src/app/core/file-upload/file-upload.componen
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
-  form: FormGroup;
+  fileUrl: string;
+  form: UntypedFormGroup;
   selectedFile: File = null;
   typesList: IType[] = [];
   brandsList: IBrand[] = [];
   product: IProduct;
   constructor(
+    public dialogRef: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private productService: ProductService,
     private brandService: BrandService,
     private typeService: TypeService,
-    private http: HttpClient
+    private http: HttpClient,
+
   ) { }
+
+  public onFileUploadSuccess(url: string): void {
+    this.fileUrl = url;
+    this.pictureUrl.setValue(this.fileUrl);
+  }
 
   ngOnInit() {
     const productId: string = this.route.snapshot.paramMap.get('id');
@@ -67,58 +78,58 @@ export class ProductDetailsComponent implements OnInit {
 
   getProduct(productId: string) {
     this.productService.getProduct(productId)
-    .subscribe({
-      next: (data: any) => {
-        console.log(data);
-        this.product = data;
-        this.prefillForm();
-      },
-      error: (err: any) =>{
-        console.log(err);
-      },
-      complete: () => {
-        console.log('get by id completed');
-      } 
-    });
+      .subscribe({
+        next: (data: any) => {
+          console.log(data);
+          this.product = data;
+          this.prefillForm();
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+        complete: () => {
+          console.log('get by id completed');
+        }
+      });
   }
-  
-  updateProduct(id: number, form: FormGroup){
-    if(form.valid){
+
+  updateProduct(id: number, form: UntypedFormGroup) {
+    if (form.valid) {
       const product: IProduct = form.value;
       product.id = id;
       console.log(product);
       this.productService.updateProduct(id, product)
-      .subscribe({
-        next: (data: any) => {
-          console.log(data);
-        },
-        error: (err: any) =>{
-          console.log(err);
-        },
-        complete: () => {
-          console.log('product update completed');
-        } 
-      })
-    } 
+        .subscribe({
+          next: (data: any) => {
+            console.log(data);
+          },
+          error: (err: any) => {
+            console.log(err);
+          },
+          complete: () => {
+            console.log('product update completed');
+          }
+        })
+    }
   }
 
-  saveProduct(form: FormGroup){
-    if(form.valid){
+  saveProduct(form: UntypedFormGroup) {
+    if (form.valid) {
       let product: IProduct = form.value;
       this.productService.createProduct(product)
-      .subscribe({
-        next: (data: any) => {
-          console.log(data);
-          this.router.navigate(['/product']);
-        },
-        error: (err: any) =>{
-          console.log(err);
-        },
-        complete: () =>{
-          console.log('product add completed');
-        } 
-      })
-    } 
+        .subscribe({
+          next: (data: any) => {
+            console.log(data);
+            this.router.navigate(['/product']);
+          },
+          error: (err: any) => {
+            console.log(err);
+          },
+          complete: () => {
+            console.log('product add completed');
+          }
+        })
+    }
   }
 
   getAllBrands() {
@@ -159,7 +170,7 @@ export class ProductDetailsComponent implements OnInit {
       });
   }
 
-  handleSaveButton(form: FormGroup) {
+  handleSaveButton(form: UntypedFormGroup) {
     console.log(form.value);
     if (this.product) {
       this.updateProduct(this.product.id, form);
@@ -174,6 +185,45 @@ export class ProductDetailsComponent implements OnInit {
     explanation: "Pass files or select files..",
     accept: ".png, .jpg, .jpeg"
   }
+
+  openConfirmation() {
+    const selectedProduct: IProduct = this.product
+    
+    if(selectedProduct != null)
+    {
+      const data: ConfirmationDialog = {
+        message: `Add a photo '${selectedProduct.name}'`,
+        data: selectedProduct
+      }
+    }
+
+    const data: ConfirmationDialog = {
+      message: `Add a photo`,
+      data: null
+    }
+
+    const dialogRef = this.dialogRef.open(SelectProductImageDialogComponent, {
+      width: '500px',
+      data: data
+    }
+    );
+
+    dialogRef.componentInstance.fileUrlChanged.subscribe((url: string) => {
+      this.fileUrl = url;
+      this.pictureUrl.setValue(this.fileUrl);
+      dialogRef.close({ success: true });
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result.success) {
+        dialogRef.close();
+      }
+    });
+  }
+
+
+
 
   prefillForm(): void {
     this.name.setValue(this.product.name);
@@ -196,12 +246,12 @@ export class ProductDetailsComponent implements OnInit {
 
   get nutrientContent(): any {
     return this.form.get('nutrientContent');
-  } 
+  }
 
   get features(): any {
     return this.form.get('features');
   }
-  
+
   get price(): any {
     return this.form.get('price');
   }
@@ -217,7 +267,7 @@ export class ProductDetailsComponent implements OnInit {
   get productType(): any {
     return this.form.get('productType');
   }
-  
+
   get productBrand(): any {
     return this.form.get('productBrand');
   }

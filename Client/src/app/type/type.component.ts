@@ -4,7 +4,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TypeService } from './type.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IType } from '../shared/models/productType';
 import { ConfirmationDialogComponent } from '../core/confirmation-dialog/confirmation-dialog.component';
@@ -27,7 +27,7 @@ export class TypeComponent implements AfterViewInit {
   constructor(
     public dialogRef: MatDialog,
     private router: Router,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private typeService: TypeService,
   ) {
     this.dataSource = new MatTableDataSource(this.types);
@@ -101,7 +101,7 @@ export class TypeComponent implements AfterViewInit {
       });
   }
 
-  saveType(form: FormGroup){
+  saveType(form: UntypedFormGroup){
     if(form.valid){
       let type: IType = form.value;
       console.log(type);

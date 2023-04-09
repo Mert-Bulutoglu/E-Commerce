@@ -1,6 +1,6 @@
 <div class="container">
     <form class="product-form" [formGroup]="form" (ngSubmit)="handleSaveButton(form)">
-        <mat-grid-list class="form-grid" cols="2" rowHeight="150px" gutterSize="56px">
+        <mat-grid-list class="form-grid" cols="3" rowHeight="150px" gutterSize="56px">
             <mat-grid-tile>
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Name</mat-label>
@@ -51,12 +51,14 @@
             <mat-grid-tile>
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Picture</mat-label>
-                    <input type="text" class="input" matInput [formControl]="pictureUrl" placeholder="Picture">
+                    <input type="text" class="input" matInput [formControl]="pictureUrl" placeholder="Picture" readonly>
                     <mat-error *ngIf="pictureUrl.hasError('required')">
                         Picture is required
-                    </mat-error>
-                    
+                    </mat-error>       
                 </mat-form-field>
+                <a class="form-field" mat-raised-button (click)="openConfirmation()" style="margin: 0; padding: 0;">
+                    <img src="../../../assets/images/photo.png">
+                  </a>
             </mat-grid-tile>
             <mat-grid-tile>
                 <mat-form-field appearance="outline">
@@ -81,8 +83,6 @@
                 </mat-form-field>
             </mat-grid-tile>     
         </mat-grid-list>
-        <app-file-upload [options]="fileUploadOptions"></app-file-upload>
-
         <div class="btn-container">
             <button mat-raised-button class="btn large" routerLink="/product">Back To List</button>
             <button mat-raised-button class="btn large" type="submit">Save</button>
