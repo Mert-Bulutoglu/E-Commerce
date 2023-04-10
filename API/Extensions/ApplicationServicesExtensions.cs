@@ -25,6 +25,7 @@ namespace API.Extensions
             services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<ITypeRepository, TypeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IDeliveryMethodRepository, DeliveryMethodRepository>();
 
             services.Configure<ApiBehaviorOptions>(options =>
              {

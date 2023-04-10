@@ -23,8 +23,12 @@ namespace API.Helpers
                 .ForMember(dest => dest.ProductBrand, opt => opt.MapFrom(src => new ProductBrand { Name = src.ProductBrand }))
                 .ForMember(dest => dest.ProductType, opt => opt.MapFrom(src => new ProductType { Name = src.ProductType }));
 
+            CreateMap<RoleDto, AppRole>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ReverseMap();
             CreateMap<ProductType, TypeDto>().ReverseMap();
             CreateMap<ProductBrand, BrandDto>().ReverseMap();
+            CreateMap<DeliveryMethod, DeliveryDto>().ReverseMap();
             CreateMap<Core.Entities.Identity.Address, AddressDto>().ReverseMap();
             CreateMap<CustomerBasketDto, CustomerBasket>();
             CreateMap<BasketItemDto, BasketItem>();

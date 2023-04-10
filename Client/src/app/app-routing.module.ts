@@ -11,6 +11,8 @@ import { UserDetailsComponent } from './user/user-details/user-details.component
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { TypeComponent } from './type/type.component';
 import { BrandComponent } from './brand/brand.component';
+import { DeliveryMethodComponent } from './delivery-method/delivery-method.component';
+import { DeliveryMethodDetailsComponent } from './delivery-method/delivery-method-details/delivery-method-details.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -30,6 +32,9 @@ const routes: Routes = [
   {path: 'create-user', component: UserDetailsComponent /*canActivate:[AuthGuard] */},
   {path: 'type', component: TypeComponent /*canActivate:[AuthGuard] */ },
   {path: 'brand', component: BrandComponent /*canActivate:[AuthGuard] */ },
+  {path: 'delivery-method', component: DeliveryMethodComponent /*canActivate:[AuthGuard] */ },
+  {path: 'delivery-method/:id', component: DeliveryMethodDetailsComponent /*canActivate:[AuthGuard] */},
+  {path: 'create-delivery-method', component: DeliveryMethodDetailsComponent /*canActivate:[AuthGuard] */ },
   {path: '**', redirectTo: '', pathMatch:'full'}
 ];
 

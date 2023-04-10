@@ -29,6 +29,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { DeliveryMethodComponent } from './delivery-method/delivery-method.component';
+import { DeliveryMethodDetailsComponent } from './delivery-method/delivery-method-details/delivery-method-details.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
     ProductDetailsComponent,
     UserDetailsComponent,
     TypeComponent,
-    BrandComponent
+    BrandComponent,
+    DeliveryMethodComponent,
+    DeliveryMethodDetailsComponent
   ],
   imports: [
     BrowserModule,
