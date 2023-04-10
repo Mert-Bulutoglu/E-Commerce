@@ -8,6 +8,7 @@ namespace Core.Entities.Identity
 {
     public class AppRole : IdentityRole<int>
     {
+        public override string Name { get; set; }
         public ICollection<AppUserRole> UserRoles { get; set; }
     }
 }

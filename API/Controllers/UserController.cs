@@ -19,14 +19,16 @@ namespace API.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<AppRole> _roleManager;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IGenericRepository<AppRole> _roleRepository;
 
-        public UserController(IUserRepository userRepository, IMapper mapper, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, IUnitOfWork unitOfWork)
+        public UserController(IUserRepository userRepository, IMapper mapper, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, IUnitOfWork unitOfWork, IGenericRepository<AppRole> roleRepository)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _userManager = userManager;
             _roleManager = roleManager;
             _unitOfWork = unitOfWork;
+            _roleRepository = roleRepository;
         }
 
         [HttpGet]
@@ -41,6 +43,14 @@ namespace API.Controllers
                 userDtoResult.RoleName = roles.FirstOrDefault();
             }
             return Ok(userDtoResults);
+        }
+
+        [HttpGet("roles")]
+        public async Task<ActionResult<IReadOnlyList<RoleDto>>> GetUserRoles()
+        {
+            var roles = await _roleRepository.ListAllAsync();
+            var roleDtoResult = _mapper.Map<List<RoleDto>>(roles);
+            return Ok(roleDtoResult);
         }
 
         [HttpGet("{id}")]
@@ -122,7 +132,7 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(UpdateUserDto userDto)
+        public async Task<ActionResult> Update(UserDtoResult userDto)
         {
             var user = await _userRepository.GetByIdAsync(userDto.Id);
 
@@ -130,6 +140,10 @@ namespace API.Controllers
             {
                 return NotFound(user);
             }
+
+            user.DisplayName = userDto.DisplayName;
+            user.UserName = userDto.DisplayName;
+            user.Email = userDto.Email;
 
             var result = await _userManager.UpdateAsync(user);
 
@@ -139,7 +153,11 @@ namespace API.Controllers
             }
 
             var userRole = await _userManager.GetRolesAsync(user);
-            await _userManager.RemoveFromRoleAsync(user, userRole[0]);
+            if (userRole.Any())
+            {
+                await _userManager.RemoveFromRoleAsync(user, userRole.ElementAt(0));
+            }
+
             await _unitOfWork.Complete();
 
             if (!await _roleManager.RoleExistsAsync(userDto.RoleName))
@@ -157,12 +175,12 @@ namespace API.Controllers
             }
             await _unitOfWork.Complete();
 
-            var updatedUser = new UserDtoResult
+            var updatedUser = new UpdateUserDto
             {
-                DisplayName = user.UserName,
+                UserName = userDto.DisplayName,
                 RoleName = userDto.RoleName,
-                Email = user.Email,
-                Id = user.Id
+                Email = userDto.Email,
+                Id = userDto.Id
             };
 
             return Ok(updatedUser);

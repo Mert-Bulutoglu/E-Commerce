@@ -15,12 +15,24 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getOrders();
+   
   }
   
   getOrders() {
     this.orderService.getOrdersForUser().subscribe({
-      next: orders => this.orders = orders
+      next: (data: any) => {
+        this.orders = data;
+        console.log(data);
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+      complete: () => {
+        console.log("get orders completed")
+      }
     })
+   
   }
+
 
 }

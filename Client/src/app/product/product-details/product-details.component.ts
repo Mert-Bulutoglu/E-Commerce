@@ -188,9 +188,8 @@ export class ProductDetailsComponent implements OnInit {
 
   openConfirmation() {
     const selectedProduct: IProduct = this.product
-    
-    if(selectedProduct != null)
-    {
+
+    if (selectedProduct != null) {
       const data: ConfirmationDialog = {
         message: `Add a photo '${selectedProduct.name}'`,
         data: selectedProduct

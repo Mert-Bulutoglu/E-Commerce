@@ -1,0 +1,49 @@
+<div class="container">
+    <form class="delivery-method-form" [formGroup]="form" (ngSubmit)="handleSaveButton(form)">
+        <mat-grid-list class="form-grid" cols="3" rowHeight="150px" gutterSize="56px">
+            <mat-grid-tile>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input type="text" class="input" matInput [formControl]="shortName"
+                        placeholder="Name">
+                    <mat-error *ngIf="shortName.hasError('required')">
+                        Name is required
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="limited-height" appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea type="text" class="input" matInput [formControl]="description"
+                        placeholder="Description"></textarea>
+                        <mat-error *ngIf="description.hasError('required')">
+                            Description is required
+                        </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="limited-height" appearance="outline">
+                    <mat-label>Delivery Time</mat-label>
+                    <textarea type="text" class="input" matInput [formControl]="deliveryTime" placeholder="Delivery Time"></textarea>
+                    <mat-error *ngIf="deliveryTime.hasError('required')">
+                        Delivery Time is required
+                    </mat-error>
+                </mat-form-field>         
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Price</mat-label>
+                    <input type="number" class="input" matInput [formControl]="price" placeholder="Price" min="0">
+                    <mat-error *ngIf="price.hasError('required')">
+                        Price is required
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>  
+        </mat-grid-list>
+        <div class="btn-container">
+            <button mat-raised-button class="btn large" routerLink="/delivery-method">Back To List</button>
+            <button mat-raised-button class="btn large" type="submit">Save</button>
+        </div>
+    </form>
+  
+</div>
