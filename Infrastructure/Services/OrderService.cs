@@ -73,6 +73,13 @@ namespace Infrastructure.Services
             return order;
         }
 
+        public async Task<IReadOnlyList<Order>> GetAllOrdersAsync()
+        {
+            var spec = new OrdersWithItemsAndOrderingSpecification();
+
+            return await _unitOfWork.Repository<Order>().ListAsync(spec);
+        }
+
         public async Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync()
         {
             return await _unitOfWork.Repository<DeliveryMethod>().ListAllAsync();

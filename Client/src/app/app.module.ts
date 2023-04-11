@@ -31,6 +31,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { DeliveryMethodComponent } from './delivery-method/delivery-method.component';
 import { DeliveryMethodDetailsComponent } from './delivery-method/delivery-method-details/delivery-method-details.component';
+import { AllOrderComponent } from './all-order/all-order.component';
+import { AllOrderDetailComponent } from './all-order/all-order-detail/all-order-detail.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { DeliveryMethodDetailsComponent } from './delivery-method/delivery-metho
     TypeComponent,
     BrandComponent,
     DeliveryMethodComponent,
-    DeliveryMethodDetailsComponent
+    DeliveryMethodDetailsComponent,
+    AllOrderComponent,
+    AllOrderDetailComponent
   ],
   imports: [
     BrowserModule,

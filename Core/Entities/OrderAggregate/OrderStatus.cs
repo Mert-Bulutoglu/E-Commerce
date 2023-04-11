@@ -9,10 +9,20 @@ namespace Core.Entities.OrderAggregate
     public enum OrderStatus
     {
         [EnumMember(Value = "Pending")]
-        Pending,   
-        [EnumMember(Value = "Payment Recieved")]
+        Pending,
+        [EnumMember(Value = "Payment Received")]
         PaymentReceived,
         [EnumMember(Value = "Payment Failed")]
-        PaymentFailed
+        PaymentFailed,
+        [EnumMember(Value = "Processing")]
+        Processing,
+        [EnumMember(Value = "Shipped")]
+        Shipped,
+        [EnumMember(Value = "Delivered")]
+        Delivered,
+        [EnumMember(Value = "Cancelled")]
+        Cancelled,
+        [EnumMember(Value = "Refunded")]
+        Refunded
     }
 }

@@ -13,6 +13,8 @@ import { TypeComponent } from './type/type.component';
 import { BrandComponent } from './brand/brand.component';
 import { DeliveryMethodComponent } from './delivery-method/delivery-method.component';
 import { DeliveryMethodDetailsComponent } from './delivery-method/delivery-method-details/delivery-method-details.component';
+import { AllOrderComponent } from './all-order/all-order.component';
+import { AllOrderDetailComponent } from './all-order/all-order-detail/all-order-detail.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -35,6 +37,8 @@ const routes: Routes = [
   {path: 'delivery-method', component: DeliveryMethodComponent /*canActivate:[AuthGuard] */ },
   {path: 'delivery-method/:id', component: DeliveryMethodDetailsComponent /*canActivate:[AuthGuard] */},
   {path: 'create-delivery-method', component: DeliveryMethodDetailsComponent /*canActivate:[AuthGuard] */ },
+  {path: 'all-order', component: AllOrderComponent /*canActivate:[AuthGuard] */ },
+  {path: 'all-order/:id', component: AllOrderDetailComponent /*canActivate:[AuthGuard] */ },
   {path: '**', redirectTo: '', pathMatch:'full'}
 ];
 
