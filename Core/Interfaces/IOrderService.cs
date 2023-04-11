@@ -11,6 +11,7 @@ namespace Core.Interfaces
     {
         Task<Order> CreateOrderAsync(string buyerEmail, int deliveryMethod, string basketId, Entities.OrderAggregate.Address shippingAdress);
         Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string buyerEmail);
+        Task<IReadOnlyList<Order>> GetAllOrdersAsync();
         Task<Order> GetOrderByIdAsync(int id, string buyerEmail);
         Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync();
 

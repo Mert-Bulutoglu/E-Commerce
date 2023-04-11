@@ -4,6 +4,7 @@ using AutoMapper;
 using Core.Entities;
 using Core.Entities.Identity;
 using Core.Entities.OrderAggregate;
+using Address = Core.Entities.Identity.Address;
 using UserDto = API.Dtos.UserDto;
 
 namespace API.Helpers
@@ -64,6 +65,15 @@ namespace API.Helpers
                 }).ToList()));
             CreateMap<AppUser, UpdateUserDto>().ReverseMap();
             CreateMap<AppUser, AddUserDto>().ReverseMap();
+
+            CreateMap<UpdateOrderDto, Order>()
+              .ForMember(dest => dest.Id, opt => opt.Ignore())
+              .ForMember(dest => dest.OrderDate, opt => opt.Ignore())
+              .ForMember(dest => dest.Status, opt => opt.Ignore())
+              .ForMember(dest => dest.PaymentIntentId, opt => opt.Ignore())
+              .ForMember(dest => dest.OrderItems, opt => opt.Ignore())
+              .ForMember(dest => dest.Subtotal, opt => opt.Ignore());
+
         }
     }
 }

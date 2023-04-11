@@ -1,23 +1,27 @@
 using API.Dtos;
+using API.Dtos.EntityDtos;
 using API.Errors;
 using API.Extensions;
 using AutoMapper;
 using Core.Entities.OrderAggregate;
 using Core.Interfaces;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class OrdersController : BaseApiController
     {
         private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
-        public OrdersController(IOrderService orderService, IMapper mapper)
+        private readonly IUnitOfWork _unitOfWork;
+        public OrdersController(IOrderService orderService, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _orderService = orderService;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpPost]
@@ -48,7 +52,6 @@ namespace API.Controllers
         public async Task<ActionResult<OrderToReturnDto>> GetOrderByIdForUser(int id)
         {
             var email = User.RetrieveEmailFromPrincipal();
-
             var order = await _orderService.GetOrderByIdAsync(id, email);
 
             if (order == null) return NotFound(new ApiResponse(404));
@@ -61,5 +64,68 @@ namespace API.Controllers
         {
             return Ok(await _orderService.GetDeliveryMethodsAsync());
         }
+
+        [HttpGet("[action]")]
+        public async Task<ActionResult> GetOrders()
+        {
+
+            var orders = await _orderService.GetAllOrdersAsync();
+
+            return Ok(_mapper.Map<IReadOnlyList<OrderToReturnDto>>(orders));
+        }
+
+        [HttpGet("getOrders/{id}")]
+        public async Task<ActionResult<OrderToReturnDto>> GetOrder(int id)
+        {
+            var order = await _orderService.GetByIdAsync(id);
+            var orderById = await _orderService.GetOrderByIdAsync(id, order.BuyerEmail);
+            if (orderById == null)
+            {
+                return NotFound();
+            }
+            return Ok(_mapper.Map<OrderToReturnDto> (orderById));
+        }
+
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<OrderToReturnDto>> Update(UpdateOrderDto updateOrderDto)
+        {
+            var order = await _orderService.GetByIdAsync(updateOrderDto.Id);
+            var orderById = await _orderService.GetOrderByIdAsync(updateOrderDto.Id, order.BuyerEmail);
+
+            if (orderById == null) return NotFound();
+
+
+            if (Enum.TryParse(updateOrderDto.Status.Replace(" ", ""), out OrderStatus status))
+            {
+                order.Status = status;
+            }
+            else
+            {
+                return BadRequest("Invalid status value.");
+            }
+
+            _mapper.Map(updateOrderDto, order);
+            _orderService.Update(order);
+
+            await _unitOfWork.Complete();
+
+            return _mapper.Map<Order, OrderToReturnDto>(order);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var databaseOrder = await _orderService.GetByIdAsync(id);
+            if (databaseOrder == null)
+            {
+                return NotFound();
+            }
+            _orderService.Delete(databaseOrder);
+            await _unitOfWork.Complete();
+
+            return Ok();
+        }
+
     }
 }
