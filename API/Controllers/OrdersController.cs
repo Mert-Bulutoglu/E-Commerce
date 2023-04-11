@@ -17,23 +17,43 @@ namespace API.Controllers
         private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        public OrdersController(IOrderService orderService, IMapper mapper, IUnitOfWork unitOfWork)
+        private readonly IBasketRepository _basketRepository;
+        private readonly IProductRepository _productRepository;
+        public OrdersController(IOrderService orderService, IMapper mapper, IUnitOfWork unitOfWork, IBasketRepository basketRepository, IProductRepository productRepository)
         {
             _mapper = mapper;
             _orderService = orderService;
             _unitOfWork = unitOfWork;
+            _basketRepository = basketRepository;
+            _productRepository = productRepository;
         }
 
         [HttpPost]
         public async Task<ActionResult<Order>> CreateOrder(OrderDto orderDto)
         {
             var email = HttpContext.User.RetrieveEmailFromPrincipal();
+            
+            var basket = await _basketRepository.GetBasketAsync(orderDto.BasketId);
 
             var address = _mapper.Map<AddressDto, Address>(orderDto.ShipToAddress);
 
             var order = await _orderService.CreateOrderAsync(email, orderDto.DeliveryMethodId, orderDto.BasketId, address);
 
             if (order == null) return BadRequest(new ApiResponse(400, "Problem creating order"));
+
+            foreach (var item in basket.Items)
+            {
+                var productItem = await _productRepository.GetProductByIdAsync(item.Id);
+                if (productItem == null || productItem.Stock < item.Quantity)
+                {
+                    return BadRequest(new ApiResponse(400, $"Not enough stock for product {item.ProductName}; enough stock is {productItem.Stock}"));
+                }
+                productItem.Stock -= item.Quantity;
+                _productRepository.Update(productItem);
+                await _unitOfWork.Complete();
+            }
+
+            await _basketRepository.DeleteBasketAsync(orderDto.BasketId);
 
             return Ok(order);
         }
