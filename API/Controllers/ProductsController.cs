@@ -99,6 +99,10 @@ namespace API.Controllers
 
             if (product == null) return NotFound(new ApiResponse(404));
 
+            product.ViewCount++;
+            _productRepo.Update(product);
+            await _unitOfWork.Complete();
+
             return _mapper.Map<Core.Entities.Product, ProductToReturnDto>(product);
         }
 
@@ -125,7 +129,6 @@ namespace API.Controllers
         public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
         {
             return Ok(await _productTypeRepo.ListAllAsync());
-
         }
 
         [HttpPost]
