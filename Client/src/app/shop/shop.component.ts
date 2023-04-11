@@ -19,7 +19,8 @@ export class ShopComponent implements OnInit {
   totalCount: number;
 
   sortOptions = [
-    {name: 'Alphabetical', value: 'name'},
+    {name: 'Popular', value: 'name'},
+    {name: 'Alphabetical', value:'alphabetical' },
     {name: 'Price: Low to High', value: 'priceAsc'},
     {name: 'Price: High to Low', value: 'priceDesc'}
   ]

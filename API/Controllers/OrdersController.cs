@@ -37,6 +37,17 @@ namespace API.Controllers
 
             var address = _mapper.Map<AddressDto, Address>(orderDto.ShipToAddress);
 
+            foreach (var item in basket.Items)
+            {
+                var productItem = await _productRepository.GetProductByIdAsync(item.Id);
+                if (productItem == null || productItem.Stock < item.Quantity)
+                {
+                    return BadRequest(new ApiResponse(400, $"Not enough stock for product {item.ProductName}; enough stock is {productItem.Stock}"));
+                }            
+                productItem.Stock -= item.Quantity;
+                _productRepository.Update(productItem);
+            }
+
             var order = await _orderService.CreateOrderAsync(email, orderDto.DeliveryMethodId, orderDto.BasketId, address);
 
             if (order == null) return BadRequest(new ApiResponse(400, "Problem creating order"));
@@ -44,14 +55,11 @@ namespace API.Controllers
             foreach (var item in basket.Items)
             {
                 var productItem = await _productRepository.GetProductByIdAsync(item.Id);
-                if (productItem == null || productItem.Stock < item.Quantity)
-                {
-                    return BadRequest(new ApiResponse(400, $"Not enough stock for product {item.ProductName}; enough stock is {productItem.Stock}"));
-                }
-                productItem.Stock -= item.Quantity;
+                productItem.NumberOfSold += item.Quantity;
                 _productRepository.Update(productItem);
-                await _unitOfWork.Complete();
             }
+
+            await _unitOfWork.Complete();
 
             await _basketRepository.DeleteBasketAsync(orderDto.BasketId);
 
