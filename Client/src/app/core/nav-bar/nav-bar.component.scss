@@ -1,4 +1,4 @@
-.cart-no{
+.cart-no {
     position: absolute;
     min-height: 25px;
     min-width: 25px;
@@ -23,8 +23,15 @@ a {
 
 .logo {
     cursor: pointer;
+    width: 120px;
+    height: 140px;
 
     &.focus {
         outline: none;
     }
 }
+
+.img {
+    width: 500px;
+    height: 600px;
+  }
