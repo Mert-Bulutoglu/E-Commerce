@@ -33,6 +33,7 @@ import { DeliveryMethodComponent } from './delivery-method/delivery-method.compo
 import { DeliveryMethodDetailsComponent } from './delivery-method/delivery-method-details/delivery-method-details.component';
 import { AllOrderComponent } from './all-order/all-order.component';
 import { AllOrderDetailComponent } from './all-order/all-order-detail/all-order-detail.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { AllOrderDetailComponent } from './all-order/all-order-detail/all-order-
     MatDialogModule,
     MatNativeDateModule,
     MatInputModule,
-    MatGridListModule 
+    MatGridListModule,
+    MatStepperModule 
   ],
   exports:[
     NgxSpinnerModule

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BasketService } from 'src/app/basket/basket.service';
 import { IProduct } from 'src/app/shared/models/product';
 import { ShopService } from '../shop.service';
+import { CdkStepper } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-product-details',
@@ -24,13 +25,22 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addItemToBasket() {
-    this.basketService.addItemToBasket(this.product, this.quantity);
+    const maxQuantity = this.product.stock - this.basketService.getTotalQuantity(this.product.id);
+    const quantityToAdd = this.quantity <= maxQuantity ? this.quantity : maxQuantity;
+    if (quantityToAdd > 0) {
+      this.basketService.addItemToBasket(this.product, quantityToAdd);
+    }
   }
+
   incrementQuantity() {
-    this.quantity++;
+    const maxQuantity = this.product.stock - this.basketService.getTotalQuantity(this.product.id);
+    if (this.quantity < maxQuantity) {
+      this.quantity++;
+    }
   }
+
   decrementQuantity() {
-    if(this.quantity> 1){
+    if (this.quantity > 1) {
       this.quantity--;
     }
   }
@@ -42,6 +52,19 @@ export class ProductDetailsComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+  
+  boldUpperCase(paragraph: string): string {
+    const words = paragraph.split(' ');
+    const formattedWords = words.map(word => {
+      if (word.toUpperCase() === word) {
+        return '<strong>' + word + '</strong>';
+      } else {
+        return word;
+      }
+    });
+    return formattedWords.join(' ');
   }
 
 }

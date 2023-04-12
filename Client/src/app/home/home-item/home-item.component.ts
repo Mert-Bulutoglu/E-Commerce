@@ -17,6 +17,10 @@ export class HomeItemComponent implements OnInit {
   }
 
   addItemToBasket() {
+    if (this.product.stock === 0) {
+      console.log('Üzgünüz, bu ürün stokta yok.');
+      return;
+    }
     this.basketService.addItemToBasket(this.product);
   }
 
