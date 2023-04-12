@@ -19,7 +19,7 @@ export class ShopComponent implements OnInit {
   totalCount: number;
 
   sortOptions = [
-    {name: 'Popular', value: 'name'},
+    {name: 'Popular', value: 'mostPopular'},
     {name: 'Alphabetical', value:'alphabetical' },
     {name: 'Price: Low to High', value: 'priceAsc'},
     {name: 'Price: High to Low', value: 'priceDesc'}
@@ -31,6 +31,7 @@ export class ShopComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+   this.shopParams.sort = 'mostPopular';
    this.getProducts();
    this.getBrands();
    this.getTypes();

@@ -36,10 +36,10 @@ namespace Core.Specifications
                         AddOrderBy(n => n.Name);
                         break;
                     case "mostPopular":
-                        AddOrderByDescending(n => n.NumberOfSold);
+                        AddOrderByDescending(n => n.ViewCount + 5 * n.NumberOfSold);                    
                         break;
                     default:
-                        AddOrderByDescending(n => n.ViewCount + 5 * n.NumberOfSold);
+                        AddOrderByDescending(n => n.NumberOfSold);
                         break;
                 }
             }
