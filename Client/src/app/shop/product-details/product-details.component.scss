@@ -1,5 +1,20 @@
-.img {
-    width: 500px;
-    height: 600px;
-  }
-  
+.product-img {
+  width: 500px;
+  height: 600px;
+  position: relative;
+}
+
+.out-of-stock {
+  filter: grayscale(100%);
+}
+
+.out-of-stock-overlay {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
+

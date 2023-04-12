@@ -1,22 +1,51 @@
 <div class="container mt-5">
     <div class="row" *ngIf="product">
         <div class="col-6">
-            <img src="{{product.pictureUrl}}" alt="{{product.name}}" class="img">
+            <img src="{{product.pictureUrl}}" alt="{{product.name}}" class="product-img"
+                [ngClass]="{'out-of-stock': product.stock === 0}">
+            <div class="out-of-stock-overlay" *ngIf="product.stock === 0">Out of Stock</div>
         </div>
         <div class="col-6">
             <h3>{{product.name}}</h3>
             <p style="font-size: 2em;">₺{{product.price}}</p>
             <div class="d-flex justify-content-start align-items-center">
-                <i (click)="decrementQuantity()" class="fa fa-minus-circle text-warning mr-2" style="cursor: pointer; font-size: 2em"></i>
+                <i (click)="decrementQuantity()" class="fa fa-minus-circle text-warning mr-2"
+                    style="cursor: pointer; font-size: 2em"></i>
                 <span class="font-weight-bold" style="font-size: 1.5em;">{{quantity}}</span>
-                <i (click)="incrementQuantity()" class="fa fa-plus-circle text-warning mx-2" style="cursor: pointer; font-size: 2em"></i>
-                <button (click)="addItemToBasket()" class="btn btn-outline-secondary btn-lg ml-4">Add to Chart</button>
+                <i (click)="incrementQuantity()" class="fa fa-plus-circle text-warning mx-2"
+                    style="cursor: pointer; font-size: 2em"></i>
+                <button (click)="addItemToBasket()" class="btn btn-outline-secondary btn-lg ml-4"
+                    [disabled]="product.stock === 0">Add to Cart</button>
             </div>
         </div>
         <div class="row mt-5">
-            <div class="col-12 ml-3">
-                <h4>How To Use</h4>
-                <p>{{product.description}}</p>
+            <div class="col-12">
+                <mat-horizontal-stepper>
+                    <mat-step label="Features">
+                        <div *ngIf="product">
+                            <div *ngFor="let paragraph of (product.features || '').split('\n')">
+                                <p [innerHTML]="boldUpperCase(paragraph)"></p>
+                                <br>
+                            </div>
+                        </div>
+                    </mat-step>                   
+                    <mat-step label="Nutrient Content">
+                        <div *ngIf="product">
+                            <div *ngFor="let paragraph of (product.nutrientContent || '').split('\n')">
+                                <p [innerHTML]="boldUpperCase(paragraph)"></p>
+                                <br>
+                            </div>
+                        </div>
+                    </mat-step>
+                    <mat-step label="How to Use">
+                        <div *ngIf="product">
+                            <div *ngFor="let paragraph of (product.description || '').split('\n')">
+                                <p [innerHTML]="boldUpperCase(paragraph.trim())"></p>
+                                <br>
+                            </div>
+                        </div>
+                    </mat-step>
+                </mat-horizontal-stepper>
             </div>
         </div>
     </div>
