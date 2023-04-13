@@ -57,6 +57,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
+app.UseMiddleware<GraylogLoggingMiddleware>();
 app.UseMiddleware<ExceptionMiddleware>();
 
 
