@@ -3,6 +3,7 @@ import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AccountService } from '../account.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-password',
@@ -15,7 +16,8 @@ export class UpdatePasswordComponent implements OnInit {
   
   constructor(spinner: NgxSpinnerService, private accountService: AccountService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastrService: ToastrService
     ) { }
 
   state: boolean;
@@ -50,6 +52,7 @@ export class UpdatePasswordComponent implements OnInit {
       }
     });
     this.accountService.updatePassword(userId, resetToken, password, passwordConfirm).subscribe(() => {
+      this.toastrService.success("Password updated successfully.")
       this.router.navigateByUrl(this.returnUrl);
     }, error => {
       console.log(error);

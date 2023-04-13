@@ -9,6 +9,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { BrandService } from './brand.service';
 import { ConfirmationDialog } from '../shared/models/confirmation-dialog';
 import { ConfirmationDialogComponent } from '../core/confirmation-dialog/confirmation-dialog.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-brand',
@@ -29,6 +30,7 @@ export class BrandComponent implements AfterViewInit {
     private router: Router,
     private fb: UntypedFormBuilder,
     private brandService: BrandService,
+    private toastrService: ToastrService
   ) {
     this.dataSource = new MatTableDataSource(this.brands);
   }
@@ -90,10 +92,12 @@ export class BrandComponent implements AfterViewInit {
             this.dataSource = new MatTableDataSource(this.brands);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
+            this.toastrService.success('Brand deleted successfully.')
           }
         },
         error: (err: any) => {
           console.log(err);
+          this.toastrService.error(`Error deleting brand.`);
         },
         complete: () => {
           console.log('Brand deletion completed.');
@@ -109,14 +113,15 @@ export class BrandComponent implements AfterViewInit {
       .subscribe({
         next: (data: any) => {
           console.log(data);
-
           this.brands.push(data);
           this.dataSource = new MatTableDataSource(this.brands);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+          this.toastrService.success(`Brand "${data.name}" added successfully.`);
         },
         error: (err: any) => {
           console.log(err);
+          this.toastrService.error(`Error deleting brand.`);
         },
         complete: () => {
           console.log('brand add completed');

@@ -9,6 +9,7 @@ import { OrdersService } from '../orders/orders.service';
 import { AllOrderService } from './all-order.service';
 import { ConfirmationDialog } from '../shared/models/confirmation-dialog';
 import { ConfirmationDialogComponent } from '../core/confirmation-dialog/confirmation-dialog.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-all-order',
@@ -31,7 +32,8 @@ export class AllOrderComponent implements AfterViewInit {
   constructor(
     public dialogRef: MatDialog,
     private router: Router,
-    private orderService: AllOrderService
+    private orderService: AllOrderService,
+    private toastrService: ToastrService
   ) { 
     this.dataSource = new MatTableDataSource(this.orders);
   }
@@ -103,10 +105,12 @@ export class AllOrderComponent implements AfterViewInit {
             this.dataSource = new MatTableDataSource(this.orders);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
+            this.toastrService.success('Order deleted successfully.')
           }
         },
         error: (err: any) => {
           console.log(err);
+          this.toastrService.error(`Error deleting brand.`);
         },
         complete: () => {
           console.log('Order deletion completed.');

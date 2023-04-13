@@ -6,6 +6,7 @@ import { Basket, IBasket, IBasketItem, IBasketTotals } from '../shared/models/ba
 import { IDeliveryMethod } from '../shared/models/deliveryMethod';
 import { IProduct } from '../shared/models/product';
 import { ProductService } from '../product/product.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class BasketService {
   basketTotal$ = this.basketTotalSource.asObservable();
   shipping = 0;
 
-  constructor(private http: HttpClient, private productService: ProductService) { }
+  constructor(private http: HttpClient, private productService: ProductService, private toastrService: ToastrService) { }
 
   createPaymentIntent() {
     return this.http.post(this.baseUrl + 'payments/' + this.getCurrentBasketValue().id, {})
@@ -27,6 +28,14 @@ export class BasketService {
           this.basketSource.next(basket);
         })
       )
+  }
+
+  getItem(id: number): IBasketItem {
+    const basket = this.getCurrentBasketValue();
+    if (!basket || !basket.items) {
+      return null; 
+    }
+    return basket.items.find(item => item.id === id);
   }
 
   setShippingPrice(deliveryMethod: IDeliveryMethod) {
@@ -93,8 +102,11 @@ export class BasketService {
         const foundItemIndex = basket.items.findIndex(x => x.id === item.id);
         basket.items[foundItemIndex].quantity++;
         this.setBasket(basket);
+        this.toastrService.success(`Quantity of "${product.name}" has been increased to ${basket.items[foundItemIndex].quantity}.`);
+      } else {
+        this.toastrService.warning(`The maximum quantity for "${product.name}" has been reached.`);
       }
-    });
+    }); 
   }
 
   decrementItemQuantity(item: IBasketItem) {
@@ -116,8 +128,10 @@ export class BasketService {
       basket.items = basket.items.filter(i => i.id !== item.id);
       if (basket.items.length > 0) {
         this.setBasket(basket);
+        this.toastrService.success(`"${item.productName}" has been removed from the basket.`);
       } else {
         this.deleteBasket(basket);
+        this.toastrService.success('Basket has been deleted.');
       }
     }
   }

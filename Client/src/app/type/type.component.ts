@@ -10,6 +10,7 @@ import { IType } from '../shared/models/productType';
 import { ConfirmationDialogComponent } from '../core/confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialog } from '../shared/models/confirmation-dialog';
 import { ApiResponse } from '../shared/models/api-response';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-type',
   templateUrl: './type.component.html',
@@ -29,12 +30,11 @@ export class TypeComponent implements AfterViewInit {
     private router: Router,
     private fb: UntypedFormBuilder,
     private typeService: TypeService,
+    private toastrService: ToastrService
   ) {
     this.dataSource = new MatTableDataSource(this.types);
   }
 
-
-  
 
   ngOnInit(): void {
     this.types = this.typeService.getAllTypes().subscribe({
@@ -90,10 +90,12 @@ export class TypeComponent implements AfterViewInit {
             this.dataSource = new MatTableDataSource(this.types);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
+            this.toastrService.success('Type deleted successfully.')
           }
         },
         error: (err: any) => {
           console.log(err);
+          this.toastrService.error(`Error deleting brand.`);
         },
         complete: () => {
           console.log('Type deletion completed.');
@@ -114,9 +116,11 @@ export class TypeComponent implements AfterViewInit {
           this.dataSource = new MatTableDataSource(this.types);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+          this.toastrService.success(`Type "${data.name}" added successfully.`);
         },
         error: (err: any) => {
           console.log(err);
+          this.toastrService.error(`Error deleting type.`);
         },
         complete: () => {
           console.log('type add completed');

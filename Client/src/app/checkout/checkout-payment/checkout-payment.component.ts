@@ -83,6 +83,7 @@ export class CheckoutPaymentComponent implements OnInit {
       if (paymentResult.paymentIntent) {
         this.basketService.deleteBasket(basket);
         const navigationExtras: NavigationExtras = {state: createdOrder};
+        this.toastr.success("Order payment succeeded.")
         this.router.navigate(['checkout/success'], navigationExtras);
       } else {
         this.toastr.error(paymentResult.error.message);

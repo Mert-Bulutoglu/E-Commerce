@@ -9,6 +9,7 @@ import { ProductService } from './product.service';
 import { Validators } from '@angular/forms';
 import { ConfirmationDialogComponent } from '../core/confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialog } from '../shared/models/confirmation-dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product',
@@ -24,6 +25,7 @@ export class ProductComponent implements AfterViewInit {
   expandedProduct: IProduct | null
   showProductModal: boolean = false;
   selectedProduct: IProduct;
+  
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -31,7 +33,8 @@ export class ProductComponent implements AfterViewInit {
   constructor(
     public dialogRef: MatDialog,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private toastrService: ToastrService
   ) { 
     this.dataSource = new MatTableDataSource(this.products);
   }
@@ -99,10 +102,12 @@ export class ProductComponent implements AfterViewInit {
             this.dataSource = new MatTableDataSource(this.products);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
+            this.toastrService.success('Product deleted successfully.')
           }
         },
         error: (err: any) => {
           console.log(err);
+          this.toastrService.error('Error deleting product.');
         },
         complete: () => {
           console.log('Product deletion completed.');
