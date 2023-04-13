@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class RegisterComponent implements OnInit {
   registerForm: UntypedFormGroup;
   errors: string[];
+  showPassword: boolean = false;
 
   constructor(private fb: UntypedFormBuilder,
     private accountService: AccountService,
@@ -60,6 +61,10 @@ export class RegisterComponent implements OnInit {
         })
       );
     };
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
 }

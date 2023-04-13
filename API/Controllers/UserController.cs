@@ -5,6 +5,7 @@ using Core.Entities;
 using Core.Entities.Identity;
 using Core.Interfaces;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -80,6 +81,7 @@ namespace API.Controllers
             return Ok(userDtoResult);
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpPost]
         public async Task<ActionResult> Save(AddUserDto userDto)
         {
@@ -131,6 +133,7 @@ namespace API.Controllers
 
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(UserDtoResult userDto)
         {
@@ -186,6 +189,7 @@ namespace API.Controllers
             return Ok(updatedUser);
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

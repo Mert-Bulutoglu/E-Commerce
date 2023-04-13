@@ -13,6 +13,7 @@
         .mat-form-field {
             width: 100%;
         }
+        
 
         input[readonly] {
             color: #bfbfbf;
@@ -57,4 +58,19 @@
 
 .form-grid {
     width: 100%;
+}
+
+.container .product-form {
+  /* ... diğer stiller */
+  
+  .picture-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    
+    .form-field {
+      margin-top: 16px;
+    }
+  }
 }
