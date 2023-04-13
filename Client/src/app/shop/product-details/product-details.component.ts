@@ -4,6 +4,7 @@ import { BasketService } from 'src/app/basket/basket.service';
 import { IProduct } from 'src/app/shared/models/product';
 import { ShopService } from '../shop.service';
 import { CdkStepper } from '@angular/cdk/stepper';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-details',
@@ -17,7 +18,8 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private shopService: ShopService,
     private activatedRoute: ActivatedRoute,
-    private basketService: BasketService
+    private basketService: BasketService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -25,10 +27,20 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addItemToBasket() {
+    if (this.product.stock === 0) {
+      console.log('Üzgünüz, bu ürün stokta yok.');
+      this.toastrService.error(`Sorry, this product "${this.product.name}" is out of stock.`);
+      return;
+    }
+  
     const maxQuantity = this.product.stock - this.basketService.getTotalQuantity(this.product.id);
     const quantityToAdd = this.quantity <= maxQuantity ? this.quantity : maxQuantity;
+  
     if (quantityToAdd > 0) {
       this.basketService.addItemToBasket(this.product, quantityToAdd);
+      this.toastrService.success(`"${this.product.name}" has been added to your basket.`);
+    } else {
+      this.toastrService.error(`Sorry, there is not enough stock for "${this.product.name}".`);
     }
   }
 
@@ -36,6 +48,9 @@ export class ProductDetailsComponent implements OnInit {
     const maxQuantity = this.product.stock - this.basketService.getTotalQuantity(this.product.id);
     if (this.quantity < maxQuantity) {
       this.quantity++;
+      this.toastrService.success(`Quantity of "${this.product.name}" has been increased to ${this.quantity}.`);
+    } else {
+      this.toastrService.warning(`The maximum quantity for "${this.product.name}" has been reached.`);
     }
   }
 
@@ -50,11 +65,11 @@ export class ProductDetailsComponent implements OnInit {
       this.product = product;
       console.log(this.product);
     }, error => {
+      this.toastrService.error(`Error occurred while retrieving data`);
       console.log(error);
     });
   }
 
-  
   boldUpperCase(paragraph: string): string {
     const words = paragraph.split(' ');
     const formattedWords = words.map(word => {

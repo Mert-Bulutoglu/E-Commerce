@@ -3,6 +3,7 @@ import { IProduct } from '../shared/models/product';
 import { ShopParams } from '../shared/models/shopParams';
 import { ShopService } from '../shop/shop.service';
 import { BasketService } from '../basket/basket.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ export class HomeComponent implements OnInit {
   shopParams = new ShopParams();
   constructor(
     private shopService: ShopService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +34,7 @@ export class HomeComponent implements OnInit {
       this.totalCount = response.count;
       console.log(this.products);
     }, error => {
+      this.toastrService.error(`Error occurred while retrieving data`);
       console.log(error);
     });
   }

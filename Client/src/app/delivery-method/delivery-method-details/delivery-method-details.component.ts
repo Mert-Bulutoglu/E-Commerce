@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IDeliveryMethod } from 'src/app/shared/models/deliveryMethod';
 import { DeliveryMethodService } from '../delivery-method.service';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-delivery-method-details',
@@ -22,6 +23,7 @@ export class DeliveryMethodDetailsComponent implements OnInit {
     private fb: UntypedFormBuilder,
     private deliveryMethodService: DeliveryMethodService,
     private http: HttpClient,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -56,6 +58,7 @@ export class DeliveryMethodDetailsComponent implements OnInit {
         },
         error: (err: any) => {
           console.log(err);
+          this.toastrService.error(`Error occurred while retrieving data`);
         },
         complete: () => {
           console.log('get by id completed');
@@ -72,9 +75,11 @@ export class DeliveryMethodDetailsComponent implements OnInit {
         .subscribe({
           next: (data: any) => {
             console.log(data);
+            this.toastrService.success(`Update delivery method "${deliveryMethod.shortName}" successfully.`)
           },
           error: (err: any) => {
             console.log(err);
+            this.toastrService.error('Error updating delivery method.');
           },
           complete: () => {
             console.log('delivery method update completed');
@@ -91,10 +96,12 @@ export class DeliveryMethodDetailsComponent implements OnInit {
         .subscribe({
           next: (data: any) => {
             console.log(data);
+            this.toastrService.success(`Add delivery method "${deliveryMethod.shortName}" successfully.`)
             this.router.navigate(['/delivery-method']);
           },
           error: (err: any) => {
             console.log(err);
+            this.toastrService.error('Error adding delivery method.');
           },
           complete: () => {
             console.log('delivery method add completed');

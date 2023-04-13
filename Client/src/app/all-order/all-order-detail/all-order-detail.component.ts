@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { OrderItem } from 'src/app/shared/models/order';
 import { IAddress } from 'src/app/shared/models/adress';
 import { OrderStatus } from 'src/app/shared/models/orderStatus';
+import { ToastrService } from 'ngx-toastr';
 
 interface OrderWithAddress extends Order {
   shipToAddress: IAddress; // add the shipToAddress property to the Order interface
@@ -42,6 +43,7 @@ export class AllOrderDetailComponent implements OnInit {
     private fb: UntypedFormBuilder,
     private orderService: AllOrderService,
     private http: HttpClient,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -80,6 +82,7 @@ export class AllOrderDetailComponent implements OnInit {
         },
         error: (err: any) => {
           console.log(err);
+          this.toastrService.error(`Error occurred while retrieving data`);
         },
         complete: () => {
           console.log('get by id completed');
@@ -96,9 +99,11 @@ export class AllOrderDetailComponent implements OnInit {
         .subscribe({
           next: (data: any) => {
             console.log(data);
+            this.toastrService.success(`Update order successfully.`)
           },
           error: (err: any) => {
             console.log(err);
+            this.toastrService.error('Error updating order.');
           },
           complete: () => {
             console.log('order update completed');

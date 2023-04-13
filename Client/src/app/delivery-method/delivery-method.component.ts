@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { DeliveryMethodService } from './delivery-method.service';
 import { ConfirmationDialog } from '../shared/models/confirmation-dialog';
 import { ConfirmationDialogComponent } from '../core/confirmation-dialog/confirmation-dialog.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-delivery-method',
@@ -30,7 +31,8 @@ export class DeliveryMethodComponent implements AfterViewInit {
   constructor(
     public dialogRef: MatDialog,
     private router: Router,
-    private deeliveryMethodService: DeliveryMethodService
+    private deeliveryMethodService: DeliveryMethodService,
+    private toastrService: ToastrService
   ) { 
     this.dataSource = new MatTableDataSource(this.deliveryMethods);
   }
@@ -47,6 +49,7 @@ export class DeliveryMethodComponent implements AfterViewInit {
       },
       error: (err: any) =>{
         console.log(err);
+        this.toastrService.error(`Error occurred while retrieving data`);
       },
       complete: () => {
         console.log("get delivery method completed.");
@@ -99,10 +102,12 @@ export class DeliveryMethodComponent implements AfterViewInit {
             this.dataSource = new MatTableDataSource(this.deliveryMethods);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
+            this.toastrService.success('Delivery method deleted successfully.')
           }
         },
         error: (err: any) => {
           console.log(err);
+          this.toastrService.error(`Error deleting Delivery Method.`);
         },
         complete: () => {
           console.log('Delivery method deletion completed.');

@@ -42,7 +42,7 @@ export class AccountService {
         if (user) {
           localStorage.setItem('token', user.token);
           this.currentUserSource.next(user);
-          this.toastrService.show("Login succeed", "Succeed Message")
+          this.toastrService.success("Login succeed.")
         }
       })
     )
@@ -54,7 +54,7 @@ export class AccountService {
         if (user) {
           localStorage.setItem('token', user.token);
           this.currentUserSource.next(user);
-          this.toastrService.show("Login succeed via Google.", "Succeed Message")
+          this.toastrService.success("Login succeed via Google.")
         }
       })  
     )
@@ -66,7 +66,7 @@ export class AccountService {
         if (user) {
           localStorage.setItem('token', user.token);
           this.currentUserSource.next(user);
-          this.toastrService.show("Login succeed via Facebook.", "Succeed Message")
+          this.toastrService.success("Login succeed via Facebook.")
         }
       })  
     )

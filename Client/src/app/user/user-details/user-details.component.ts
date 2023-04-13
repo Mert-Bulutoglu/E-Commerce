@@ -6,6 +6,7 @@ import { IUsers } from 'src/app/shared/models/users';
 import { UserService } from '../user.service';
 import { HttpClient } from '@angular/common/http';
 import { IRole } from 'src/app/shared/models/role';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-details',
@@ -24,6 +25,7 @@ export class UserDetailsComponent implements OnInit {
     private fb: UntypedFormBuilder,
     private userService: UserService,
     private http: HttpClient,
+    private toastrService: ToastrService
 
   ) { }
 
@@ -63,6 +65,7 @@ export class UserDetailsComponent implements OnInit {
         },
         error: (err: any) => {
           console.log(err);
+          this.toastrService.error(`Error occurred while retrieving data`);
         },
         complete: () => {
           console.log('get by id completed');
@@ -82,6 +85,7 @@ export class UserDetailsComponent implements OnInit {
         },
         error: (err: any) => {
           console.log(err);
+          this.toastrService.error(`Error occurred while retrieving data`);
         },
         complete: () => {
           console.log('get brand completed');
@@ -97,10 +101,12 @@ export class UserDetailsComponent implements OnInit {
       this.userService.updateUser(id, user)
         .subscribe({
           next: (data: any) => {
+            this.toastrService.success(`Update user "${user.displayName}" successfully.`)
             console.log(data);
           },
           error: (err: any) => {
             console.log(err);
+            this.toastrService.error('Error updating user.');
           },
           complete: () => {
             console.log('user update completed');
@@ -120,6 +126,7 @@ export class UserDetailsComponent implements OnInit {
           },
           error: (err: any) => {
             console.log(err);
+            this.toastrService.error(`Error occurred while retrieving data`);
           },
           complete: () => {
             console.log('user add completed');

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { UserService } from './user.service';
 import { ConfirmationDialog } from '../shared/models/confirmation-dialog';
 import { ConfirmationDialogComponent } from '../core/confirmation-dialog/confirmation-dialog.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user',
@@ -30,7 +31,8 @@ export class UserComponent implements AfterViewInit {
   constructor(
     public dialogRef: MatDialog,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private toastrService: ToastrService
   ) { 
     this.dataSource = new MatTableDataSource(this.users);
   }
@@ -46,6 +48,7 @@ export class UserComponent implements AfterViewInit {
       },
       error: (err: any) =>{
         console.log(err);
+        this.toastrService.error(`Error occurred while retrieving data`);
       },
       complete: () => {
         console.log("get user completed.");
@@ -98,10 +101,12 @@ export class UserComponent implements AfterViewInit {
             this.dataSource = new MatTableDataSource(this.users);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
+            this.toastrService.success('User deleted successfully.')
           }
         },
         error: (err: any) => {
           console.log(err);
+          this.toastrService.error('Error deleting user.');
         },
         complete: () => {
           console.log('User deletion completed.');

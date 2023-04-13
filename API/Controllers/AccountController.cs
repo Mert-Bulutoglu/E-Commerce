@@ -50,6 +50,11 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByEmailFromClaimsPrinciple(User);
 
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
             return new UserDto
             {
                 Email = user.Email,

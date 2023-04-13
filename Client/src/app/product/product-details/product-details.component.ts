@@ -12,6 +12,7 @@ import { FileUploadOptions } from 'src/app/core/file-upload/file-upload.componen
 import { MatDialog } from '@angular/material/dialog';
 import { SelectProductImageDialogComponent } from 'src/app/core/select-product-image-dialog/select-product-image-dialog.component';
 import { ConfirmationDialog } from 'src/app/shared/models/confirmation-dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-details',
@@ -34,6 +35,7 @@ export class ProductDetailsComponent implements OnInit {
     private brandService: BrandService,
     private typeService: TypeService,
     private http: HttpClient,
+    private toastrService: ToastrService
 
   ) { }
 
@@ -86,6 +88,7 @@ export class ProductDetailsComponent implements OnInit {
         },
         error: (err: any) => {
           console.log(err);
+          this.toastrService.error(`Error occurred while retrieving data`);
         },
         complete: () => {
           console.log('get by id completed');
@@ -101,9 +104,11 @@ export class ProductDetailsComponent implements OnInit {
       this.productService.updateProduct(id, product)
         .subscribe({
           next: (data: any) => {
+            this.toastrService.success(`Update product "${product.name}" successfully.`)
             console.log(data);
           },
           error: (err: any) => {
+            this.toastrService.error('Error updating product.');
             console.log(err);
           },
           complete: () => {
@@ -120,9 +125,11 @@ export class ProductDetailsComponent implements OnInit {
         .subscribe({
           next: (data: any) => {
             console.log(data);
+            this.toastrService.success(`Add product "${product.name}" successfully.`)
             this.router.navigate(['/product']);
           },
           error: (err: any) => {
+            this.toastrService.error('Error adding product.');
             console.log(err);
           },
           complete: () => {
@@ -144,6 +151,7 @@ export class ProductDetailsComponent implements OnInit {
         },
         error: (err: any) => {
           console.log(err);
+          this.toastrService.error(`Error occurred while retrieving data`);
         },
         complete: () => {
           console.log('get brand completed');
@@ -163,6 +171,7 @@ export class ProductDetailsComponent implements OnInit {
         },
         error: (err: any) => {
           console.log(err);
+          this.toastrService.error(`Error occurred while retrieving data`);
         },
         complete: () => {
           console.log('get brand completed');
@@ -211,6 +220,7 @@ export class ProductDetailsComponent implements OnInit {
       this.fileUrl = url;
       this.pictureUrl.setValue(this.fileUrl);
       dialogRef.close({ success: true });
+      this.toastrService.success(`Add picture successfully.`)
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -220,8 +230,6 @@ export class ProductDetailsComponent implements OnInit {
       }
     });
   }
-
-
 
 
   prefillForm(): void {
