@@ -22,7 +22,6 @@ namespace API.Controllers
         private readonly IGenericRepository<ProductBrand> _productBrandRepo;
         private readonly IGenericRepository<ProductType> _productTypeRepo;
         private readonly IMapper _mapper;
-        private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMailService _mailService;
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -31,7 +30,6 @@ namespace API.Controllers
         IGenericRepository<ProductBrand> productBrandRepo,
         IGenericRepository<ProductType> productTypeRepo,
         IMapper mapper,
-        ILogger<ProductsController> logger,
         IMailService mailService,
         IUnitOfWork unitOfWork,
         IWebHostEnvironment webHostEnvironment)
@@ -40,7 +38,6 @@ namespace API.Controllers
             this._productBrandRepo = productBrandRepo;
             this._productTypeRepo = productTypeRepo;
             this._mapper = mapper;
-            this._logger = logger;
             _mailService = mailService;
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
@@ -60,8 +57,6 @@ namespace API.Controllers
             var products = await _productRepo.ListAsync(spec);
 
             var data = _mapper.Map<IReadOnlyList<Core.Entities.Product>, IReadOnlyList<ProductToReturnDto>>(products);
-
-            _logger.LogInformation("Başariyla getirildi.");
 
             return Ok(new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
         }
