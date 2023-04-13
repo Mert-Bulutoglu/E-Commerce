@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LrGPYjykVfXRjs4wFu+ra24WCQmwfV4FrVlk4Dr/Edo=",
+  "Hash": "Pq9CnOLtJYRnNtX6G/tL2cJyIe3LYY4xbko+zaxZ3YY=",
   "Source": "API",
   "BasePath": "_content/API",
   "Mode": "Default",
@@ -816,6 +816,23 @@
       "OriginalItemSpec": "wwwroot\\photos\\product\\1193834333.JPG"
     },
     {
+      "Identity": "C:\\Users\\Mert\\Desktop\\Commerce\\API\\wwwroot\\photos\\product\\1212429085.png",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Mert\\Desktop\\Commerce\\API\\wwwroot\\",
+      "BasePath": "_content/API",
+      "RelativePath": "photos/product/1212429085.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\photos\\product\\1212429085.png"
+    },
+    {
       "Identity": "C:\\Users\\Mert\\Desktop\\Commerce\\API\\wwwroot\\photos\\product\\1265401339.png",
       "SourceId": "API",
       "SourceType": "Discovered",
@@ -901,6 +918,23 @@
       "OriginalItemSpec": "wwwroot\\photos\\product\\158729605.png"
     },
     {
+      "Identity": "C:\\Users\\Mert\\Desktop\\Commerce\\API\\wwwroot\\photos\\product\\2047923191.JPG",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Mert\\Desktop\\Commerce\\API\\wwwroot\\",
+      "BasePath": "_content/API",
+      "RelativePath": "photos/product/2047923191.JPG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\photos\\product\\2047923191.JPG"
+    },
+    {
       "Identity": "C:\\Users\\Mert\\Desktop\\Commerce\\API\\wwwroot\\photos\\product\\2103660256.png",
       "SourceId": "API",
       "SourceType": "Discovered",
@@ -984,6 +1018,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\photos\\product\\518826984.png"
+    },
+    {
+      "Identity": "C:\\Users\\Mert\\Desktop\\Commerce\\API\\wwwroot\\photos\\product\\598766240.png",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Mert\\Desktop\\Commerce\\API\\wwwroot\\",
+      "BasePath": "_content/API",
+      "RelativePath": "photos/product/598766240.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\photos\\product\\598766240.png"
     },
     {
       "Identity": "C:\\Users\\Mert\\Desktop\\Commerce\\API\\wwwroot\\photos\\product\\60923695.png",

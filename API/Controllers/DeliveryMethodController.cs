@@ -2,6 +2,7 @@
 using AutoMapper;
 using Core.Entities.OrderAggregate;
 using Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -36,6 +37,7 @@ namespace API.Controllers
             return Ok(deliveryMethod);
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpPost]
         public async Task<ActionResult> Save(DeliveryDto deliveryDto)
         {
@@ -45,6 +47,7 @@ namespace API.Controllers
             return Ok(deliveryDto);
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(DeliveryDto deliveryDto)
         {
@@ -61,6 +64,7 @@ namespace API.Controllers
             return Ok(_mapper.Map<DeliveryDto>(databaseDelivery));
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

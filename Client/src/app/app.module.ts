@@ -34,6 +34,7 @@ import { DeliveryMethodDetailsComponent } from './delivery-method/delivery-metho
 import { AllOrderComponent } from './all-order/all-order.component';
 import { AllOrderDetailComponent } from './all-order/all-order-detail/all-order-detail.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     DeliveryMethodComponent,
     DeliveryMethodDetailsComponent,
     AllOrderComponent,
-    AllOrderDetailComponent
+    AllOrderDetailComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,

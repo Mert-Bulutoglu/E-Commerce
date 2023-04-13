@@ -12,6 +12,7 @@ import { AccountService } from '../account.service';
 export class LoginComponent implements OnInit {
   loginForm: UntypedFormGroup;
   returnUrl: string;
+  showPassword: boolean = false;
 
   constructor(private accountService: AccountService,
     private router: Router,
@@ -74,6 +75,10 @@ export class LoginComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
 }

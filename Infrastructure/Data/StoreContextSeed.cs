@@ -83,7 +83,7 @@ namespace Infrastructure.Data
                     };
 
 
-                    await userManager.CreateAsync(admin, "Pa$$w0rd1");
+                    await userManager.CreateAsync(admin, "Pa$$w0rd");
                     await userManager.AddToRoleAsync(admin, "Admin");
 
 

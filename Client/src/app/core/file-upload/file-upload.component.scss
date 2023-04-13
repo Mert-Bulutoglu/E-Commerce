@@ -1,0 +1,44 @@
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.upload-table {
+    margin-top: 20px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    font-weight: bold;
+    text-align: left;
+    border-bottom: 2px solid #ccc;
+    padding: 10px 0;
+}
+
+.table td {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.upload-item {
+    display: flex;
+    align-items: center;
+}
+
+.upload-name {
+    flex: 1;
+}
+
+.btn-remove-upload {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #d9534f;
+}

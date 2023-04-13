@@ -4,12 +4,12 @@ bg-white border-bottom shadow-sm fixed-top">
   <nav class="my-2 my-md-0 mr-md-3 text-uppercase" style="font-size: larger;">
     <a class="p-2 " [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
     <a class="p-2 " routerLink="/shop" routerLinkActive="active">Shop</a>
-    <a class="p-2 " routerLink="/product" routerLinkActive="active">Product</a>
-    <a class="p-2 " routerLink="/user" routerLinkActive="active">User</a>
-    <a class="p-2 " routerLink="/brand" routerLinkActive="active">Brand</a>
-    <a class="p-2 " routerLink="/type" routerLinkActive="active">Type</a>
-    <a class="p-2 " routerLink="/delivery-method" routerLinkActive="active">Delivery Method</a>
-    <a class="p-2 " routerLink="/all-order" routerLinkActive="active">Order</a>
+    <a *ngIf="(currentUser$ | async)?.roleName === 'Admin'" class="p-2 " routerLink="/product" routerLinkActive="active">Product</a>
+    <a *ngIf="(currentUser$ | async)?.roleName === 'Admin'" class="p-2 " routerLink="/user" routerLinkActive="active">User</a>
+    <a *ngIf="(currentUser$ | async)?.roleName === 'Admin'" class="p-2 " routerLink="/brand" routerLinkActive="active">Brand</a>
+    <a *ngIf="(currentUser$ | async)?.roleName === 'Admin'" class="p-2 " routerLink="/type" routerLinkActive="active">Type</a>
+    <a *ngIf="(currentUser$ | async)?.roleName === 'Admin'" class="p-2 " routerLink="/delivery-method" routerLinkActive="active">Delivery Method</a>
+    <a *ngIf="(currentUser$ | async)?.roleName === 'Admin'" class="p-2 " routerLink="/all-order" routerLinkActive="active">Order</a>
   </nav>
   <div class="d-flex align-items-center">
     <a routerLink="/basket" class="position-relative">

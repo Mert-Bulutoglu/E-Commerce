@@ -16,7 +16,6 @@ using Product = Core.Entities.Product;
 
 namespace API.Controllers
 {
-
     public class ProductsController : BaseApiController
     {
         private readonly IProductRepository _productRepo;
@@ -131,6 +130,8 @@ namespace API.Controllers
             return Ok(await _productTypeRepo.ListAllAsync());
         }
 
+
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpPost]
         public async Task<ActionResult> Save(ProductDto productDto)
         {
@@ -171,6 +172,8 @@ namespace API.Controllers
             return Ok(newProductDto);
         }
 
+
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(ProductDto productDto)
         {
@@ -197,6 +200,7 @@ namespace API.Controllers
             return Ok(_mapper.Map<ProductDto>(databaseProduct));
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
@@ -212,6 +216,7 @@ namespace API.Controllers
             return Ok();
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Upload()
         {

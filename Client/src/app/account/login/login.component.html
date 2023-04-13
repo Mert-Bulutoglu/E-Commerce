@@ -6,7 +6,18 @@
       </div>
 
       <app-text-input formControlName="email" [label]="'Email adress'"></app-text-input>
-      <app-text-input formControlName="password" [label]="'Password'" [type]="'password'"></app-text-input>
+      
+     
+      <div class="input-group mb-3">
+        <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control" placeholder="Password" formControlName="password">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
+            <i [class]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+          </button>
+        </div>
+      </div>
+      
+      
 
       <!-- <div class="checkbox mb-3">
               <label>

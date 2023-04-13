@@ -15,6 +15,8 @@ import { DeliveryMethodComponent } from './delivery-method/delivery-method.compo
 import { DeliveryMethodDetailsComponent } from './delivery-method/delivery-method-details/delivery-method-details.component';
 import { AllOrderComponent } from './all-order/all-order.component';
 import { AllOrderDetailComponent } from './all-order/all-order-detail/all-order-detail.component';
+import { RoleGuard } from './core/guards/role.guard';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -26,19 +28,20 @@ const routes: Routes = [
   {path: 'checkout', canActivate:[AuthGuard], loadChildren: () => import('./checkout/checkout.module').then(mod => mod.CheckoutModule)},
   {path: 'orders', canActivate:[AuthGuard], loadChildren: () => import('./orders/orders.module').then(mod => mod.OrdersModule)},
   {path: 'account', loadChildren: () => import('./account/account.module').then(mod => mod.AccountModule)},
-  {path: 'product/:id', component: ProductDetailsComponent /*canActivate:[AuthGuard] */ },
-  {path: 'create-product', component: ProductDetailsComponent /*canActivate:[AuthGuard] */ },
-  {path: 'product', component: ProductComponent /*canActivate:[AuthGuard] */ },
-  {path: 'user', component: UserComponent /*canActivate:[AuthGuard] */},
-  {path: 'user/:id', component: UserDetailsComponent /*canActivate:[AuthGuard] */},
-  {path: 'create-user', component: UserDetailsComponent /*canActivate:[AuthGuard] */},
-  {path: 'type', component: TypeComponent /*canActivate:[AuthGuard] */ },
-  {path: 'brand', component: BrandComponent /*canActivate:[AuthGuard] */ },
-  {path: 'delivery-method', component: DeliveryMethodComponent /*canActivate:[AuthGuard] */ },
-  {path: 'delivery-method/:id', component: DeliveryMethodDetailsComponent /*canActivate:[AuthGuard] */},
-  {path: 'create-delivery-method', component: DeliveryMethodDetailsComponent /*canActivate:[AuthGuard] */ },
-  {path: 'all-order', component: AllOrderComponent /*canActivate:[AuthGuard] */ },
-  {path: 'all-order/:id', component: AllOrderDetailComponent /*canActivate:[AuthGuard] */ },
+  {path: 'product/:id', component: ProductDetailsComponent ,canActivate:[RoleGuard]},
+  {path: 'create-product', component: ProductDetailsComponent ,canActivate:[RoleGuard]},
+  {path: 'product', component: ProductComponent,  canActivate:[RoleGuard] },
+  {path: 'user', component: UserComponent ,canActivate:[RoleGuard]},
+  {path: 'user/:id', component: UserDetailsComponent ,canActivate:[RoleGuard]},
+  {path: 'create-user', component: UserDetailsComponent ,canActivate:[RoleGuard]},
+  {path: 'type', component: TypeComponent ,canActivate:[RoleGuard]},
+  {path: 'brand', component: BrandComponent ,canActivate:[RoleGuard]},
+  {path: 'delivery-method', component: DeliveryMethodComponent ,canActivate:[RoleGuard]},
+  {path: 'delivery-method/:id', component: DeliveryMethodDetailsComponent ,canActivate:[RoleGuard]},
+  {path: 'create-delivery-method', component: DeliveryMethodDetailsComponent ,canActivate:[RoleGuard]},
+  {path: 'all-order', component: AllOrderComponent ,canActivate:[RoleGuard]},
+  {path: 'all-order/:id', component: AllOrderDetailComponent ,canActivate:[RoleGuard]},
+  {path: 'unauthorized', component: UnauthorizedComponent},
   {path: '**', redirectTo: '', pathMatch:'full'}
 ];
 

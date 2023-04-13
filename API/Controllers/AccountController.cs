@@ -49,6 +49,7 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
             var user = await _userManager.FindByEmailFromClaimsPrinciple(User);
+            var roles = await _userManager.GetRolesAsync(user);
 
             if (user == null)
             {
@@ -59,7 +60,8 @@ namespace API.Controllers
             {
                 Email = user.Email,
                 Token = await _tokenService.CreateToken(user),
-                DisplayName = user.DisplayName
+                DisplayName = user.DisplayName,
+                RoleName = roles.FirstOrDefault()
             };
         }
 
@@ -101,6 +103,8 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
+            var roles = await _userManager.GetRolesAsync(user);
+
             if (user == null) return Unauthorized(new ApiResponse(401));
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
@@ -111,7 +115,8 @@ namespace API.Controllers
             {
                 Email = user.Email,
                 Token = await _tokenService.CreateToken(user),
-                DisplayName = user.DisplayName
+                DisplayName = user.DisplayName,
+                RoleName = roles.FirstOrDefault()
             };
         }
 
@@ -133,6 +138,7 @@ namespace API.Controllers
                 UserName = registerDto.Email
             };
 
+
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
             if (!result.Succeeded) return BadRequest(new ApiResponse(400));
@@ -141,11 +147,14 @@ namespace API.Controllers
 
             if (!roleResult.Succeeded) return BadRequest(result.Errors);
 
+            var roles = await _userManager.GetRolesAsync(user);
+
             return new UserDto
             {
                 DisplayName = user.DisplayName,
                 Token = await _tokenService.CreateToken(user),
-                Email = user.Email
+                Email = user.Email,
+                RoleName = roles.FirstOrDefault()
             };
 
         }
@@ -165,6 +174,7 @@ namespace API.Controllers
             var info = new UserLoginInfo(googleDto.Provider, payload.Subject, googleDto.Provider);
 
             AppUser user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+            var roles = await _userManager.GetRolesAsync(user);
 
             bool result = user != null;
 
@@ -194,7 +204,8 @@ namespace API.Controllers
             {
                 DisplayName = user.DisplayName,
                 Token = await _tokenService.CreateToken(user),
-                Email = user.Email
+                Email = user.Email,
+                RoleName = roles.FirstOrDefault() 
             };
         }
 
@@ -247,11 +258,13 @@ namespace API.Controllers
                     throw new Exception("Invalid external authentication.");
 
 
+                var roles = await _userManager.GetRolesAsync(user);
                 return new UserDto
                 {
                     DisplayName = user.DisplayName,
                     Token = await _tokenService.CreateToken(user),
-                    Email = user.Email
+                    Email = user.Email,
+                    RoleName = roles.FirstOrDefault()
                 };
             }
             throw new Exception("Invalid external authentication.");

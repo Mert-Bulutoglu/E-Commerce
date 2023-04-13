@@ -2,6 +2,7 @@
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -37,6 +38,7 @@ namespace API.Controllers
 
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpPost]
         public async Task<ActionResult> Save(TypeDto typeDto)
         {
@@ -46,6 +48,7 @@ namespace API.Controllers
             return Ok(typeDto);
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(TypeDto typeDto)
         {
@@ -62,6 +65,7 @@ namespace API.Controllers
             return Ok(_mapper.Map<TypeDto>(databaseType));
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
