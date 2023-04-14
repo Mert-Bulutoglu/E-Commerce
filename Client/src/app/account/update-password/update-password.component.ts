@@ -13,6 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 export class UpdatePasswordComponent implements OnInit {
   returnUrl: string;
   loginForm: UntypedFormGroup;
+  showPassword: boolean = false;
+  showPasswordSecond: boolean = false;
   
   constructor(spinner: NgxSpinnerService, private accountService: AccountService,
     private router: Router,
@@ -58,6 +60,14 @@ export class UpdatePasswordComponent implements OnInit {
       console.log(error);
     });
 
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  togglePasswordVisibilitySecond(): void {
+    this.showPasswordSecond = !this.showPasswordSecond;
   }
 
   createPasswordResetForm() {
