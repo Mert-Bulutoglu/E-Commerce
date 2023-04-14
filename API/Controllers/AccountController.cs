@@ -174,7 +174,6 @@ namespace API.Controllers
             var info = new UserLoginInfo(googleDto.Provider, payload.Subject, googleDto.Provider);
 
             AppUser user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
-            var roles = await _userManager.GetRolesAsync(user);
 
             bool result = user != null;
 
@@ -204,8 +203,7 @@ namespace API.Controllers
             {
                 DisplayName = user.DisplayName,
                 Token = await _tokenService.CreateToken(user),
-                Email = user.Email,
-                RoleName = roles.FirstOrDefault() 
+                Email = user.Email
             };
         }
 
