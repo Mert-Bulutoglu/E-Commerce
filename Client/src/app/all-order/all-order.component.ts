@@ -4,12 +4,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Order } from '@stripe/stripe-js';
 import { OrdersService } from '../orders/orders.service';
 import { AllOrderService } from './all-order.service';
 import { ConfirmationDialog } from '../shared/models/confirmation-dialog';
 import { ConfirmationDialogComponent } from '../core/confirmation-dialog/confirmation-dialog.component';
 import { ToastrService } from 'ngx-toastr';
+import { Order } from '../shared/models/order';
 
 @Component({
   selector: 'app-all-order',
@@ -36,6 +36,11 @@ export class AllOrderComponent implements AfterViewInit {
     private toastrService: ToastrService
   ) { 
     this.dataSource = new MatTableDataSource(this.orders);
+  }
+
+  getTotalCost() {
+    const total = this.orders.map(t => t.total).reduce((acc, value) => acc + value, 0);
+    return total.toLocaleString('tr-TR'); // ya da istediğiniz bir yerel ayarı kullanabilirsiniz
   }
 
   ngOnInit() {

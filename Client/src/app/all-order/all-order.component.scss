@@ -12,6 +12,10 @@
     width: 100%;
   }
   
+  tr.mat-mdc-footer-row td {
+    font-weight: bold;
+  }
+  
   .action-buttons {
     display: flex;
     flex-direction: row;

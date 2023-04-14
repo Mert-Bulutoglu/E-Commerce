@@ -16,7 +16,7 @@
   
       <ng-container matColumnDef="price">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
-        <td mat-cell *matCellDef="let row"> {{row.price}}</td>
+        <td mat-cell *matCellDef="let row"> ₺{{row.price.toLocaleString('tr-TR')}}</td>
       </ng-container>
 
       <ng-container matColumnDef="stock">
