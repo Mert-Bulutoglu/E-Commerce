@@ -57,6 +57,8 @@ export class ProductDetailsComponent implements OnInit {
         features: [''],
         nutrientContent: [''],
         price: ['', [Validators.required]],
+        viewCount: ['0'],
+        numberOfSold: ['0'],
         stock: ['', [Validators.required]],
         pictureUrl: ['', [Validators.required]],
         productType: ['', [Validators.required]],
@@ -70,6 +72,8 @@ export class ProductDetailsComponent implements OnInit {
         features: [''],
         nutrientContent: [''],
         price: ['', [Validators.required]],
+        viewCount: ['0'],
+        numberOfSold: ['0'],
         stock: ['', [Validators.required]],
         pictureUrl: ['', [Validators.required]],
         productType: ['', [Validators.required]],
@@ -238,6 +242,8 @@ export class ProductDetailsComponent implements OnInit {
     this.nutrientContent.setValue(this.product.nutrientContent);
     this.features.setValue(this.product.features);
     this.price.setValue(this.product.price);
+    this.viewCount.setValue(this.product.viewCount);
+    this.numberOfSold.setValue(this.product.numberOfSold);
     this.pictureUrl.setValue(this.product.pictureUrl);
     this.productType.setValue(this.product.productType);
     this.productBrand.setValue(this.product.productBrand);
@@ -265,6 +271,14 @@ export class ProductDetailsComponent implements OnInit {
 
   get stock(): any {
     return this.form.get('stock');
+  }
+
+  get numberOfSold(): any {
+    return this.form.get('numberOfSold');
+  }
+
+  get viewCount(): any {
+    return this.form.get('viewCount');
   }
 
   get pictureUrl(): any {

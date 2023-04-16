@@ -7,6 +7,7 @@ export interface IProduct {
     price: number;
     stock: number;
     viewCount: number;
+    numberOfSold: number;
     pictureUrl: string;
     productType: string;
     productBrand: string;

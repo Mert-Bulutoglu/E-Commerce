@@ -16,6 +16,7 @@ namespace API.Dtos
         public int Stock { get; set; }
         public string PictureUrl { get; set; }
         public int? ViewCount { get; set; }
+        public int? NumberOfSold { get; set; }
 
         //    Related Entities  
         public string ProductType { get; set; }
