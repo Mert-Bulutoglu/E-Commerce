@@ -23,6 +23,16 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock </th>
         <td mat-cell *matCellDef="let row"> {{row.stock}}</td>
       </ng-container>
+
+      <ng-container matColumnDef="numberOfSold">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Number Of Sold </th>
+        <td mat-cell *matCellDef="let row"> {{row.numberOfSold}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="viewCount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ViewCount </th>
+        <td mat-cell *matCellDef="let row"> {{row.viewCount}}</td>
+      </ng-container>
   
       <ng-container matColumnDef="productType">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Type </th>

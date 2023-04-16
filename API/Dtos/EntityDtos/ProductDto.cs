@@ -14,6 +14,8 @@ namespace API.Dtos.EntityDtos
         public string Features { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
+        public int ViewCount { get; set; }
+        public int NumberOfSold { get; set; }
         public string PictureUrl { get; set; }
         public string ProductType { get; set; }
         public string ProductBrand { get; set; }

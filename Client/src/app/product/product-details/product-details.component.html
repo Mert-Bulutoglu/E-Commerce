@@ -48,6 +48,18 @@
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>ViewCount</mat-label>
+                    <input type="number" class="input" matInput [formControl]="viewCount" placeholder="View Count" min="0" readonly>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Number Of Sold</mat-label>
+                    <input type="number" class="input" matInput [formControl]="numberOfSold" placeholder="Number Of Sold" min="0" readonly>
+                </mat-form-field>
+            </mat-grid-tile>
             <mat-grid-tile class="picture-container">
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Picture</mat-label>
