@@ -72,8 +72,6 @@ export class UpdatePasswordComponent implements OnInit {
 
   createPasswordResetForm() {
     this.loginForm = new UntypedFormGroup({
-         email: new UntypedFormControl('', [Validators.required, Validators
-        .pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
         password: new UntypedFormControl('', Validators.required),
         passwordConfirm: new UntypedFormControl('', Validators.required)
     });

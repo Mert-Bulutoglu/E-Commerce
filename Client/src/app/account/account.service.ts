@@ -104,7 +104,7 @@ export class AccountService {
     this.currentUserSource.next(null);
     this.router.navigateByUrl('/home');
     this.authService.signOut(true);
-    //location.reload();
+    location.reload();
   }
 
   checkEmailExists(email: string) {
