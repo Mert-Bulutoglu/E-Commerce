@@ -4,7 +4,7 @@ using API.Helpers;
 using API.Middleware;
 using Core.Entities.Identity;
 using Infrastructure.Data;
-using Infrastructure.Identity;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -29,14 +29,14 @@ builder.Services.AddDbContext<StoreContext>(options =>
 {options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddDbContext<AppIdentityDbContext>(x => 
-{
-    x.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"));
-});
 
 builder.Services.AddSingleton<IConnectionMultiplexer>(c => {
     var configuration = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"),true);
     return ConnectionMultiplexer.Connect(configuration);
+});
+
+builder.Services.Configure<FormOptions>(options => {
+    options.MultipartBodyLengthLimit = 1073741824;
 });
 
 builder.Services.AddApplicationServices();
@@ -57,6 +57,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
+app.UseMiddleware<GraylogLoggingMiddleware>();
 app.UseMiddleware<ExceptionMiddleware>();
 
 
@@ -69,6 +70,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 app.UseCors("CorsPolicy");
@@ -87,16 +89,11 @@ var services = scope.ServiceProvider;
 var loggerFactory = services.GetRequiredService<ILoggerFactory>();
 try
 {
-    var context = services.GetRequiredService<StoreContext>();
-    await context.Database.MigrateAsync();
-    await StoreContextSeed.SeedAsync(context, loggerFactory);
-
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
     var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
-    var identityContext = services.GetRequiredService<AppIdentityDbContext>();
-    await identityContext.Database.MigrateAsync();
-    await AppIdentityDbContextSeed.SeedUserAsync(userManager, roleManager);
-
+    var context = services.GetRequiredService<StoreContext>();
+    await context.Database.MigrateAsync();
+    await StoreContextSeed.SeedAsync(context, loggerFactory, userManager, roleManager);
 }
 catch (Exception ex)
 {

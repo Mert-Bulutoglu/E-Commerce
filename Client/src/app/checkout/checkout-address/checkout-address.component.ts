@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from 'src/app/account/account.service';
 
@@ -9,7 +9,7 @@ import { AccountService } from 'src/app/account/account.service';
   styleUrls: ['./checkout-address.component.scss']
 })
 export class CheckoutAddressComponent implements OnInit {
-  @Input() checkoutForm: FormGroup;
+  @Input() checkoutForm: UntypedFormGroup;
 
   constructor(private accountService: AccountService, private toastr: ToastrService) { }
 

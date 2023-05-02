@@ -1,0 +1,72 @@
+<mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. buyer email" #input>
+</mat-form-field>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="buyerEmail">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Buyer Email </th>
+            <td mat-cell *matCellDef="let row"> {{row.buyerEmail}} </td>
+            <td mat-footer-cell *matFooterCellDef> Total: </td>
+        </ng-container>
+
+        <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Buyer Name</th>
+            <td mat-cell *matCellDef="let row"> {{row.shipToAddress.firstName}}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Buyer Last Name</th>
+            <td mat-cell *matCellDef="let row"> {{row.shipToAddress.lastName}}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <ng-container matColumnDef="deliveryMethod">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Delivery Method </th>
+            <td mat-cell *matCellDef="let row"> {{row.deliveryMethod}}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <ng-container matColumnDef="orderDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Order Date </th>
+            <td mat-cell *matCellDef="let row"> {{row.orderDate | date: 'medium'}}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Order Status </th>
+            <td mat-cell *matCellDef="let row"> {{row.status}}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Order Total </th>
+            <td mat-cell *matCellDef="let row"> ₺{{row.total.toLocaleString('tr-TR')}} </td>
+            <td mat-footer-cell *matFooterCellDef> ₺{{getTotalCost()}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+            <td mat-cell *matCellDef="let row">
+                <div class="action-buttons">
+                    <button class="btn" mat-raised-button (click)="showProducDetails(row.id)" color= "success">Show Product</button>
+                    <button class="btn" mat-raised-button (click)="showOrderDetails(row.id)">Show Order</button>
+                    <button class="btn" mat-raised-button (click)="openDeleteConfirmation(row.id)" color="warn">Delete
+                    </button>
+                </div>
+            </td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of products"></mat-paginator>
+</div>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncValidatorFn, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AsyncValidatorFn, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map, of, switchMap, timer } from 'rxjs';
 import { AccountService } from '../account.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -10,10 +11,15 @@ import { AccountService } from '../account.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
+  registerForm: UntypedFormGroup;
   errors: string[];
+  showPassword: boolean = false;
 
-  constructor(private fb: FormBuilder, private accountService: AccountService, private router: Router) { }
+  constructor(private fb: UntypedFormBuilder,
+    private accountService: AccountService,
+    private router: Router,
+    private toastrService: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.createRegisterForm();
@@ -23,15 +29,16 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group({
       displayName: [null, [Validators.required]],
       email: [null,
-         [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')],
-         [this.validateEmailNotTaken()]
-        ],
+        [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')],
+        [this.validateEmailNotTaken()]
+      ],
       password: [null, [Validators.required]]
     })
   }
 
   onSubmit() {
     this.accountService.register(this.registerForm.value).subscribe(response => {
+     this.toastrService.success("Welcome Eat Your Protein!, you registered successfully.")
       this.router.navigateByUrl('/shop');
     }, error => {
       console.log(error);
@@ -54,6 +61,10 @@ export class RegisterComponent implements OnInit {
         })
       );
     };
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
 }

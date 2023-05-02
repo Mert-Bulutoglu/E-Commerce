@@ -1,6 +1,6 @@
 
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { loadStripe, Stripe, StripeCardCvcElement, StripeCardExpiryElement, StripeCardNumberElement } from '@stripe/stripe-js';
 import { ToastrService } from 'ngx-toastr';
@@ -17,7 +17,7 @@ import { CheckoutService } from '../checkout.service';
   styleUrls: ['./checkout-payment.component.scss']
 })
 export class CheckoutPaymentComponent implements OnInit {
-  @Input() checkoutForm?: FormGroup;
+  @Input() checkoutForm?: UntypedFormGroup;
   @ViewChild('cardNumber') cardNumberElement?: ElementRef;
   @ViewChild('cardExpiry') cardExpiryElement?: ElementRef;
   @ViewChild('cardCvc') cardCvcElement?: ElementRef;
@@ -83,6 +83,7 @@ export class CheckoutPaymentComponent implements OnInit {
       if (paymentResult.paymentIntent) {
         this.basketService.deleteBasket(basket);
         const navigationExtras: NavigationExtras = {state: createdOrder};
+        this.toastr.success("Order payment succeeded.")
         this.router.navigate(['checkout/success'], navigationExtras);
       } else {
         this.toastr.error(paymentResult.error.message);

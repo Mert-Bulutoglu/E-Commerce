@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8Xlu8IIEnmi+PXHiWEFoYTpe9rSNV09deQ2Vb5uk7po=",
+  "Hash": "VavNpCXUqZ1c6l6/IS9aCr/5evrDs1T0d4+/bq8COuU=",
   "Source": "API",
   "BasePath": "_content/API",
   "Mode": "Default",
@@ -780,6 +780,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\products\\zayıflama\\ZayıflamaSupplementler.png"
+    },
+    {
+      "Identity": "C:\\Users\\Mert\\Desktop\\Commerce\\API\\wwwroot\\photos\\product\\1101342152.png",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Mert\\Desktop\\Commerce\\API\\wwwroot\\",
+      "BasePath": "_content/API",
+      "RelativePath": "photos/product/1101342152.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\photos\\product\\1101342152.png"
     }
   ]
 }

@@ -1,0 +1,58 @@
+<div class="container">
+    <form class="order-form" [formGroup]="form" (ngSubmit)="handleSaveButton(form)">
+        <mat-grid-list class="form-grid" cols="3" rowHeight="150px" gutterSize="56px">
+            <mat-grid-tile>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input type="text" class="input" matInput [formControl]="firstName"
+                        placeholder="Name" readonly>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input type="text" class="input" matInput [formControl]="lastName"
+                        placeholder="Last Name" readonly>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="limited-height" appearance="outline">
+                    <mat-label>Long Address</mat-label>
+                    <textarea type="text" class="input" matInput [formControl]="state"
+                        placeholder="State" readonly></textarea>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Street</mat-label>
+                    <input type="text" class="input" matInput [formControl]="street"
+                        placeholder="Street" readonly>        
+                </mat-form-field>         
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="limited-height" appearance="outline">
+                    <mat-label>Zip Code</mat-label>
+                    <input type="text" class="input" matInput [formControl]="zipCode"
+                        placeholder="ZipCode" readonly>        
+                </mat-form-field>         
+            </mat-grid-tile>
+
+             <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Order Status</mat-label>
+                    <mat-select [formControl]="status">
+                        <mat-option *ngFor="let status of statusList" [value]="status.name">{{status.name}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="status.hasError('required')">
+                        Status is required
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>   
+        </mat-grid-list>
+        <div class="btn-container">
+            <button mat-raised-button class="btn large" routerLink="/all-order">Back To List</button>
+            <button mat-raised-button class="btn large" type="submit">Save</button>
+        </div>
+    </form>
+  
+</div>

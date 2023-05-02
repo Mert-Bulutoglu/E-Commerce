@@ -1,6 +1,6 @@
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../account.service';
 
@@ -10,8 +10,9 @@ import { AccountService } from '../account.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   returnUrl: string;
+  showPassword: boolean = false;
 
   constructor(private accountService: AccountService,
     private router: Router,
@@ -37,10 +38,10 @@ export class LoginComponent implements OnInit {
   }
 
   createLoginForm() {
-    this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators
+    this.loginForm = new UntypedFormGroup({
+      email: new UntypedFormControl('', [Validators.required, Validators
         .pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
-      password: new FormControl('', Validators.required)
+      password: new UntypedFormControl('', Validators.required)
     });
   }
 
@@ -74,6 +75,10 @@ export class LoginComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
 }

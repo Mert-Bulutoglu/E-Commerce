@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AccountService } from '../account.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-password',
@@ -11,11 +12,14 @@ import { AccountService } from '../account.service';
 })
 export class UpdatePasswordComponent implements OnInit {
   returnUrl: string;
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
+  showPassword: boolean = false;
+  showPasswordSecond: boolean = false;
   
   constructor(spinner: NgxSpinnerService, private accountService: AccountService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastrService: ToastrService
     ) { }
 
   state: boolean;
@@ -50,6 +54,7 @@ export class UpdatePasswordComponent implements OnInit {
       }
     });
     this.accountService.updatePassword(userId, resetToken, password, passwordConfirm).subscribe(() => {
+      this.toastrService.success("Password updated successfully.")
       this.router.navigateByUrl(this.returnUrl);
     }, error => {
       console.log(error);
@@ -57,12 +62,18 @@ export class UpdatePasswordComponent implements OnInit {
 
   }
 
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  togglePasswordVisibilitySecond(): void {
+    this.showPasswordSecond = !this.showPasswordSecond;
+  }
+
   createPasswordResetForm() {
-    this.loginForm = new FormGroup({
-         email: new FormControl('', [Validators.required, Validators
-        .pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
-        password: new FormControl('', Validators.required),
-        passwordConfirm: new FormControl('', Validators.required)
+    this.loginForm = new UntypedFormGroup({
+        password: new UntypedFormControl('', Validators.required),
+        passwordConfirm: new UntypedFormControl('', Validators.required)
     });
   }
 

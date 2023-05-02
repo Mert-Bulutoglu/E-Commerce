@@ -27,6 +27,7 @@ namespace API.Controllers
         private readonly IMapper _mapper;
         private readonly HttpClient _httpClient;
         private readonly IMailService _mailService;
+        private readonly IConfiguration _config;
 
         public AccountController(UserManager<AppUser> userManager,
          SignInManager<AppUser> signInManager,
@@ -34,7 +35,8 @@ namespace API.Controllers
           IMapper mapper,
           IHttpClientFactory httpClientFactory
 ,
-          IMailService mailService)
+          IMailService mailService,
+          IConfiguration config)
         {
             _tokenService = tokenService;
             _mapper = mapper;
@@ -42,6 +44,7 @@ namespace API.Controllers
             _userManager = userManager;
             _httpClient = httpClientFactory.CreateClient();
             _mailService = mailService;
+            _config = config;
         }
 
         [Authorize]
@@ -49,12 +52,19 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
             var user = await _userManager.FindByEmailFromClaimsPrinciple(User);
+            var roles = await _userManager.GetRolesAsync(user);
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
 
             return new UserDto
             {
                 Email = user.Email,
                 Token = await _tokenService.CreateToken(user),
-                DisplayName = user.DisplayName
+                DisplayName = user.DisplayName,
+                RoleName = roles.FirstOrDefault()
             };
         }
 
@@ -96,6 +106,8 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
+            var roles = await _userManager.GetRolesAsync(user);
+
             if (user == null) return Unauthorized(new ApiResponse(401));
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
@@ -106,7 +118,8 @@ namespace API.Controllers
             {
                 Email = user.Email,
                 Token = await _tokenService.CreateToken(user),
-                DisplayName = user.DisplayName
+                DisplayName = user.DisplayName,
+                RoleName = roles.FirstOrDefault()
             };
         }
 
@@ -128,6 +141,7 @@ namespace API.Controllers
                 UserName = registerDto.Email
             };
 
+
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
             if (!result.Succeeded) return BadRequest(new ApiResponse(400));
@@ -136,11 +150,14 @@ namespace API.Controllers
 
             if (!roleResult.Succeeded) return BadRequest(result.Errors);
 
+            var roles = await _userManager.GetRolesAsync(user);
+
             return new UserDto
             {
                 DisplayName = user.DisplayName,
                 Token = await _tokenService.CreateToken(user),
-                Email = user.Email
+                Email = user.Email,
+                RoleName = roles.FirstOrDefault()
             };
 
         }
@@ -152,7 +169,7 @@ namespace API.Controllers
         {
             var settings = new GoogleJsonWebSignature.ValidationSettings()
             {
-                Audience = new List<string> { "530880028410-j4tfeh1qe8s7qtcu3hgsq55qetllur3i.apps.googleusercontent.com" }
+                Audience = new List<string> { _config["Mail:Audience"] }
             };
 
             var payload = await GoogleJsonWebSignature.ValidateAsync(googleDto.IdToken, settings);
@@ -181,8 +198,6 @@ namespace API.Controllers
 
             if (result)
                 await _userManager.AddLoginAsync(user, info);
-            else
-                throw new Exception("Invalid external authentication.");
 
 
             return new UserDto
@@ -197,10 +212,13 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> FaceBookLogin(FaceBookDto faceBookDto)
         {
 
+            var clientId = _config["Facebook:ClientId"];
+            var clientSecret = _config["Facebook:ClientSecret"];
+
             string accessTokenResponse =
             await _httpClient
             .GetStringAsync
-            ($"https://graph.facebook.com/oauth/access_token?client_id=1350540582456118&client_secret=8281e579f1f647af81b9e21346667162&grant_type=client_credentials");
+            ($"https://graph.facebook.com/oauth/access_token?client_id={clientId}&client_secret={clientSecret}&grant_type=client_credentials");
 
             FaceBookAccessTokenResponseDto faceBookAccessTokenResponse = JsonSerializer.Deserialize<FaceBookAccessTokenResponseDto>(accessTokenResponse);
 
@@ -238,15 +256,15 @@ namespace API.Controllers
 
                 if (result)
                     await _userManager.AddLoginAsync(user, info);
-                else
-                    throw new Exception("Invalid external authentication.");
 
 
+                var roles = await _userManager.GetRolesAsync(user);
                 return new UserDto
                 {
                     DisplayName = user.DisplayName,
                     Token = await _tokenService.CreateToken(user),
-                    Email = user.Email
+                    Email = user.Email,
+                    RoleName = roles.FirstOrDefault()
                 };
             }
             throw new Exception("Invalid external authentication.");
@@ -317,7 +335,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    throw new Exception();
+                    throw new Exception("This link is already expired. Please get new ones via Forgot Password button.");
                 }
             }
             return false;

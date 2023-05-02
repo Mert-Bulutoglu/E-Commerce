@@ -15,7 +15,12 @@ namespace Infrastructure.Data.Config
             builder.Property(p => p.Id).IsRequired();
             builder.Property(p => p.Name).IsRequired().HasMaxLength(100);
             builder.Property(p => p.Description).IsRequired();
+            builder.Property(p => p.NutrientContent);
+            builder.Property(p => p.Features);
+            builder.Property(p => p.ViewCount);
+            builder.Property(p => p.NumberOfSold);
             builder.Property(p => p.Price).HasColumnType("decimal(18,2)");
+            builder.Property(p => p.Stock);
             builder.Property(p => p.PictureUrl).IsRequired();
             builder.HasOne(b => b.ProductBrand).WithMany()
               .HasForeignKey(p => p.ProductBrandId);

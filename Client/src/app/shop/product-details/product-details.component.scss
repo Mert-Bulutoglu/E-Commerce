@@ -1,0 +1,25 @@
+.product-img {
+  width: 500px;
+  height: 600px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.product-img:hover {
+  transform: scale(1.2);
+}
+
+.out-of-stock {
+  filter: grayscale(100%);
+}
+
+.out-of-stock-overlay {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
+

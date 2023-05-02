@@ -1,16 +1,34 @@
-<carousel>
-    <slide>
-        <img src="assets/images/kosu.png" alt="first slide" style="display: block; width: 100%;">
-    </slide>
-    <slide>
-        <img src="assets/images/fitness.png" alt="first slide" style="display: block; width: 100%;">
-    </slide>
-    <slide>
-        <img src="assets/images/saglam.png" alt="first slide" style="display: block; width: 100%;">
-    </slide>
-</carousel>
-<section class="featured">
-    <div class="d-flex justify-content-center pt-4">
-        <h1>Welcome to the Eat Your Protein!</h1>
+<div class="container mt-3">
+    <div class="row">
+        <carousel>
+            <div class="d-flex justify-content-center pt-4">
+                <h1>Welcome to the Eat Your Protein!</h1>
+            </div>
+            <slide>
+                <img src="assets/images/kosu.png" alt="first slide" style="display: block; width: 100%;">
+            </slide>
+            <slide>
+                <img src="assets/images/fitness.png" alt="first slide" style="display: block; width: 100%;">
+            </slide>
+            <slide>
+                <img src="assets/images/halter.png" alt="first slide" style="display: block; width: 100%;">
+            </slide>
+        </carousel>
+        <carousel>
+            <div class="d-flex justify-content-center pt-4">
+                <h1>MOST SELLERS</h1>
+            </div>
+            <div class="row">
+                <div class="col-2 mb-2" *ngFor="let item of products">
+                    <app-home-item [product]="item"></app-home-item>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center pt-4">
+                <button type="button" class="btn btn-primary" routerLink="/shop" style="width: 250px;">See All Products</button>
+            </div>
+            <div class="d-flex justify-content-center pt-4">
+            </div>
+        </carousel>
+
     </div>
-</section>
+</div>

@@ -4,6 +4,7 @@ import { IProduct } from '../shared/models/product';
 import { IType } from '../shared/models/productType';
 import { ShopParams } from '../shared/models/shopParams';
 import { ShopService } from './shop.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-shop',
@@ -19,21 +20,25 @@ export class ShopComponent implements OnInit {
   totalCount: number;
 
   sortOptions = [
-    {name: 'Alphabetical', value: 'name'},
+    {name: 'Popular', value: 'mostPopular'},
+    {name: 'Alphabetical', value:'alphabetical' },
     {name: 'Price: Low to High', value: 'priceAsc'},
     {name: 'Price: High to Low', value: 'priceDesc'}
   ]
 
   constructor(
-    private shopService: ShopService
+    private shopService: ShopService,
+    private toastrService: ToastrService
     
     ) { }
 
   ngOnInit(): void {
+   this.shopParams.sort = 'mostPopular';
    this.getProducts();
    this.getBrands();
    this.getTypes();
   }
+  
   getProducts(){
     this.shopService.getProducts(this.shopParams).subscribe(response => {
       this.products = response.data;
@@ -42,6 +47,7 @@ export class ShopComponent implements OnInit {
       this.totalCount = response.count;
       console.log(this.products);
     }, error => {
+      this.toastrService.error(`Error occurred while retrieving data`);
       console.log(error);
     });
   }
@@ -52,6 +58,7 @@ export class ShopComponent implements OnInit {
       console.log(this.brands)
     },
       error => {
+        this.toastrService.error(`Error occurred while retrieving data`);
         console.log(error);
       }
       );
@@ -63,6 +70,7 @@ export class ShopComponent implements OnInit {
       console.log(this.types)
      },
       error => {
+        this.toastrService.error(`Error occurred while retrieving data`);
         console.log(error);
       }
       );

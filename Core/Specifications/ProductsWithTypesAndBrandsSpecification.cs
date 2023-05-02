@@ -32,8 +32,14 @@ namespace Core.Specifications
                     case "priceDesc":
                         AddOrderByDescending(p => p.Price);
                         break;
-                    default:
+                    case "alphabetical":
                         AddOrderBy(n => n.Name);
+                        break;
+                    case "mostPopular":
+                        AddOrderByDescending(n => n.ViewCount + 5 * n.NumberOfSold);                    
+                        break;
+                    default:
+                        AddOrderByDescending(n => n.NumberOfSold);
                         break;
                 }
             }

@@ -1,0 +1,104 @@
+<div class="container">
+    <form class="product-form" [formGroup]="form" (ngSubmit)="handleSaveButton(form)">
+        <mat-grid-list class="form-grid" cols="3" rowHeight="150px" gutterSize="56px">
+            <mat-grid-tile>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input type="text" class="input" matInput [formControl]="name"
+                        placeholder="Name">
+                    <mat-error *ngIf="name.hasError('required')">
+                        Name is required
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="limited-height" appearance="outline">
+                    <mat-label>How To Use</mat-label>
+                    <textarea type="text" class="input" matInput [formControl]="description"
+                        placeholder="How To Use"></textarea>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="limited-height" appearance="outline">
+                    <mat-label>Nutrient Content</mat-label>
+                    <textarea type="text" class="input" matInput [formControl]="nutrientContent" placeholder="Nutrient Content"></textarea>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="limited-height " appearance="outline">
+                    <mat-label>Features</mat-label>
+                    <textarea type="text" class="input" matInput [formControl]="features" placeholder="Features"></textarea>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Price</mat-label>
+                    <input type="number" class="input" matInput [formControl]="price" placeholder="Price" min="0">
+                    <mat-error *ngIf="price.hasError('required')">
+                        Price is required
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Stock</mat-label>
+                    <input type="number" class="input" matInput [formControl]="stock" placeholder="Stock" min="0">
+                    <mat-error *ngIf="price.hasError('required')">
+                        Stock is required
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>ViewCount</mat-label>
+                    <input type="number" class="input" matInput [formControl]="viewCount" placeholder="View Count" min="0" readonly>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Number Of Sold</mat-label>
+                    <input type="number" class="input" matInput [formControl]="numberOfSold" placeholder="Number Of Sold" min="0" readonly>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile class="picture-container">
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Picture</mat-label>
+                    <input type="text" class="input" matInput [formControl]="pictureUrl" placeholder="Picture" readonly>
+                    <mat-error *ngIf="pictureUrl.hasError('required')">
+                        Picture is required
+                    </mat-error>       
+                </mat-form-field>
+                <a class="form-field" mat-raised-button (click)="openConfirmation()" style="margin: 0; padding: 0;">
+                    <img src="../../../assets/images/photo.png">
+                  </a>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Type</mat-label>
+                    <mat-select [formControl]="productType">
+                        <mat-option *ngFor="let productType of typesList" [value]="productType.name">{{productType.name}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="productType.hasError('required')">
+                        Type is required
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Brand</mat-label>
+                    <mat-select [formControl]="productBrand">
+                        <mat-option *ngFor="let productBrand of brandsList" [value]="productBrand.name">{{productBrand.name}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="productBrand.hasError('required')">
+                        Brand is required
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>     
+        </mat-grid-list>
+        <div class="btn-container">
+            <button mat-raised-button class="btn large" routerLink="/product">Back To List</button>
+            <button mat-raised-button class="btn large" type="submit">Save</button>
+        </div>
+    </form>
+  
+</div>

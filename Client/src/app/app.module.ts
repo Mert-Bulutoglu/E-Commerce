@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -13,11 +12,45 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptors';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { OrderDetailedComponent } from './order-detailed/order-detailed.component';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from "@abacritt/angularx-social-login";
+import { ProductComponent } from './product/product.component';
+import { UserComponent } from './user/user.component';
+import { ProductDetailsComponent } from './product/product-details/product-details.component';
+import { UserDetailsComponent } from './user/user-details/user-details.component';
+import { TypeComponent } from './type/type.component';
+import { BrandComponent } from './brand/brand.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { DeliveryMethodComponent } from './delivery-method/delivery-method.component';
+import { DeliveryMethodDetailsComponent } from './delivery-method/delivery-method-details/delivery-method-details.component';
+import { AllOrderComponent } from './all-order/all-order.component';
+import { AllOrderDetailComponent } from './all-order/all-order-detail/all-order-detail.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    OrderDetailedComponent
+    OrderDetailedComponent,
+    ProductComponent,
+    UserComponent,
+    ProductDetailsComponent,
+    UserDetailsComponent,
+    TypeComponent,
+    BrandComponent,
+    DeliveryMethodComponent,
+    DeliveryMethodDetailsComponent,
+    AllOrderComponent,
+    AllOrderDetailComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +60,21 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, So
     CoreModule,
     HomeModule,
     NgxSpinnerModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatSortModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatRippleModule,
+    MatDialogModule,
+    MatSelectModule,
+    FormsModule,
+    MatDialogModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatGridListModule,
+    MatStepperModule 
   ],
   exports:[
     NgxSpinnerModule

@@ -4,15 +4,19 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Core.Entities;
+using Core.Entities.Identity;
 using Core.Entities.OrderAggregate;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using Address = Core.Entities.Identity.Address;
 
 namespace Infrastructure.Data
 {
     public class StoreContextSeed
     {
-          public static async Task SeedAsync(StoreContext context, ILoggerFactory loggerFactory)
-        {
+          public static async Task SeedAsync(StoreContext context, ILoggerFactory loggerFactory,UserManager<AppUser> userManager,
+            RoleManager<AppRole> roleManager)
+             {
             try
             {
                 if (!context.ProductBrands.Any())
@@ -26,6 +30,63 @@ namespace Infrastructure.Data
                     }
 
                     await context.SaveChangesAsync();
+                }
+
+                if (!userManager.Users.Any())
+                {
+
+                    var user = new AppUser
+                    {
+                        DisplayName = "Mert",
+                        Email = "mert@gmail.com",
+                        UserName = "mert@gmail.com",
+                        Address = new Address
+                        {
+                            FirstName = "Mert",
+                            LastName = "Bulutoðlu",
+                            Street = "Esatpaþa",
+                            City = "Istanbul",
+                            State = "Ataþehir",
+                            ZipCode = "34000"
+                        }
+                    };
+
+                    var roles = new List<AppRole>
+                {
+                     new AppRole{Name = "User"},
+                     new AppRole{Name = "Admin"}
+                };
+
+                    foreach (var role in roles)
+                    {
+                        await roleManager.CreateAsync(role);
+                    }
+
+
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                    await userManager.AddToRoleAsync(user, "User");
+
+                    var admin = new AppUser
+                    {
+                        UserName = "admin",
+                        Email = "admin@admin.com",
+                        DisplayName = "admin",
+                        Address = new Address
+                        {
+                            FirstName = "admin",
+                            LastName = "Bulutoðlu",
+                            Street = "Esatpaþa",
+                            City = "Istanbul",
+                            State = "Ataþehir",
+                            ZipCode = "34000"
+                        }
+                    };
+
+
+                    await userManager.CreateAsync(admin, "Pa$$w0rd");
+                    await userManager.AddToRoleAsync(admin, "Admin");
+
+
                 }
 
                 if (!context.ProductTypes.Any())
