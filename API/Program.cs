@@ -102,5 +102,3 @@ catch (Exception ex)
 }
 
 await app.RunAsync();
-
-// Log.Information("wwowowoowowo");

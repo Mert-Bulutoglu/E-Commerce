@@ -40,4 +40,6 @@
     <Folder Include="wwwroot\photos\" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties serilog_1json__JsonSchema="https://cdn.sdf.com/schemas/sdf-schema-1.0.json" /></VisualStudio></ProjectExtensions>
+
 </Project>
