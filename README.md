@@ -1,4 +1,4 @@
-# E-Commerce
+# EAT YOUR PROTEIN
 Development of an E-Commerce application which purpose of selling nutritional supplements. The application was built with C#, .net 6.0 and MSSQL in the backend and HTML, CSS and JavaScript with Angular in the frontend.
 
 User Side Frontend 
