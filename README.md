@@ -123,9 +123,41 @@ Figure 27: Admin “Product” Add Page;
 Figure 28: Admin “User” Page;
 As seen in the figure 28, the admin can preview and delete all users registered in the system, but cannot add new users. Since the table used in the product page is used in this section, the same features apply here as well.
 
+![image](https://github.com/Mert-Bulutoglu/E-Commerce/assets/107191110/46c35d13-9817-4c1e-a2b7-2c941d2188c3)
+Figure 29: Admin “User” Detail Page;
+When the admin moves to the page shown in the figure 29, he can update some information of the selected user. Most importantly, it can change that person's role.
 
+![image](https://github.com/Mert-Bulutoglu/E-Commerce/assets/107191110/e94e7014-344d-4728-9bf8-258c068f020f)
+Figure 30: Admin “Brand” Page;
+    On the page shown in the figure 30, the admin can add a new brand directly on this page by writing a text to the input at the top. The table in this section does not have a search bar, but has other features such as paging. Admin can delete specified brands.
+    
+![image](https://github.com/Mert-Bulutoglu/E-Commerce/assets/107191110/c5415a66-cf50-4d7f-a7a7-d58a99ecb9c3)
+Figure 31: Admin “Type” Page
+ On the page shown in the figure 31, the admin can add a new type directly on this page by writing a text to the input at the top. The table in this section does not have a search bar, but has other features such as paging. Admin can delete specified types.
+ 
+ ![image](https://github.com/Mert-Bulutoglu/E-Commerce/assets/107191110/41203cb6-220f-43fb-b5aa-a0eaeaac0241)
+Figure 32: Admin “Delivery Method” Page;
+   On the page shown in the figure 32, admin can view the information of all delivery methods found in the database. In order to reach more detailed information, admin can go to the delivery method admin wants to reach by clicking the "Show Details" button. In addition, a specified delivery method can be deleted with the "Delete" button. Thanks to the "Add Delivery Method" button in the upper left, the admin can go to the page where he will add a new delivery method. Since the table used in the product page is used in this section, the same features apply here as well.
+   
+   ![image](https://github.com/Mert-Bulutoglu/E-Commerce/assets/107191110/91554998-c2b3-4087-be71-a71166c08b26)
+   Figure 33: Admin “Delivery Method” Detail Page;
+   On the page shown in the figure 33, the admin can both preview detailed information about the delivery method and update the delivery method.
 
+![image](https://github.com/Mert-Bulutoglu/E-Commerce/assets/107191110/b76d0fbb-1997-4db1-8dce-fe36fc2f875a)
+Figure 34: Admin “Delivery Method” Add Page;
+     On this page shown in the figure 34, the user can add a new delivery method . 
 
+![image](https://github.com/Mert-Bulutoglu/E-Commerce/assets/107191110/a0becc96-e0f2-49f5-b194-cb2bdc64f88e)
+Figure 35: Admin “All Orders” Page;
+On the page shown in the figure 35, admin can view the information of all orders found in the database. In order to reach more detailed information, admin can go to the order admin wants to reach by clicking the "Show Order '' button. A specified order can be deleted with the "Delete" button .In addition to these, the details of the ordered products can be accessed by clicking the "Show Product" button.
+      On this page, the admin can preview all the information about the orders. Thanks to the table feature, for example, order prices can be listed in ascending or descending order. Thanks to the search bar, the desired orders can be found. How many products will be listed on a page can be determined from the "Items per page" section at the bottom right. And most importantly, the admin can access the total return of all sales with the total information below the table.
 
+![image](https://github.com/Mert-Bulutoglu/E-Commerce/assets/107191110/149b623a-fb7e-40a6-b90f-d975b407e0b7)
+Figure 36: Admin “Order” Detail Page;
+   As seen in this figure 36, the admin can only update the status of the order, it is not possible to update other fields.
+
+![image](https://github.com/Mert-Bulutoglu/E-Commerce/assets/107191110/6e33cda7-af10-4bcf-af24-73f27d224bbe)
+Figure 37: Admin “Ordered Product ” Detail Page;
+   As seen in the figure 37, the admin can view the information of the ordered products.
 
 
