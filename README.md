@@ -95,7 +95,7 @@ Figure 21: All Orders of The User;
 Figure 22: Order Detail Page;
 On the page shown in the figure 22, the user can follow the status of the product he has ordered.
 
-5.2.4.2 Admin Side Frontend 
+Admin Side Frontend :
    Admin logs into the system with the same panel as other users, but has access to a few extra pages and functions other than existing pages.
 
 ![image](https://github.com/Mert-Bulutoglu/E-Commerce/assets/107191110/bc4cd529-ef64-4714-90e0-70dc2e5e4a9d)
